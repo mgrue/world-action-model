@@ -1,7 +1,7 @@
 # Expert controller and speed profile
 
 Labels: wayfinder:prototype
-Status: open
+Status: closed
 Assignee: mgrue
 Blocked by: 01-controller-research.md
 Parent: ../MAP.md
@@ -27,3 +27,13 @@ Check: over ≥ 1000 seeded starts per Route × Direction, zero Crashes in 900-t
 - **Step 1 gap found:** `Info.branch`/`last_branch` come from nearest-projection `locate`, so on the exit tick they name the wrong branch in about 1.5% of clean passages and **about 27% of passages with noise**. `last_branch` is unusable for instruction scoring as specified. Fix in Step 1 or define scoring in ticket 05 (open question to the human).
 - Safety rule (switch plan to the occupied branch when > 2.5 m from the planned Route inside the section) never fired in clean or burst runs; keep it for Step 9.
 - Actions: steer is piecewise constant with steps at primitive boundaries (exact feed-forward under instant steer); throttle is deadbeat (full accel out of curves, about −0.75 braking, 0 cruising) with slight ±0.05 chatter while braking. Speeds: 4.9 m/s branch arcs, 6.1 m/s end arcs, 10 m/s briefly on the bottom straight.
+- Human watched `show` (any/inner, cw/ccw, with and without bursts): driving and traces look right. The `last_branch` gap goes to Step 1 (option a): reopen the Env API ticket and score the branch at the section midpoint.
+
+**Resolution (2026-11-03):**
+- **Steering:** curvature feed-forward + lateral/heading feedback. `k = κ̄·cos θe / max(1 − κ̄e, 0.2) − 2ωs·θe − ωs²·e·sinc θe`, ωs = 0.5 m⁻¹. κ̄ is the travel-signed mean curvature over the next tick's arc (`wrap(θ_path(s + d·v1·DT) − θ_path(s)) / (v1·DT)`). Clamp k to the sim limit using v1, the post-throttle speed. steer = atan(L·k)/δ_max.
+- **Followed Route = the Planned branch's Route**, never nearest projection.
+- **Speed:** per (Route, Direction) profile on a 0.05 m grid. v_lim = min(10, √(5/|κ|)), then forward 4 m/s² and backward 6 m/s² passes, twice around the loop. Deadbeat throttle toward the profile at `s + d·(v·DT + 0.5 m)`.
+- **Start inside the section:** keep the preferred branch (Instruction, or the coin under `any`) unless its heading error > 20° and the other branch fits better. Then mark the passage exempt if it differs from the Instruction.
+- **Safety rule:** inside the section, if > 2.5 m from the planned Route while `locate` names the other branch, follow the occupied branch, exempt. It never fired; kept for Step 9.
+- **Passage scoring:** branch at the section midpoint; a passage that never reaches the midpoint is partial, so exempt.
+- **Verified:** 0 crashes and 0 wrong-branch passages in 12,000 episodes (clean + bursts); about 4.1 laps/episode; human approved.

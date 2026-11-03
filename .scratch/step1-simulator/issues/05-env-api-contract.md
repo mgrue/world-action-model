@@ -1,7 +1,7 @@
 # Env API and interface contract
 
 Labels: wayfinder:grilling
-Status: closed
+Status: open
 Assignee: mgrue
 Blocked by: 01-python-package-compatibility.md, 03-physics-model.md, 04-off-track-semantics.md
 Parent: ../MAP.md
@@ -32,3 +32,5 @@ Check: the spec contains typed signatures and the determinism tests fixed by the
 - **Track queries:** `Route.pose_at(s)`, `curvature_at(s)`, `project(x, y) -> Projection(station_m, lateral_m, distance_m)`; `Track.locate(x, y)`, `Track.is_crash(state)`, `fork_station_m = 0`, `merge_station_m ≈ 22.96`, `Track.default()` and validated `TrackParams`.
 - **Rendering:** `RenderParams` as Q7; per-episode override via reset.
 - **Tests (check):** typed signatures above; physics-ticket determinism tests (same-machine hash equality of States + Frames; golden trajectory at 1e-9) plus start-pose validity over many seeds.
+
+**Reopened (2026-11-03)** by Step 2 ticket [03 Expert controller](../../step2-expert/issues/03-controller-prototype.md): `last_branch` is set from the nearest-projection branch on the tick *before* exiting the fork section, where the two branches coincide. It is wrong in about 1.5% of clean passages and about 27% with steer noise, so it can't score Instructions. Fix: record the branch when the car crosses the section midpoint (`merge_station_m / 2`, branch centres 12 m apart), and set `last_branch` on exit only if the car crossed the midpoint and the exit is in the same travel sense as that crossing. Partial passages (no crossing) leave it unchanged.
