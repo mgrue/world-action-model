@@ -307,7 +307,7 @@ Expected runtime: about 70 s for `eval --n 1000` (6000 episodes) on an M-series 
 | `test_branch_split` | `any`, 300 seeds × 2 Directions: outer fraction of scored passages in [0.45, 0.55]; with `p_outer = 0.7` in [0.65, 0.75]; `p_outer = 1.0`: every scored passage is outer. |
 | `test_noise_shape` | no perturbed tick in the first 30; `executed == clean` whenever not perturbed; throttle never differs; every maximal run of perturbed ticks is at least 8 ticks long (back-to-back bursts may join); `burst_peak = 0` → never perturbed and the noise stream is never drawn. |
 | `test_control_pure` | `control` returns identical results on repeated calls and leaves `planned_branch`, `safety_switches` and the RNG states unchanged. |
-| `test_profile` | at default params the profile equals `√(5/ρ)` (4.94 m/s) mid-branch-arc and `√(5·7.5)` (6.12 m/s) mid-end-arc to 1e-9, never exceeds `v_cap`, and adjacent samples obey the accel/brake bounds. |
+| `test_profile` | at default params the profile equals `√(5·ρ)` (4.94 m/s) mid-branch-arc and `√(5·7.5)` (6.12 m/s) mid-end-arc to 1e-9, never exceeds `v_cap`, and adjacent samples obey the accel/brake bounds. |
 | `test_score_episode` | synthetic Info streams: first passage exempt only when `infos[0].branch` is set; a wrong-branch passage under `outer` gives `instruction_followed = False`; wrong-way ticks counted; `any` counts every passage correct; empty input raises. |
 | `test_cli_eval` | `main(["eval", "--n", "3"])` returns 0 and prints `PASS`. |
 
