@@ -21,6 +21,8 @@ Frontier = open, unblocked, unassigned tickets in `issues/`.
 
 <!-- one line per closed ticket -->
 
+- [Python and package compatibility on macOS arm64](issues/01-python-package-compatibility.md) — Python 3.14 + pygame-ce 2.5.x (SDL2) + numpy + torch 2.15 (MPS works); not upstream pygame
+
 ## Not yet specified
 
 - **Visual randomisation knobs** (Step 3 "minor visuals"): which parameters the renderer exposes (track/grass colours, car colour, noise?) and their ranges — depends on the look settled in the geometry prototype and how much Step 4's VAE should be stressed.
