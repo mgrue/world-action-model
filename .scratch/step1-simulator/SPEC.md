@@ -335,7 +335,8 @@ There is no gymnasium dependency and no reward. `step` doesn't return frames: ca
    - `wrong_way = progress_m < max_progress_m − 5.0`
 4. Update the branch:
    - If the previous `branch` was not None and `branch_new` is None, the car has left the fork section.
-   - If it left at the far end for its travel sense (`Δ > 0` exiting past the Merge, `Δ < 0` exiting past the Fork), set `last_branch = previous branch`.
+   - When the car enters the fork section, remember the entry end: the Fork if `Δ > 0`, the Merge if `Δ < 0`.
+   - If it leaves at the other end (`Δ > 0` exiting past the Merge, `Δ < 0` exiting past the Fork), set `last_branch = previous branch`. If the episode started inside the section (entry unknown), any exit counts.
    - Otherwise (it backed out the way it came), leave `last_branch` unchanged.
 5. Check for a crash: if `track.is_crash(state)`, set `terminated = True` and `termination = "crash"`.
 6. Check truncation: else if `steps >= max_steps`, set `truncated = True` and `termination = "max_steps"`.
@@ -459,8 +460,16 @@ These fill gaps between ticket decisions. They don't change any decision. If one
 8. **Recording** includes the reasons `"reset"` and `"quit"` alongside `"crash"`.
 9. **Performance target:** under 2 ms per 64 px frame with the background cache.
 10. **Crash test numbers** (§9) follow from geometry. On a straight with θ along the tangent, the corner offset is lateral + 1.25 m, so lateral 1.6 m puts it at 2.85 m, more than 2.8.
+11. **Fork-passage completion** (added during implementation): the sign of `Δ` at exit alone can't detect backing out, so the env records the entry end and counts a passage only when the car exits at the opposite end (§6.2 step 4).
+12. **Wrong-way manual check:** the car can't U-turn on a 5 m road (minimum turning circle ≈ 7.7 m across). It can only turn round at the top of the outer branch, at about 2 m/s, keeping to the Island side with full right steer.
 
 ## 12. Out of scope for Step 1
 
 - Scripted expert (Step 2), dataset recording format and visual-randomisation ranges (Step 3), VAE (Step 4), frame history and speed observability (Steps 3/6).
 - Step 1 only provides the interface those steps use: Track queries, `step_state`, `CarEnv`, `RenderParams` and `render`.
+
+---
+
+## Status
+
+Implemented in `src/toycar/` (commit `10e2d43`). The automated tests (§9) pass, and the manual acceptance checklist (§10) passed on 2026-11-03. **The PLAN.md Step 1 check is met.**

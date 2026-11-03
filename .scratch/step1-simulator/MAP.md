@@ -1,7 +1,7 @@
 # Step 1 simulator spec
 
 Labels: wayfinder:map
-Status: destination reached (2026-11-03) — see SPEC.md
+Status: destination reached (2026-11-03) — see SPEC.md; implemented and accepted (2026-11-03)
 Tracker: local markdown — tickets are files in `issues/`, each with `Parent: MAP.md`.
 Ticket header fields: `Labels:` (wayfinder type), `Status:` (open/closed), `Assignee:` (empty = unclaimed — the claim), `Blocked by:` (ticket files; unblocked when all are closed).
 Frontier = open, unblocked, unassigned tickets in `issues/`.
