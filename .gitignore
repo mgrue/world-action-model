@@ -5,3 +5,5 @@ __pycache__/
 runs/
 .idea/
 data/
+*.pt
+.scratch/step4-vae/prototypes/out/*.npz
