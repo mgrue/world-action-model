@@ -1,6 +1,7 @@
 # Step 1 simulator spec
 
 Labels: wayfinder:map
+Status: destination reached (2026-11-03) — see SPEC.md
 Tracker: local markdown — tickets are files in `issues/`, each with `Parent: MAP.md`.
 Ticket header fields: `Labels:` (wayfinder type), `Status:` (open/closed), `Assignee:` (empty = unclaimed — the claim), `Blocked by:` (ticket files; unblocked when all are closed).
 Frontier = open, unblocked, unassigned tickets in `issues/`.
@@ -27,6 +28,7 @@ Frontier = open, unblocked, unassigned tickets in `issues/`.
 - [What happens when the car leaves the road](issues/04-off-track-semantics.md) — any car corner past the kerb's outer edge (2.8 m from both Routes) is a Crash: episode terminates with reason "crash"; no walls/grass physics
 - [Env API and interface contract](issues/05-env-api-contract.md) — `toycar` pure core (Track/physics/render) + thin CarEnv; seeded reset with StartSpec; shared Station for progress/laps/branch; 900-tick episodes; frozen typed dataclasses, no gymnasium
 - [Keyboard driving mode](issues/06-keyboard-driving-mode.md) — pygame-ce 15 Hz loop, arrows/WASD with ramped steer and cruise throttle, 64 px ×8 view + hi-res/debug toggles, CRASH banner + auto-reset, .npz record + bit-exact replay, 9-step manual acceptance script
+- [Compile SPEC.md](issues/07-compile-spec.md) — destination reached: [SPEC.md](SPEC.md); gaps filled while compiling listed in its §11
 
 ## Not yet specified
 
