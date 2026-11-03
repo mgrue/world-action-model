@@ -33,3 +33,21 @@ _Avoid_: pixels (for world positions)
 **Frame**:
 One rendered 64×64 RGB image of the whole Track from the fixed overhead camera.
 _Avoid_: screenshot, observation (when meaning the image alone)
+
+## Car and control
+
+**State**:
+The car's canonical physical state (x, y, θ, v): position in Track units, heading angle, speed. Fully determines the next State given an Action.
+_Avoid_: observation, pose (when speed is included)
+
+**State features**:
+The model-facing encoding of a State: (x/40, y/40, cos θ, sin θ, v/10).
+_Avoid_: state vector (ambiguous)
+
+**Action**:
+One tick's command [steer, throttle], each in [-1, 1].
+_Avoid_: control, input, command
+
+**Tick**:
+One simulation step at 15 Hz: one Action applied, one State update, one Frame rendered.
+_Avoid_: frame (when meaning time), step (when ambiguous)

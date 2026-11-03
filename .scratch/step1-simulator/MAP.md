@@ -23,11 +23,11 @@ Frontier = open, unblocked, unassigned tickets in `issues/`.
 
 - [Python and package compatibility on macOS arm64](issues/01-python-package-compatibility.md) — Python 3.14 + pygame-ce 2.5.x (SDL2) + numpy + torch 2.15 (MPS works); not upstream pygame
 - [Track geometry, car size and look at 64×64](issues/02-track-car-render-look.md) — single-lane stadium with a symmetric fork; two Routes of lines+arcs in metres (40 m frame); 4.4×2.5 m car with yellow nose; 64×64 frames, resolution param, 4× supersampled
+- [Physics model and action/state definitions](issues/03-physics-model.md) — kinematic bicycle at 15 Hz with exact-arc integration; lateral-accel steering clamp forces braking for curves; State (x,y,θ,v), sin/cos features; same-machine bit-exact determinism
 
 ## Not yet specified
 
 - **Visual randomisation knobs** (Step 3 "minor visuals"): which parameters the renderer exposes (track/grass colours, car colour, noise?) and their ranges — depends on the look settled in the geometry prototype and how much Step 4's VAE should be stressed.
-- **Determinism scope**: bit-exact across machines / numpy versions, or only same-machine? May need float64-only rules or a frame-hash golden file; sharpens once stack and physics are fixed.
 - **Speed observability**: a single frame can't show speed (summary flags this); whether the sim/renderer should help (e.g., motion trail, history) or leave it to the model's state token — revisit after physics + render are fixed.
 
 ## Out of scope
