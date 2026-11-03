@@ -99,6 +99,38 @@ def test_wrong_way_fork_passage_sets_last_branch():
     assert r.info.last_branch == "inner" and r.info.wrong_way
 
 
+@pytest.mark.parametrize("route,direction", [("outer", "cw"), ("inner", "cw"), ("outer", "ccw"), ("inner", "ccw")])
+def test_last_branch_robust_to_noise(route, direction):
+    # steer noise makes the nearest-branch label flicker near the Fork/Merge; last_branch must not
+    rng = np.random.default_rng(1)
+    for seed in range(5):
+        env = CarEnv(max_steps=10**6)
+        _, info = env.reset(seed, StartSpec(direction=direction, route=route, station_m=50.0, lateral_m=0.0,
+                                            heading_offset=0.0, speed=5.0))
+        passages, phase = 0, rng.uniform(0, 6.3)
+        for t in range(1400):
+            steer, thr = pursuit_action(env, route, direction)
+            prev = info.branch
+            r = env.step((steer + 0.25 * math.sin(0.35 * t + phase), thr))
+            assert not r.terminated
+            info = r.info
+            if prev is not None and info.branch is None:
+                passages += 1
+                assert info.last_branch == route, (seed, t)
+        assert passages >= 5
+
+
+def test_partial_passage_leaves_last_branch_unset(track):
+    # start inside the fork section past its midpoint: the first exit is a partial passage
+    env = CarEnv(max_steps=10**6)
+    _, info = env.reset(0, StartSpec(direction="cw", route="outer", station_m=track.merge_station_m * 0.75,
+                                     lateral_m=0.0, heading_offset=0.0, speed=4.0))
+    assert info.branch == "outer"
+    while info.branch is not None:
+        info = env.step(pursuit_action(env, "outer", "cw")).info
+    assert info.last_branch is None
+
+
 def test_episode_end():
     env = CarEnv(max_steps=5)
     env.reset(0, StartSpec(speed=0.0))

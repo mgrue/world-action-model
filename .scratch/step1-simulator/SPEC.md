@@ -334,10 +334,9 @@ There is no gymnasium dependency and no reward. `step` doesn't return frames: ca
    - `laps = max(0, floor(progress_m / L))`
    - `wrong_way = progress_m < max_progress_m − 5.0`
 4. Update the branch:
-   - If the previous `branch` was not None and `branch_new` is None, the car has left the fork section.
-   - When the car enters the fork section, remember the entry end: the Fork if `Δ > 0`, the Merge if `Δ < 0`.
-   - If it leaves at the other end (`Δ > 0` exiting past the Merge, `Δ < 0` exiting past the Fork), set `last_branch = previous branch`. If the episode started inside the section (entry unknown), any exit counts.
-   - Otherwise (it backed out the way it came), leave `last_branch` unchanged.
+   - `branch` is the label from `locate`: the nearest Route while the Station is in the fork section. It is informational, and it can name the wrong branch within a few metres of the Fork or Merge, where the branches coincide.
+   - When the Station crosses the section midpoint `mid = merge_station_m / 2` (`s_old < mid ≤ s_new` or `s_new < mid ≤ s_old`) with `branch_new` not None, record `mid_branch = branch_new` and the crossing sense (+1 if `s_new > s_old`, else −1). The branch centres are about 12 m apart there, so the label is unambiguous.
+   - On exit (previous `branch` not None, `branch_new` None): if a crossing was recorded this passage and the exit sense (`Δ > 0` past the Merge = +1, `Δ < 0` past the Fork = −1) equals the crossing sense, set `last_branch = mid_branch`. Otherwise (a partial passage that started past the midpoint, or backing out), leave `last_branch` unchanged. Then clear the recorded crossing.
 5. Check for a crash: if `track.is_crash(state)`, set `terminated = True` and `termination = "crash"`.
 6. Check truncation: else if `steps >= max_steps`, set `truncated = True` and `termination = "max_steps"`.
 7. Return `StepResult`. A crashing tick still returns its State, and `render()` then shows the car touching grass.
@@ -460,7 +459,7 @@ These fill gaps between ticket decisions. They don't change any decision. If one
 8. **Recording** includes the reasons `"reset"` and `"quit"` alongside `"crash"`.
 9. **Performance target:** under 2 ms per 64 px frame with the background cache.
 10. **Crash test numbers** (§9) follow from geometry. On a straight with θ along the tangent, the corner offset is lateral + 1.25 m, so lateral 1.6 m puts it at 2.85 m, more than 2.8.
-11. **Fork-passage completion** (added during implementation): the sign of `Δ` at exit alone can't detect backing out, so the env records the entry end and counts a passage only when the car exits at the opposite end (§6.2 step 4).
+11. **Fork-passage completion** (revised 2026-11-03, Step 2 ticket 03): `last_branch` comes from the branch at the section-midpoint crossing, not the last tick inside the section. Near the Fork and Merge the nearest-branch label was wrong in about 1.5% of clean passages and about 27% with steer noise. A passage counts only if it crossed the midpoint and exited in the same sense (§6.2 step 4).
 12. **Wrong-way manual check:** the car can't U-turn on a 5 m road (minimum turning circle ≈ 7.7 m across). It can only turn round at the top of the outer branch, at about 2 m/s, keeping to the Island side with full right steer.
 
 ## 12. Out of scope for Step 1
@@ -472,4 +471,4 @@ These fill gaps between ticket decisions. They don't change any decision. If one
 
 ## Status
 
-Implemented in `src/toycar/` (commit `10e2d43`). The automated tests (§9) pass, and the manual acceptance checklist (§10) passed on 2026-11-03. **The PLAN.md Step 1 check is met.**
+Implemented in `src/toycar/` (commit `10e2d43`; `last_branch` rule revised 2026-11-03). The automated tests (§9) pass, and the manual acceptance checklist (§10) passed on 2026-11-03. **The PLAN.md Step 1 check is met.**

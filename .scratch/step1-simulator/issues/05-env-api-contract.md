@@ -1,7 +1,7 @@
 # Env API and interface contract
 
 Labels: wayfinder:grilling
-Status: open
+Status: closed
 Assignee: mgrue
 Blocked by: 01-python-package-compatibility.md, 03-physics-model.md, 04-off-track-semantics.md
 Parent: ../MAP.md
@@ -34,3 +34,5 @@ Check: the spec contains typed signatures and the determinism tests fixed by the
 - **Tests (check):** typed signatures above; physics-ticket determinism tests (same-machine hash equality of States + Frames; golden trajectory at 1e-9) plus start-pose validity over many seeds.
 
 **Reopened (2026-11-03)** by Step 2 ticket [03 Expert controller](../../step2-expert/issues/03-controller-prototype.md): `last_branch` is set from the nearest-projection branch on the tick *before* exiting the fork section, where the two branches coincide. It is wrong in about 1.5% of clean passages and about 27% with steer noise, so it can't score Instructions. Fix: record the branch when the car crosses the section midpoint (`merge_station_m / 2`, branch centres 12 m apart), and set `last_branch` on exit only if the car crossed the midpoint and the exit is in the same travel sense as that crossing. Partial passages (no crossing) leave it unchanged.
+
+**Re-resolved (2026-11-03):** `last_branch` now comes from the branch at the section-midpoint crossing and is set on exit only if the exit sense matches the crossing sense. Partial passages leave it unchanged. `branch` itself stays the nearest-Route label, documented as informational near the ends. SPEC §6.2 step 4 and §11.11 were updated. New tests: `test_last_branch_robust_to_noise` (4 Route × Direction × 5 seeds with sinusoidal steer noise) and `test_partial_passage_leaves_last_branch_unset`. Both fail on the old rule.

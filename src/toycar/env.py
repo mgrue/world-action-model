@@ -99,8 +99,9 @@ class CarEnv:
         self._wrong_way = False
         self._station, self._branch = self._track.locate(state.x, state.y)
         self._last_branch: Branch | None = None
-        # which end the car entered the fork section from: +1 = Fork (moving cw), −1 = Merge, 0 = unknown
-        self._branch_entry = 0
+        # branch and travel sense (+1 = cw) at the most recent crossing of the section midpoint, this passage
+        self._mid_branch: Branch | None = None
+        self._mid_sense = 0
         self._termination: Termination = None
         self._ended = False
         return state, self._info()
@@ -140,14 +141,17 @@ class CarEnv:
         self._wrong_way = self._progress < self._max_progress - WRONG_WAY_M
 
         prev = self._branch
-        if prev is None and branch_new is not None:
-            self._branch_entry = 1 if delta > 0 else -1
-        elif prev is not None and branch_new is None:
+        mid = track.merge_station_m / 2.0
+        s_old = self._station
+        if branch_new is not None and (s_old < mid <= s_new or s_new < mid <= s_old):
+            # crossing the midpoint: branch centres are far apart here, so `locate` is unambiguous
+            self._mid_branch, self._mid_sense = branch_new, (1 if s_new > s_old else -1)
+        if prev is not None and branch_new is None:
             exit_sense = 1 if delta > 0 else -1  # +1 = past the Merge, −1 = past the Fork
-            # completed the passage (left at the far end), not backed out the way it came
-            if self._branch_entry == 0 or exit_sense == self._branch_entry:
-                self._last_branch = prev
-            self._branch_entry = 0
+            # completed passage: crossed the midpoint and left in the same travel sense
+            if self._mid_branch is not None and exit_sense == self._mid_sense:
+                self._last_branch = self._mid_branch
+            self._mid_branch, self._mid_sense = None, 0
         self._station, self._branch = s_new, branch_new
 
         terminated = truncated = False
