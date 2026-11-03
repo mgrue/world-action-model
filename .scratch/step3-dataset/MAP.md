@@ -43,7 +43,7 @@ _(empty — Frame history deferred to Step 6 as a loader option and the Step 6 t
 
 ## Out of scope
 
-- Caching VAE latents next to the data (Step 4/6 storage decision; about 5.5 GB at 3000 × 901 Frames in float16, per [ticket 01](research/01-storage-and-loading.md)).
+- Caching VAE latents next to the data (Step 4/6 storage decision; 8×8×16 float16 latents are 2 KB per Frame, about 3.7 GB for the 6000 × 301 Frames decided in ticket 02; see [ticket 01](research/01-storage-and-loading.md)).
 - The models (Steps 4–8): architecture, normalisation inside the model, batching on MPS beyond what the loader contract needs.
 - Closed-loop evaluation (Step 9) — only the seed ranges it must not overlap are in scope.
 - Changes to the Step 1 simulator or Step 2 expert, unless a ticket finds a blocking gap (then reopen the relevant ticket).
