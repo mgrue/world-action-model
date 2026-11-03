@@ -92,3 +92,9 @@ _Avoid_: oracle, teacher, autopilot
 **Burst**:
 A short triangular steering perturbation the Expert adds to the executed Action (never to the label) so the data shows recoveries.
 _Avoid_: noise (when meaning one perturbation event), jitter
+
+## Dataset
+
+**Split**:
+One of the disjoint episode sets `train`, `val`, `test`, each recorded from its own seed block. Episodes are assigned to Splits whole; windows of one episode never appear in two Splits.
+_Avoid_: fold, partition

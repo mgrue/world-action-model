@@ -34,6 +34,7 @@ PLAN.md check to satisfy: "plotting a window shows frames and actions that line 
 <!-- one line per closed ticket -->
 
 - [Storage format and loading throughput](issues/01-storage-and-loading.md) — store States/actions/flags/metadata only and re-render Frames in the loader (0.11 GB at 3000 episodes, bit-identical, 3.5k windows/s vs about 13/s consumed by training); per-episode Frame hash + render-code hash in the manifest, checked on open; HDF5+lzf as fallback; raw Frames (33 GB) don't fit
+- [Episode mix, dataset size and splits](issues/02-episode-mix-and-splits.md) — 6000 episodes × 300 ticks, exactly 1000 per Instruction × Direction (assigned `k mod 6`); Step 1 start ranges and Step 2 expert defaults unchanged; by-episode split 4800/600/600 on seed blocks 1M/2M/3M (Step 9 eval 9M, Step 2 eval 0–999); any crash aborts recording; ≈ 0.98M usable windows
 
 ## Not yet specified
 
