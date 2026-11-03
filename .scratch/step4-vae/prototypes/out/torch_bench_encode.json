@@ -1,0 +1,290 @@
+[
+ {
+  "device": "mps",
+  "size": "small",
+  "precision": "float32",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 927248,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 43.74,
+  "ms_per_window": 5.467,
+  "frames_s": 3110
+ },
+ {
+  "device": "mps",
+  "size": "small",
+  "precision": "float32",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 927248,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 168.68,
+  "ms_per_window": 5.271,
+  "frames_s": 3225
+ },
+ {
+  "device": "mps",
+  "size": "small",
+  "precision": "float16",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 927248,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 47.13,
+  "ms_per_window": 5.892,
+  "frames_s": 2885
+ },
+ {
+  "device": "mps",
+  "size": "small",
+  "precision": "float16",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 927248,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 182.08,
+  "ms_per_window": 5.69,
+  "frames_s": 2988
+ },
+ {
+  "device": "mps",
+  "size": "large",
+  "precision": "float32",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 2082064,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 80.75,
+  "ms_per_window": 10.093,
+  "frames_s": 1684
+ },
+ {
+  "device": "mps",
+  "size": "large",
+  "precision": "float32",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 2082064,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 317.25,
+  "ms_per_window": 9.914,
+  "frames_s": 1715
+ },
+ {
+  "device": "mps",
+  "size": "large",
+  "precision": "float16",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 2082064,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 89.82,
+  "ms_per_window": 11.227,
+  "frames_s": 1514
+ },
+ {
+  "device": "mps",
+  "size": "large",
+  "precision": "float16",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 2082064,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 353.33,
+  "ms_per_window": 11.041,
+  "frames_s": 1540
+ },
+ {
+  "device": "mps",
+  "size": "lean",
+  "precision": "float32",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 908624,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 26.42,
+  "ms_per_window": 3.303,
+  "frames_s": 5147
+ },
+ {
+  "device": "mps",
+  "size": "lean",
+  "precision": "float32",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 908624,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 102.15,
+  "ms_per_window": 3.192,
+  "frames_s": 5326
+ },
+ {
+  "device": "mps",
+  "size": "lean",
+  "precision": "float16",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 908624,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 27.84,
+  "ms_per_window": 3.479,
+  "frames_s": 4886
+ },
+ {
+  "device": "mps",
+  "size": "lean",
+  "precision": "float16",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 908624,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 107.08,
+  "ms_per_window": 3.346,
+  "frames_s": 5080
+ },
+ {
+  "device": "cpu",
+  "size": "small",
+  "precision": "float32",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 927248,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 722.57,
+  "ms_per_window": 90.321,
+  "frames_s": 188
+ },
+ {
+  "device": "cpu",
+  "size": "small",
+  "precision": "float32",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 927248,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 2892.93,
+  "ms_per_window": 90.404,
+  "frames_s": 188
+ },
+ {
+  "device": "cpu",
+  "size": "large",
+  "precision": "float32",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 2082064,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 1190.12,
+  "ms_per_window": 148.765,
+  "frames_s": 114
+ },
+ {
+  "device": "cpu",
+  "size": "large",
+  "precision": "float32",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 2082064,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 4688.43,
+  "ms_per_window": 146.513,
+  "frames_s": 116
+ },
+ {
+  "device": "cpu",
+  "size": "lean",
+  "precision": "float32",
+  "windows": 8,
+  "frames": 136,
+  "enc_params": 908624,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 612.64,
+  "ms_per_window": 76.579,
+  "frames_s": 222
+ },
+ {
+  "device": "cpu",
+  "size": "lean",
+  "precision": "float32",
+  "windows": 32,
+  "frames": 544,
+  "enc_params": 908624,
+  "latent_shape": [
+   16,
+   8,
+   8
+  ],
+  "ms_batch": 2396.27,
+  "ms_per_window": 74.884,
+  "frames_s": 227
+ }
+]

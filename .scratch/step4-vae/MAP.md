@@ -34,6 +34,7 @@ PLAN.md check to satisfy: "reconstructions keep the car's position and heading c
 ## Decisions so far
 
 <!-- one line per closed ticket -->
+- [PyTorch on Python 3.14 and MPS](issues/01-torch-on-mac.md) — torch 2.15.0 cp314 wheel from PyPI works; MPS ~11× CPU (~350–490 Frames/s at ~2 M params, ~1 h/epoch); float32 eager, batch 64–128, `num_workers=0`; seeded MPS runs bit-identical; encoder ≈ 5 ms per Window
 
 - [Measuring car visibility](issues/04-car-visibility-check.md) — colour-centroid pose estimator, reconstruction vs original on 4096 fixed val Frames: car found 100%, position p95 ≤ 0.3 m / max ≤ 0.6 m, heading p95 ≤ 10° / max ≤ 30°; PSNR (whole, car region, background) as diagnostics; Probes report-only; ~30-entry contact sheet; validated on six fake reconstructions (8×8 block average fails on heading)
 

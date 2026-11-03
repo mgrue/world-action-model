@@ -1,0 +1,56 @@
+[
+ {
+  "size": "small",
+  "precision": "float32",
+  "num_workers": 0,
+  "batch": 256,
+  "steps_s": 1.36,
+  "frames_s": 348,
+  "loss": 0.0301
+ },
+ {
+  "size": "small",
+  "precision": "float32",
+  "num_workers": 4,
+  "batch": 256,
+  "steps_s": 1.37,
+  "frames_s": 350,
+  "loss": 0.0301
+ },
+ {
+  "size": "lean",
+  "precision": "float32",
+  "num_workers": 0,
+  "batch": 256,
+  "steps_s": 1.92,
+  "frames_s": 493,
+  "loss": 0.028
+ },
+ {
+  "size": "lean",
+  "precision": "float32",
+  "num_workers": 4,
+  "batch": 256,
+  "steps_s": 1.93,
+  "frames_s": 493,
+  "loss": 0.028
+ },
+ {
+  "size": "lean",
+  "precision": "float16",
+  "num_workers": 0,
+  "batch": 256,
+  "steps_s": 1.94,
+  "frames_s": 496,
+  "loss": 0.037
+ },
+ {
+  "size": "lean",
+  "precision": "float16",
+  "num_workers": 4,
+  "batch": 256,
+  "steps_s": 1.95,
+  "frames_s": 500,
+  "loss": 0.037
+ }
+]

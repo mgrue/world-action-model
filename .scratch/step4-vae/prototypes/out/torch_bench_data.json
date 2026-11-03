@@ -1,0 +1,63 @@
+[
+ {
+  "mode": "in-process loop",
+  "n_frames": 1444800,
+  "frames_s": 8186
+ },
+ {
+  "mode": "DataLoader",
+  "num_workers": 0,
+  "batch": 256,
+  "startup_s": 0.07,
+  "frames_s": 8036,
+  "dtype": "torch.uint8",
+  "shape": [
+   256,
+   64,
+   64,
+   3
+  ]
+ },
+ {
+  "mode": "DataLoader",
+  "num_workers": 2,
+  "batch": 256,
+  "startup_s": 2.39,
+  "frames_s": 15900,
+  "dtype": "torch.uint8",
+  "shape": [
+   256,
+   64,
+   64,
+   3
+  ]
+ },
+ {
+  "mode": "DataLoader",
+  "num_workers": 4,
+  "batch": 256,
+  "startup_s": 3.55,
+  "frames_s": 29465,
+  "dtype": "torch.uint8",
+  "shape": [
+   256,
+   64,
+   64,
+   3
+  ]
+ },
+ {
+  "mode": "DataLoader",
+  "num_workers": 6,
+  "batch": 256,
+  "startup_s": 5.43,
+  "frames_s": 41752,
+  "dtype": "torch.uint8",
+  "shape": [
+   256,
+   64,
+   64,
+   3
+  ]
+ }
+]

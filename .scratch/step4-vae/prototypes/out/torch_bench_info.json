@@ -1,0 +1,31 @@
+{
+ "torch": "2.15.0",
+ "python": "3.14.6",
+ "numpy": "2.5.4",
+ "macos": "26.6.2",
+ "machine": "arm64",
+ "mps_available": true,
+ "mps_recommended_max_gb": 11.84,
+ "cpu_threads": 6,
+ "toycar": "0.1.0",
+ "params": {
+  "small": 1870675,
+  "large": 4188403,
+  "lean": 1833427
+ },
+ "enc_params": {
+  "small": 927248,
+  "large": 2082064,
+  "lean": 908624
+ },
+ "train_gflop_per_frame": {
+  "small": 4.403,
+  "large": 9.875,
+  "lean": 3.497
+ },
+ "enc_gflop_per_frame": {
+  "small": 0.592,
+  "large": 1.327,
+  "lean": 0.441
+ }
+}
