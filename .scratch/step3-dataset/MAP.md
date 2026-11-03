@@ -1,6 +1,7 @@
 # Step 3 dataset spec
 
 Labels: wayfinder:map
+Status: destination reached (2026-11-03) — see SPEC.md
 Tracker: local markdown — tickets are files in `issues/`, each with `Parent: MAP.md`.
 Ticket header fields: `Labels:` (wayfinder type), `Status:` (open/closed), `Assignee:` (empty = unclaimed — the claim), `Blocked by:` (ticket files; unblocked when all are closed).
 Frontier = open, unblocked, unassigned tickets in `issues/`.
@@ -38,6 +39,7 @@ PLAN.md check to satisfy: "plotting a window shows frames and actions that line 
 - [Window definition and time alignment](issues/04-window-definition.md) — window at t = fₜ + sₜ, `clean` aₜ…aₜ₊₁₅, future fₜ₊₁…fₜ₊₁₆ (action k ↔ future Frame k), Instruction id; clean-future filter by default, stride 1, explicit index, fixed 2048-window val/test subsets; `horizon` and `future_frames` are loader settings (Step 6 token budget); per-tick station/branch/planned_branch stored; `approaches_section` tag; uint8 HWC Frames, no torch in core
 - [Minor-visual randomisation and held-out world changes](issues/03-visual-randomisation.md) — per-episode jitter of all five colours (×U[0.85, 1.15] brightness, ±10 per channel, stream `[seed, 3]`), same for all splits; no pixel augmentation; track shape fixed; five reserved probes (`brown_grass`, `light_road`, `blue_car`, `no_kerb`, `wide_fork`); Step 1 renderer made recolourable (bit-identical, 0.1 ms per new colour set)
 - [Recorder, loader API, CLI and window plot](issues/05-recorder-loader-and-plot.md) — `toycar.dataset` (numpy only, `Windows` works with PyTorch's `DataLoader` as is); `data/<name>/` = manifest + per-split `.npz` (about 100 MB, atomic write); hash check of 4 episodes per split on open, `verify` for all; `record`/`verify`/`stats`/`plot` CLI with action k under future Frame k; 14 tests + 4-step manual acceptance
+- [Compile SPEC.md](issues/06-compile-spec.md) — destination reached: [SPEC.md](SPEC.md); gaps filled while compiling listed in its §14
 
 ## Not yet specified
 
