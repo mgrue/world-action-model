@@ -8,7 +8,7 @@ Parent: ../MAP.md
 
 ## Question
 
-What is the exact public API Steps 2–4 build on: plain class vs gymnasium `Env`; `reset(seed, options)` and `step(action)` signatures and return values; what lives in state vs info; headless `render()` returning a `uint8 (64,64,3)` array; start-pose randomisation (position along centerline, direction, lane, initial speed) driven by the seed; track queries the expert needs (centerline, lane offset, closest point, curvature); progress along the centerline, direction-aware lap counting and wrong-way detection; episode length/truncation; where visual-randomisation parameters enter.
+What is the exact public API Steps 2–4 build on: plain class vs gymnasium `Env`; `reset(seed, options)` and `step(action)` signatures and return values; what lives in state vs info; headless `render()` returning a `uint8 (64,64,3)` array; start-pose randomisation (position along a Route, direction, initial speed) driven by the seed; track queries the expert needs (per-Route centerline, closest point, curvature — the Track has two Routes, outer and inner, see CONTEXT.md); progress along which Route when the car is between Fork and Merge, direction-aware lap counting and wrong-way detection; episode length/truncation; where visual-randomisation parameters enter.
 
 Check: the spec contains typed signatures and a determinism test (same seed + same action sequence → identical states and frame hashes).
 
