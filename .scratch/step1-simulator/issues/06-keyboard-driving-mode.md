@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-python-package-compatibility.md, 03-physics-model.md
 Parent: ../MAP.md
 
