@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-storage-and-loading.md, 02-episode-mix-and-splits.md, 04-window-definition.md
 Parent: ../MAP.md
 
