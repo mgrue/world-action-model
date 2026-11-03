@@ -1,0 +1,43 @@
+Estimator on 4096 original val Frames vs true State: position median 0.051 / p95 0.164 / max 0.330 m; heading median 2.4 / p95 9.2 / max 31.4°
+
+exact copy (should PASS)
+  slice        n  found  pos p95  pos max  head p95  head max   PSNR    car     bg  verdict
+  all       4096 100.0%    0.000    0.000       0.0       0.0   99.0   99.0   99.0  PASS
+  section   1275 100.0%    0.000    0.000       0.0       0.0   99.0   99.0   99.0  PASS
+  fast       399 100.0%    0.000    0.000       0.0       0.0   99.0   99.0   99.0  PASS
+  kerb        51 100.0%    0.000    0.000       0.0       0.0   99.0   99.0   99.0  PASS
+
+car shifted 1 px = 0.625 m (should FAIL on position)
+  slice        n  found  pos p95  pos max  head p95  head max   PSNR    car     bg  verdict
+  all       4096 100.0%    0.625    0.641       0.0      13.8   33.9   16.3   99.0  FAIL
+  section   1275 100.0%    0.625    0.641       0.0       8.8   33.9   16.5   99.0  FAIL
+  fast       399 100.0%    0.625    0.625       0.0       0.0   33.9   15.6   99.0  FAIL
+  kerb        51 100.0%    0.631    0.637      10.4      13.8   33.7   16.2   99.0  FAIL
+
+car erased (should FAIL on found)
+  slice        n  found  pos p95  pos max  head p95  head max   PSNR    car     bg  verdict
+  all       4096   0.0%      inf      inf     180.0     180.0   29.6   12.0   99.0  FAIL
+  section   1275   0.0%      inf      inf     180.0     180.0   29.7   12.3   99.0  FAIL
+  fast       399   0.0%      inf      inf     180.0     180.0   29.4   11.0   99.0  FAIL
+  kerb        51   0.0%      inf      inf     180.0     180.0   29.5   11.9   99.0  FAIL
+
+car facing backwards (should FAIL on heading)
+  slice        n  found  pos p95  pos max  head p95  head max   PSNR    car     bg  verdict
+  all       4096 100.0%    0.122    0.201     180.0     180.0   31.1   13.6   99.0  FAIL
+  section   1275 100.0%    0.123    0.191     179.8     180.0   31.2   13.8   99.0  FAIL
+  fast       399 100.0%    0.075    0.128     180.0     180.0   31.0   12.7   99.0  FAIL
+  kerb        51 100.0%    0.111    0.118     178.9     180.0   31.0   13.4   99.0  FAIL
+
+background noise ±4 per channel, car intact (should PASS)
+  slice        n  found  pos p95  pos max  head p95  head max   PSNR    car     bg  verdict
+  all       4096 100.0%    0.125    0.231       7.2      19.6   39.9   39.9   39.9  PASS
+  section   1275 100.0%    0.127    0.177       6.9      19.6   39.9   39.9   39.9  PASS
+  fast       399 100.0%    0.125    0.231       7.5      17.1   39.9   40.0   39.9  PASS
+  kerb        51 100.0%    0.131    0.144       8.6      19.4   39.9   39.9   39.9  PASS
+
+8×8 block average, enlarged (should FAIL)
+  slice        n  found  pos p95  pos max  head p95  head max   PSNR    car     bg  verdict
+  all       4096 100.0%    0.599    0.930     180.0     180.0   22.5   13.8   23.1  FAIL
+  section   1275 100.0%    0.659    0.930     180.0     180.0   22.5   14.0   23.1  FAIL
+  fast       399 100.0%    0.513    0.750     180.0     180.0   22.5   13.0   23.0  FAIL
+  kerb        51 100.0%    0.678    0.770     180.0     180.0   22.4   13.3   23.0  FAIL

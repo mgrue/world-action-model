@@ -35,6 +35,8 @@ PLAN.md check to satisfy: "reconstructions keep the car's position and heading c
 
 <!-- one line per closed ticket -->
 
+- [Measuring car visibility](issues/04-car-visibility-check.md) — colour-centroid pose estimator, reconstruction vs original on 4096 fixed val Frames: car found 100%, position p95 ≤ 0.3 m / max ≤ 0.6 m, heading p95 ≤ 10° / max ≤ 30°; PSNR (whole, car region, background) as diagnostics; Probes report-only; ~30-entry contact sheet; validated on six fake reconstructions (8×8 block average fails on heading)
+
 ## Not yet specified
 
 _(empty — every known question has a ticket)_
