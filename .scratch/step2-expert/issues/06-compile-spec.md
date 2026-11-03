@@ -2,7 +2,7 @@
 
 Labels: wayfinder:task
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-controller-research.md, 02-instruction-set.md, 03-controller-prototype.md, 04-expert-variation.md, 05-expert-api-and-metrics.md
 Parent: ../MAP.md
 
