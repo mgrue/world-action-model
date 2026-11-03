@@ -10,6 +10,9 @@ dependencies = [
 
 [dependency-groups]
 dev = ["pytest"]
+viz = [
+    "matplotlib>=3.10,<4",
+]
 
 [build-system]
 requires = ["uv_build>=0.9,<0.14"]
