@@ -2,7 +2,7 @@
 
 Labels: wayfinder:task
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-storage-and-loading.md, 02-episode-mix-and-splits.md, 03-visual-randomisation.md, 04-window-definition.md, 05-recorder-loader-and-plot.md
 Parent: ../MAP.md
 
