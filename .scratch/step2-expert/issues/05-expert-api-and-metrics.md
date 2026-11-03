@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 02-instruction-set.md, 04-expert-variation.md
 Parent: ../MAP.md
 
