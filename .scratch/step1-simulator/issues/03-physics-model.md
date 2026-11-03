@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 02-track-car-render-look.md
 Parent: ../MAP.md
 
