@@ -2,7 +2,7 @@
 
 Labels: wayfinder:research
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by:
 Parent: ../MAP.md
 
