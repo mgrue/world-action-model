@@ -102,3 +102,7 @@ _Avoid_: fold, partition
 **Window**:
 One training example cut from an episode at tick t: the observed Frame and State at t, the Instruction, the next H expert actions (clean labels) and the H Frames they cause (action k ↔ future Frame k). H = 16 by default.
 _Avoid_: sample, clip, chunk (chunk = the predicted action sequence)
+
+**Probe**:
+A named world change reserved for Step 10 generalisation tests (a colour or track-shape change outside the training jitter); never used in training data.
+_Avoid_: variant, test set (a Probe is a world change, not a Split)
