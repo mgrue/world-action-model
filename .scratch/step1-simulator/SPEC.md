@@ -241,7 +241,7 @@ def render(state: State, track: Track, params: RenderParams = RenderParams(),
 3. **Car** is drawn over the background. A sub-pixel is car if `|fwd| < CAR_LENGTH/2` and `|lat| < CAR_WIDTH/2`, where `fwd = (p − c)·f` and `lat = (p − c)·r`. It's **nose** colour if additionally `fwd > CAR_LENGTH/2 − 0.35·CAR_LENGTH`, otherwise body colour.
 4. **Downsample.** Average each `supersample × supersample` block in float64, then convert with `np.round` (half to even) and cast to uint8.
 5. **Caching** is a performance requirement:
-   - Cache the background (sub-pixel colour array) per `(track.params, params, resolution)`.
+   - Cache the colour-independent background layout per `(track.params, resolution, supersample)`: sub-pixel class labels (grass/kerb/road) and per-pixel class counts. Apply the colours on every call (background = round(counts · palette / supersample²); the car patch reads the label grid). The output is bit-identical to colouring every sub-pixel, for any colours, so per-episode colours (Step 3) cost no redraw. (Revised 2026-11-03, Step 3 ticket 03; previously the coloured background was cached per `(track.params, params, resolution)`.)
    - Per frame, recompute only the sub-pixels inside the car's bounding box.
    - Target: under 2 ms per 64×64 frame on an M-series Mac, after the cache is warm.
 

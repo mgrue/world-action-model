@@ -33,31 +33,38 @@ def _downsample(sub: np.ndarray, ss: int) -> np.ndarray:
     return np.round(avg).astype(np.uint8)
 
 
-@lru_cache(maxsize=32)
-def _background(track_params: TrackParams, params: RenderParams, resolution: int) -> tuple[np.ndarray, np.ndarray]:
-    """(sub-pixel float64 colours (n, n, 3), downsampled uint8 frame). Read-only arrays."""
+_GRASS, _KERB, _ROAD = 0, 1, 2  # background class labels, also row order of the palette
+
+
+@lru_cache(maxsize=16)
+def _layout(track_params: TrackParams, resolution: int, supersample: int) -> tuple[np.ndarray, np.ndarray]:
+    """Colour-independent background: (sub-pixel class labels (n, n) int8,
+    per-output-pixel class counts (resolution, resolution, 3) float64). Read-only arrays."""
     track = Track(track_params)
-    n = resolution * params.supersample
+    n = resolution * supersample
     c = (np.arange(n, dtype=np.float64) + 0.5) * (WORLD_M / n)
     px, py = np.meshgrid(c, c)  # px varies along columns (x), py along rows (y)
     d = track.distance_grid(px, py)
     hw = track_params.road_half_width_m
-    sub = np.empty((n, n, 3), dtype=np.float64)
-    sub[...] = params.grass
-    sub[d < hw + track_params.kerb_width_m] = params.kerb
-    sub[d < hw] = params.road
-    frame = _downsample(sub, params.supersample)
-    sub.flags.writeable = False
-    frame.flags.writeable = False
-    return sub, frame
+    labels = np.full((n, n), _GRASS, dtype=np.int8)
+    labels[d < hw + track_params.kerb_width_m] = _KERB
+    labels[d < hw] = _ROAD
+    blocks = labels.reshape(resolution, supersample, resolution, supersample)
+    counts = np.stack([(blocks == k).sum(axis=(1, 3)) for k in (_GRASS, _KERB, _ROAD)], axis=-1).astype(np.float64)
+    labels.flags.writeable = False
+    counts.flags.writeable = False
+    return labels, counts
 
 
 def render(state: State, track: Track, params: RenderParams = RenderParams(), resolution: int = 64) -> np.ndarray:
     """Render one Frame: uint8 array of shape (resolution, resolution, 3)."""
     ss = params.supersample
     n = resolution * ss
-    sub_bg, frame_bg = _background(track.params, params, resolution)
-    out = frame_bg.copy()
+    labels, counts = _layout(track.params, resolution, ss)
+    palette = np.array([params.grass, params.kerb, params.road], dtype=np.float64)
+    # Block average of integer colours: the sums are exact in float64, so this equals the
+    # per-sub-pixel average bit for bit, for any colours.
+    out = np.round(counts @ palette / (ss * ss)).astype(np.uint8)
 
     # bounding box of the car in sub-pixels, expanded to whole output pixels
     cell = WORLD_M / n
@@ -79,7 +86,7 @@ def render(state: State, track: Track, params: RenderParams = RenderParams(), re
         return out
     nose = car & (fwd > CAR_LENGTH / 2 - NOSE_FRACTION * CAR_LENGTH)
 
-    patch = sub_bg[i0:i1, j0:j1].copy()
+    patch = palette[labels[i0:i1, j0:j1]]
     patch[car] = params.body
     patch[nose] = params.nose
     out[i0 // ss : i1 // ss, j0 // ss : j1 // ss] = _downsample(patch, ss)
