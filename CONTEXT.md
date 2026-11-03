@@ -98,3 +98,7 @@ _Avoid_: noise (when meaning one perturbation event), jitter
 **Split**:
 One of the disjoint episode sets `train`, `val`, `test`, each recorded from its own seed block. Episodes are assigned to Splits whole; windows of one episode never appear in two Splits.
 _Avoid_: fold, partition
+
+**Window**:
+One training example cut from an episode at tick t: the observed Frame and State at t, the Instruction, the next H expert actions (clean labels) and the H Frames they cause (action k ↔ future Frame k). H = 16 by default.
+_Avoid_: sample, clip, chunk (chunk = the predicted action sequence)

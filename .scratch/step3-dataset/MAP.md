@@ -35,15 +35,15 @@ PLAN.md check to satisfy: "plotting a window shows frames and actions that line 
 
 - [Storage format and loading throughput](issues/01-storage-and-loading.md) — store States/actions/flags/metadata only and re-render Frames in the loader (0.11 GB at 3000 episodes, bit-identical, 3.5k windows/s vs about 13/s consumed by training); per-episode Frame hash + render-code hash in the manifest, checked on open; HDF5+lzf as fallback; raw Frames (33 GB) don't fit
 - [Episode mix, dataset size and splits](issues/02-episode-mix-and-splits.md) — 6000 episodes × 300 ticks, exactly 1000 per Instruction × Direction (assigned `k mod 6`); Step 1 start ranges and Step 2 expert defaults unchanged; by-episode split 4800/600/600 on seed blocks 1M/2M/3M (Step 9 eval 9M, Step 2 eval 0–999); any crash aborts recording; ≈ 0.98M usable windows
+- [Window definition and time alignment](issues/04-window-definition.md) — window at t = fₜ + sₜ, `clean` aₜ…aₜ₊₁₅, future fₜ₊₁…fₜ₊₁₆ (action k ↔ future Frame k), Instruction id; clean-future filter by default, stride 1, explicit index, fixed 2048-window val/test subsets; `horizon` and `future_frames` are loader settings (Step 6 token budget); per-tick station/branch/planned_branch stored; `approaches_section` tag; uint8 HWC Frames, no torch in core
 
 ## Not yet specified
 
-- **Frame history**: PLAN uses 1 observed Frame; speed is invisible in one Frame but the State token carries v. Whether windows should ever carry more than one observed Frame (FLUX uses several) — revisit once the window ticket settles, likely deferred to Step 6.
-- **Step 6 token budget** (from ticket 01): about 1100 tokens per window with plain attention caps the batch at 8 on this Mac. Not a Step 3 decision, but it may argue for shorter futures or fewer Frames per window; carry into Step 6's map.
-- **Latent caching for Step 4+**: whether the dataset should later store VAE latents next to Frames. Likely a Step 4/6 concern; only the format's extensibility is in scope here.
+_(empty — Frame history deferred to Step 6 as a loader option and the Step 6 token budget handled by the `horizon`/`future_frames` loader settings, both in [Window definition](issues/04-window-definition.md); latent caching moved to Out of scope)_
 
 ## Out of scope
 
+- Caching VAE latents next to the data (Step 4/6 storage decision; about 5.5 GB at 3000 × 901 Frames in float16, per [ticket 01](research/01-storage-and-loading.md)).
 - The models (Steps 4–8): architecture, normalisation inside the model, batching on MPS beyond what the loader contract needs.
 - Closed-loop evaluation (Step 9) — only the seed ranges it must not overlap are in scope.
 - Changes to the Step 1 simulator or Step 2 expert, unless a ticket finds a blocking gap (then reopen the relevant ticket).
