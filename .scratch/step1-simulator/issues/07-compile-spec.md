@@ -2,7 +2,7 @@
 
 Labels: wayfinder:task
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 02-track-car-render-look.md, 03-physics-model.md, 04-off-track-semantics.md, 05-env-api-contract.md, 06-keyboard-driving-mode.md
 Parent: ../MAP.md
 
