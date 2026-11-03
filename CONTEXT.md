@@ -71,3 +71,16 @@ Distance accumulated along Station in the episode's Direction; negative when dri
 
 **Lap**:
 One full Route length (88 m) of accumulated Progress.
+
+## Expert and instructions
+
+**Instruction**:
+The per-episode command the driver follows: `outer`, `inner` or `any`. It picks which Branch to take at every Passage. It does not include Direction, which comes from the start pose.
+_Avoid_: command, task, goal
+
+**Passage**:
+One traversal of the fork section, from entering it at one end (the Fork or the Merge) to leaving it at the other.
+_Avoid_: fork crossing, branch visit
+
+**Planned branch**:
+The Branch the expert intends to take on its current or next Passage: the Instruction itself for `outer`/`inner`, or a fair coin for `any`, drawn at reset and on each exit from the fork section.

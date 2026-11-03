@@ -25,10 +25,11 @@ PLAN.md check to satisfy: "the expert completes laps reliably for every behavior
 
 <!-- one line per closed ticket -->
 
+- [Instruction set and branch choice](issues/02-instruction-set.md) — three branch-only Instructions `outer`/`inner`/`any` (Direction stays an episode property); fair coin per Fork passage under `any`, drawn at reset and on each exit from the fork section; fixed per episode; starts match the Instruction, wrong-branch passages exempt; `INSTRUCTIONS` tuple order frozen; CFG null is model-side only
+
 ## Not yet specified
 
-- **Mid-episode instruction changes**: is an Instruction fixed for the whole episode, or can it switch (e.g. "take the inner branch next time")? Depends on the Instruction set and on what Step 3 windows (16 ticks ≈ 1.07 s) can even observe.
-- **Null instruction for classifier-free guidance** (PLAN Step 10): whether the expert/data side needs a "no instruction" label or it is purely a model-side dropout — likely model-side; revisit once the Instruction set is fixed.
+_(empty — mid-episode changes and the CFG null label were resolved in [Instruction set and branch choice](issues/02-instruction-set.md))_
 
 ## Out of scope
 
