@@ -33,9 +33,12 @@ PLAN.md check to satisfy: "plotting a window shows frames and actions that line 
 
 <!-- one line per closed ticket -->
 
+- [Storage format and loading throughput](issues/01-storage-and-loading.md) — store States/actions/flags/metadata only and re-render Frames in the loader (0.11 GB at 3000 episodes, bit-identical, 3.5k windows/s vs about 13/s consumed by training); per-episode Frame hash + render-code hash in the manifest, checked on open; HDF5+lzf as fallback; raw Frames (33 GB) don't fit
+
 ## Not yet specified
 
 - **Frame history**: PLAN uses 1 observed Frame; speed is invisible in one Frame but the State token carries v. Whether windows should ever carry more than one observed Frame (FLUX uses several) — revisit once the window ticket settles, likely deferred to Step 6.
+- **Step 6 token budget** (from ticket 01): about 1100 tokens per window with plain attention caps the batch at 8 on this Mac. Not a Step 3 decision, but it may argue for shorter futures or fewer Frames per window; carry into Step 6's map.
 - **Latent caching for Step 4+**: whether the dataset should later store VAE latents next to Frames. Likely a Step 4/6 concern; only the format's extensibility is in scope here.
 
 ## Out of scope

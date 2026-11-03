@@ -1,0 +1,26 @@
+{
+  "npz_ep": {
+    "windows_per_s": 389.14533118658994,
+    "frames_per_s": 427.9694912724756
+  },
+  "npy_memmap": {
+    "windows_per_s": 240346.5224743635,
+    "frames_per_s": 380921.7275435489
+  },
+  "h5_lzf": {
+    "windows_per_s": 4334.777454834316,
+    "frames_per_s": 12004.118682964352
+  },
+  "h5_gzip": {
+    "windows_per_s": 1935.6466685877708,
+    "frames_per_s": 4729.071377853524
+  },
+  "zarr_blosc": {
+    "windows_per_s": 581.5169768740261,
+    "frames_per_s": 1782.7242942272371
+  },
+  "states_only": {
+    "windows_per_s": 901.567717789152,
+    "frames_per_s": 15207.109751120888
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "npz_ep": {
+    "loader_w0_windows_per_s": 351.90306167663067,
+    "loader_w4_windows_per_s": 214.77861135590854
+  },
+  "npy_memmap": {
+    "loader_w0_windows_per_s": 2071.022598219135,
+    "loader_w4_windows_per_s": 65412.4998375463
+  },
+  "h5_lzf": {
+    "loader_w0_windows_per_s": 2346.146581581045,
+    "loader_w4_windows_per_s": 13108.60815126625
+  },
+  "h5_gzip": {
+    "loader_w0_windows_per_s": 1630.0557145520338,
+    "loader_w4_windows_per_s": 7400.583807985178
+  },
+  "zarr_blosc": {
+    "loader_w0_windows_per_s": 546.0044378358218,
+    "loader_w4_windows_per_s": 1414.6291629828572
+  },
+  "states_only": {
+    "loader_w0_windows_per_s": 870.5836907764804,
+    "loader_w4_windows_per_s": 3550.1715910047747
+  }
+}
