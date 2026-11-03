@@ -55,3 +55,19 @@ _Avoid_: frame (when meaning time), step (when ambiguous)
 **Crash**:
 The event of any car corner leaving the road surface plus kerb (more than 2.8 m from both Routes); it ends the episode.
 _Avoid_: collision, off-track (as a noun)
+
+## Episode bookkeeping
+
+**Station**:
+Distance in metres along a Route from the Fork, increasing clockwise, in [0, Route length); identical on both Routes outside the Branches.
+_Avoid_: arc length, position (for this scalar)
+
+**Direction**:
+The travel sense an episode is meant to follow: clockwise (cw, Station increasing) or counterclockwise (ccw).
+_Avoid_: orientation, heading (heading is the car's angle)
+
+**Progress**:
+Distance accumulated along Station in the episode's Direction; negative when driving the wrong way.
+
+**Lap**:
+One full Route length (88 m) of accumulated Progress.

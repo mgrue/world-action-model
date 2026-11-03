@@ -1,7 +1,7 @@
 # Env API and interface contract
 
 Labels: wayfinder:grilling
-Status: open
+Status: closed
 Assignee: mgrue
 Blocked by: 01-python-package-compatibility.md, 03-physics-model.md, 04-off-track-semantics.md
 Parent: ../MAP.md
@@ -13,3 +13,22 @@ What is the exact public API Steps 2–4 build on: plain class vs gymnasium `Env
 Check: the spec contains typed signatures and the determinism tests fixed by the physics ticket (same-machine hash equality + golden trajectory at 1e-9).
 
 ## Comments
+
+- Q1 shape → package **`toycar`**: pure core (`track.py` Track/Route geometry + queries; `physics.py` pure `step_state`; `render.py` pure `render(state, track, params, resolution)`) + thin stateful `env.py` `CarEnv` (State + episode bookkeeping) + `drive.py` keyboard mode. **No gymnasium**; keep the familiar reset/step shape with separate terminated/truncated flags, no reward.
+- Q2 signatures → frozen dataclasses `State(x,y,theta,v)` with `.features()` (float32, 5), `StepResult(state, terminated, truncated, info)`, `Info`; `CarEnv(track=None, render_params=None, max_steps=..., resolution=64)`; `reset(seed: int, start: StartSpec | None = None) -> (State, Info)` (seed required); `step(action: Sequence[float]) -> StepResult` (clipped); `render() -> uint8 (res,res,3)` of current State (frames not returned by step); `state` property.
+- Q3 progress → **Station s ∈ [0, 88)** from the Fork, increasing clockwise, shared by both Routes (equal lengths; inside the fork section measured on the nearer branch), from the car centre's closest point. Episode **direction** cw/ccw fixed at reset. **progress_m** = accumulated unwrapped Δs signed by direction. **laps** = floor(progress_m / 88.0). **wrong_way** = progress_m more than 5 m below its episode max (informational). **branch** ∈ {None, outer, inner} between Fork and Merge; **last_branch** = branch of the most recently completed fork passage. Info = (station_m, progress_m, laps, direction, wrong_way, branch, last_branch, steps, termination: None|"crash"|"max_steps").
+- Q4 start poses → `rng = np.random.default_rng(seed)`; sample direction ∈ {cw, ccw}, route ∈ {outer, inner}, station_m ∈ U[0, 88), lateral_m ∈ U[−1, 1], heading_offset ∈ U[±10°] from the Route tangent in episode direction, speed ∈ U[0, 6] m/s; any StartSpec field overrides; resample from the same rng while the pose is a Crash.
+- Q5 episode length → default `max_steps = 900` (60 s ≈ 4–5 laps); reaching it gives truncated = True, termination "max_steps"; constructor argument.
+- Q6 track queries → `Projection(station_m, lateral_m [+ = right of cw tangent], distance_m)`; `Route(name, length_m, pose_at(s), curvature_at(s) [+ = clockwise], project(x, y))` exact on line/arc primitives; `Track(outer, inner, fork_station_m=0, merge_station_m≈22.96, road_half_width_m=2.5, kerb_width_m=0.3, locate(x, y) -> (station, branch|None), is_crash(state))`; `Track.default()` + `Track(TrackParams(straight, end_radius, fork_length, bulge))` validated to fit the 40 m frame with equal-length branches.
+- Q7 rendering → frozen `RenderParams(grass, road, kerb, body, nose, supersample=4)` with the track ticket's defaults; pure `render(state, track, params, resolution=64)` with background cached per (track, params, resolution); `CarEnv(render_params=...)` and per-episode `reset(..., render_params=None)` override. Renderer is a pure function of one State — no trails or speed indicators. Visual-randomisation ranges and frame history/speed observability ruled **out of scope** (Step 3 / Step 6 decisions).
+
+**Resolution (2026-11-03):**
+- **Package `toycar`:** `track.py` (Track, Route, TrackParams, Projection), `physics.py` (pure `step_state(state, action) -> State`), `render.py` (RenderParams, pure `render`), `env.py` (CarEnv), `drive.py` (keyboard mode). No gymnasium, no reward.
+- **Types:** frozen dataclasses `State(x, y, theta, v)` + `.features()` float32 (5); `StepResult(state, terminated, truncated, info)`; `Info(station_m, progress_m, laps, direction, wrong_way, branch, last_branch, steps, termination: None|"crash"|"max_steps")`; `StartSpec(direction, route, station_m, lateral_m, heading_offset, speed)` all optional.
+- **CarEnv:** `__init__(track=None, render_params=None, max_steps=900, resolution=64)`; `reset(seed: int, start=None, render_params=None) -> (State, Info)`; `step(action) -> StepResult` (action clipped; raises after termination/truncation until reset); `render() -> uint8 (res,res,3)`; `state` property. Frames are not returned by step.
+- **Start poses:** `default_rng(seed)`; direction U{cw,ccw}, route U{outer,inner}, station U[0,88), lateral U[−1,1] m, heading offset U[±10°] from tangent in episode direction, speed U[0,6] m/s; StartSpec overrides; resample while Crash.
+- **Progress:** Station s from Fork, clockwise, shared by both Routes (nearer branch inside fork section); progress_m = accumulated unwrapped Δs signed by direction; laps = floor(progress_m/88); wrong_way when progress_m < max − 5 m; branch / last_branch for instruction checks.
+- **Episode end:** Crash → terminated, "crash"; steps == max_steps → truncated, "max_steps".
+- **Track queries:** `Route.pose_at(s)`, `curvature_at(s)`, `project(x, y) -> Projection(station_m, lateral_m, distance_m)`; `Track.locate(x, y)`, `Track.is_crash(state)`, `fork_station_m = 0`, `merge_station_m ≈ 22.96`, `Track.default()` and validated `TrackParams`.
+- **Rendering:** `RenderParams` as Q7; per-episode override via reset.
+- **Tests (check):** typed signatures above; physics-ticket determinism tests (same-machine hash equality of States + Frames; golden trajectory at 1e-9) plus start-pose validity over many seeds.
