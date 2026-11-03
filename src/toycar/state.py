@@ -51,6 +51,7 @@ class Info:
     wrong_way: bool
     branch: Branch | None
     last_branch: Branch | None
+    passages: int  # completed fork-section passages (incremented exactly when last_branch is set)
     steps: int
     termination: Termination
 

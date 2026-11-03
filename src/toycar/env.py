@@ -99,6 +99,7 @@ class CarEnv:
         self._wrong_way = False
         self._station, self._branch = self._track.locate(state.x, state.y)
         self._last_branch: Branch | None = None
+        self._passages = 0
         # branch and travel sense (+1 = cw) at the most recent crossing of the section midpoint, this passage
         self._mid_branch: Branch | None = None
         self._mid_sense = 0
@@ -115,6 +116,7 @@ class CarEnv:
             wrong_way=self._wrong_way,
             branch=self._branch,
             last_branch=self._last_branch,
+            passages=self._passages,
             steps=self._steps,
             termination=self._termination,
         )
@@ -151,6 +153,7 @@ class CarEnv:
             # completed passage: crossed the midpoint and left in the same travel sense
             if self._mid_branch is not None and exit_sense == self._mid_sense:
                 self._last_branch = self._mid_branch
+                self._passages += 1
             self._mid_branch, self._mid_sense = None, 0
         self._station, self._branch = s_new, branch_new
 

@@ -275,6 +275,7 @@ class Info:
     wrong_way: bool
     branch: Branch | None
     last_branch: Branch | None
+    passages: int          # completed fork-section passages; +1 exactly when last_branch is set
     steps: int
     termination: Termination
 
@@ -319,7 +320,7 @@ There is no gymnasium dependency and no reward. `step` doesn't return frames: ca
    - θ = `wrap(tθ + (π if direction == "ccw" else 0) + heading_offset)`.
    - v = speed.
 5. If `track.is_crash(pose)`: redraw all six values from the same `rng` (overrides re-applied) until it isn't. If 1000 attempts fail (only possible with a bad StartSpec), raise `ValueError`.
-6. Reset the bookkeeping: `steps = 0`, `progress_m = 0`, `max_progress_m = 0`, `laps = 0`, `wrong_way = False`, `branch` from `locate`, and `last_branch = None`. Set `termination = None`.
+6. Reset the bookkeeping: `steps = 0`, `progress_m = 0`, `max_progress_m = 0`, `laps = 0`, `wrong_way = False`, `branch` from `locate`, and `last_branch = None`, `passages = 0`. Set `termination = None`.
 7. If `render_params` is given, it replaces the env's params for this episode. Otherwise the constructor's params (or the defaults) apply.
 
 ### 6.2 `step(action)`
@@ -336,7 +337,7 @@ There is no gymnasium dependency and no reward. `step` doesn't return frames: ca
 4. Update the branch:
    - `branch` is the label from `locate`: the nearest Route while the Station is in the fork section. It is informational, and it can name the wrong branch within a few metres of the Fork or Merge, where the branches coincide.
    - When the Station crosses the section midpoint `mid = merge_station_m / 2` (`s_old < mid ≤ s_new` or `s_new < mid ≤ s_old`) with `branch_new` not None, record `mid_branch = branch_new` and the crossing sense (+1 if `s_new > s_old`, else −1). The branch centres are about 12 m apart there, so the label is unambiguous.
-   - On exit (previous `branch` not None, `branch_new` None): if a crossing was recorded this passage and the exit sense (`Δ > 0` past the Merge = +1, `Δ < 0` past the Fork = −1) equals the crossing sense, set `last_branch = mid_branch`. Otherwise (a partial passage that started past the midpoint, or backing out), leave `last_branch` unchanged. Then clear the recorded crossing.
+   - On exit (previous `branch` not None, `branch_new` None): if a crossing was recorded this passage and the exit sense (`Δ > 0` past the Merge = +1, `Δ < 0` past the Fork = −1) equals the crossing sense, set `last_branch = mid_branch` and `passages += 1`. Otherwise (a partial passage that started past the midpoint, or backing out), leave `last_branch` unchanged. Then clear the recorded crossing.
 5. Check for a crash: if `track.is_crash(state)`, set `terminated = True` and `termination = "crash"`.
 6. Check truncation: else if `steps >= max_steps`, set `truncated = True` and `termination = "max_steps"`.
 7. Return `StepResult`. A crashing tick still returns its State, and `render()` then shows the car touching grass.
@@ -380,7 +381,7 @@ Standing still on the road and driving the wrong way are **not** crashes. A stop
 **Display.**
 - The main view is the true 64×64 frame upscaled ×8 with nearest-neighbour scaling, giving 512×512.
 - Build it with `pygame.surfarray.make_surface(frame.swapaxes(0, 1))` and `pygame.transform.scale`. Don't use `smoothscale`.
-- The debug panel (about 220 px wide) sits to the **right** of the frame, never over it. It shows x, y, θ in degrees, v, steer, throttle, station, progress, laps, direction, branch, last_branch, wrong_way, steps and seed.
+- The debug panel (about 220 px wide) sits to the **right** of the frame, never over it. It shows x, y, θ in degrees, v, steer, throttle, station, progress, laps, direction, branch, last_branch, passages, wrong_way, steps and seed.
 - The window is about 732×512. On Retina displays macOS may upscale the window 2× with slight softening, which is accepted.
 
 **Crash.** Freeze the last frame with a red **"CRASH"** banner for 1.5 s, then auto-reset with seed + 1.

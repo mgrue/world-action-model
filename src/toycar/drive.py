@@ -106,6 +106,7 @@ def draw_panel(screen: pygame.Surface, font: pygame.font.Font, d: Driver, paused
         f"direction {i.direction}",
         f"branch   {i.branch}",
         f"last_br  {i.last_branch}",
+        f"passages {i.passages}",
         f"wrong_way {i.wrong_way}",
         f"steps    {i.steps}",
         f"seed     {d.seed}",

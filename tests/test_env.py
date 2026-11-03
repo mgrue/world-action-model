@@ -117,6 +117,7 @@ def test_last_branch_robust_to_noise(route, direction):
             if prev is not None and info.branch is None:
                 passages += 1
                 assert info.last_branch == route, (seed, t)
+                assert info.passages == passages, (seed, t)
         assert passages >= 5
 
 
@@ -128,7 +129,7 @@ def test_partial_passage_leaves_last_branch_unset(track):
     assert info.branch == "outer"
     while info.branch is not None:
         info = env.step(pursuit_action(env, "outer", "cw")).info
-    assert info.last_branch is None
+    assert info.last_branch is None and info.passages == 0
 
 
 def test_episode_end():
