@@ -26,6 +26,7 @@ Frontier = open, unblocked, unassigned tickets in `issues/`.
 - [Physics model and action/state definitions](issues/03-physics-model.md) — kinematic bicycle at 15 Hz with exact-arc integration; lateral-accel steering clamp forces braking for curves; State (x,y,θ,v), sin/cos features; same-machine bit-exact determinism
 - [What happens when the car leaves the road](issues/04-off-track-semantics.md) — any car corner past the kerb's outer edge (2.8 m from both Routes) is a Crash: episode terminates with reason "crash"; no walls/grass physics
 - [Env API and interface contract](issues/05-env-api-contract.md) — `toycar` pure core (Track/physics/render) + thin CarEnv; seeded reset with StartSpec; shared Station for progress/laps/branch; 900-tick episodes; frozen typed dataclasses, no gymnasium
+- [Keyboard driving mode](issues/06-keyboard-driving-mode.md) — pygame-ce 15 Hz loop, arrows/WASD with ramped steer and cruise throttle, 64 px ×8 view + hi-res/debug toggles, CRASH banner + auto-reset, .npz record + bit-exact replay, 9-step manual acceptance script
 
 ## Not yet specified
 
