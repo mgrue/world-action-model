@@ -25,6 +25,7 @@ PLAN.md check to satisfy: "the expert completes laps reliably for every behavior
 
 <!-- one line per closed ticket -->
 
+- [Path-tracking controllers and demonstration noise](issues/01-controller-research.md) — curvature feed-forward + lateral/heading feedback (not pure pursuit), follow the Planned branch's Route, forward/backward speed profile at a_lat_plan = 5 m/s²; DART-style noisy execution with clean labels, sparse triangular steer bursts, per-tick `perturbed` flag
 - [Instruction set and branch choice](issues/02-instruction-set.md) — three branch-only Instructions `outer`/`inner`/`any` (Direction stays an episode property); fair coin per Fork passage under `any`, drawn at reset and on each exit from the fork section; fixed per episode; starts match the Instruction, wrong-branch passages exempt; `INSTRUCTIONS` tuple order frozen; CFG null is model-side only
 
 ## Not yet specified
