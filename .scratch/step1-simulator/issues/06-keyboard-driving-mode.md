@@ -8,7 +8,7 @@ Parent: ../MAP.md
 
 ## Question
 
-How does a human drive the car: key mapping, how digital key presses map to continuous steer/throttle (instant vs ramped; note throttle 0 holds speed, negative throttle brakes, no reverse), real-time loop at the sim tick rate, upscaled display of the 64×64 frame (and optionally a debug overlay with state/progress), reset/quit keys, and whether a drive can be recorded (seed + action log) and replayed to prove determinism?
+How does a human drive the car: key mapping, how digital key presses map to continuous steer/throttle (instant vs ramped; note throttle 0 holds speed, negative throttle brakes, no reverse), real-time loop at the sim tick rate, upscaled display of the 64×64 frame (and optionally a debug overlay with state/progress), reset/quit keys, what the human sees on a Crash (episode terminates; e.g. pause + auto-reset), and whether a drive can be recorded (seed + action log) and replayed to prove determinism?
 
 Check: the spec defines the PLAN.md Step 1 check ("a human can drive the car and the rendering looks right") as a concrete manual test script.
 

@@ -51,3 +51,7 @@ _Avoid_: control, input, command
 **Tick**:
 One simulation step at 15 Hz: one Action applied, one State update, one Frame rendered.
 _Avoid_: frame (when meaning time), step (when ambiguous)
+
+**Crash**:
+The event of any car corner leaving the road surface plus kerb (more than 2.8 m from both Routes); it ends the episode.
+_Avoid_: collision, off-track (as a noun)
