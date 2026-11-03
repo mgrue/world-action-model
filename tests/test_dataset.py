@@ -344,3 +344,22 @@ def test_cli(tmp_path, capsys):
     png2 = tmp_path / "w2.png"
     assert D.main(["plot", str(out), "--episode", "0", "--t", "5", "--probe", "brown_grass", "--out", str(png2)]) == 0
     assert png2.exists()
+    png3 = tmp_path / "w3.png"
+    assert D.main(["plot", str(out), "--seed", "1", "--approaching", "--zoom", "12", "--out", str(png3)]) == 0
+    assert png3.exists()
+    with pytest.raises(SystemExit):
+        D.main(["plot", str(out), "--zoom", "0"])
+
+
+def test_zoom_box():
+    # a still car mid-track: exactly zoom_m wide (12 m = 19.2 → 20 px), centred on the car
+    r0, r1, c0, c1 = D._zoom_box(np.array([[20.0, 20.0]]), 12.0)
+    assert r1 - r0 == c1 - c0 == 20 and (r0 + r1) / 2 == (c0 + c1) / 2 == 32
+    # a long path grows the box to keep it (plus a car length each side) in view
+    path = np.array([[10.0, 20.0], [22.0, 21.0]])
+    r0, r1, c0, c1 = D._zoom_box(path, 6.0)
+    assert c1 - c0 >= (12.0 + 2 * 4.4) * 1.6 and c0 <= 10 * 1.6 and c1 >= 22 * 1.6
+    # near the edge the box is shifted inside the Frame, never shrunk
+    r0, r1, c0, c1 = D._zoom_box(np.array([[1.0, 39.0]]), 12.0)
+    assert (c0, r1) == (0, 64) and r1 - r0 == c1 - c0 == 20
+    assert D._zoom_box(np.array([[20.0, 20.0]]), 40.0) == (0, 64, 0, 64)

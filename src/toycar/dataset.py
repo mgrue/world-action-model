@@ -4,7 +4,7 @@
     uv run python -m toycar.dataset verify [DIR]
     uv run python -m toycar.dataset stats  [DIR]
     uv run --group viz python -m toycar.dataset plot [DIR] [--split val] [--episode I --t T | --seed N]
-                                                    [--approaching] [--probe NAME] [--out window.png]
+                                                    [--approaching] [--probe NAME] [--zoom M] [--out window.png]
 
 numpy only; matplotlib is imported lazily by `plot`.
 """
@@ -16,6 +16,7 @@ import dataclasses
 import datetime
 import hashlib
 import json
+import math
 import os
 import platform
 import shutil
@@ -36,10 +37,10 @@ import numpy as np
 from . import __version__
 from .env import CarEnv
 from .expert import INSTRUCTIONS, Expert, ExpertParams, Instruction, start_spec
-from .physics import step_state
+from .physics import CAR_LENGTH
 from .render import RGB, RenderParams, render
 from .state import Branch, Direction, State
-from .track import Track, TrackParams
+from .track import WORLD_M, Track, TrackParams
 
 # -- recorded set (SPEC §2) -----------------------------------------------------------------
 Split = Literal["train", "val", "test"]
@@ -756,8 +757,20 @@ def cmd_stats(path: Path) -> int:
     return 0
 
 
+def _zoom_box(xy: np.ndarray, zoom_m: float, resolution: int = 64) -> tuple[int, int, int, int]:
+    """Pixel crop (r0, r1, c0, c1) of a square at least `zoom_m` wide, centred on the car path `xy` (n, 2)
+    and grown to keep the whole path plus one car length in view; clamped to the Frame."""
+    lo, hi = xy.min(axis=0), xy.max(axis=0)
+    side_m = max(zoom_m, float((hi - lo).max()) + 2 * CAR_LENGTH)
+    side = min(resolution, math.ceil(side_m * resolution / WORLD_M))
+    cx, cy = (lo + hi) / 2 * resolution / WORLD_M  # pixel coordinates: column = x, row = y
+    c0 = min(max(round(cx - side / 2), 0), resolution - side)
+    r0 = min(max(round(cy - side / 2), 0), resolution - side)
+    return r0, r0 + side, c0, c0 + side
+
+
 def cmd_plot(path: Path, split: Split, episode: int | None, t: int | None, seed: int, approaching: bool,
-             probe: str | None, out: Path) -> int:
+             probe: str | None, out: Path, zoom: float | None = None) -> int:
     import matplotlib
 
     matplotlib.use("Agg")
@@ -789,6 +802,10 @@ def cmd_plot(path: Path, split: Split, episode: int | None, t: int | None, seed:
     gs = fig.add_gridspec(4, H + 1, height_ratios=[1.15, 1, 1, 1], wspace=0.0, hspace=0.25,
                           left=0.04, right=0.99, top=0.86, bottom=0.07)
     imgs = [("t", item["obs_frame"])] + [(f"k={k} (t+{k + 1})", f) for k, f in zip(item["future_index"], item["future_frames"])]
+    if zoom is not None:
+        # the same crop in every column, so the car moves across a fixed piece of track
+        r0, r1, c0, c1 = _zoom_box(states[t0 : t0 + H + 1, :2], zoom)
+        imgs = [(label, img[r0:r1, c0:c1]) for label, img in imgs]
     for c, (label, img) in enumerate(imgs):
         ax = fig.add_subplot(gs[0, c])
         ax.imshow(img, interpolation="nearest")
@@ -827,7 +844,8 @@ def cmd_plot(path: Path, split: Split, episode: int | None, t: int | None, seed:
     fig.suptitle(
         f"{path.name} · {split} · episode {e} · seed {int(item['seed'])} · t {t0} · "
         f"{INSTRUCTIONS[int(item['instruction'])]} {DIRECTIONS[int(item['direction'])]} · "
-        f"approaches_section {bool(item['approaches_section'])} · probe {probe or '-'}",
+        f"approaches_section {bool(item['approaches_section'])} · probe {probe or '-'}"
+        + (f" · zoom {(r1 - r0) * WORLD_M / 64:.1f} m" if zoom is not None else ""),
         fontsize=10,
     )
     fig.savefig(out, dpi=110)
@@ -858,6 +876,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     pl.add_argument("--approaching", action="store_true")
     pl.add_argument("--probe", choices=[n for n, p in PROBES.items() if p.track_params is None])
     pl.add_argument("--out", type=Path, default=Path("window.png"))
+    pl.add_argument("--zoom", type=float, metavar="M",
+                    help="crop every Frame to the same square of at least M metres around the car's path")
     args = ap.parse_args(argv)
 
     if args.cmd == "record":
@@ -867,9 +887,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         return cmd_verify(args.dir)
     if args.cmd == "stats":
         return cmd_stats(args.dir)
+    if args.zoom is not None and not 0 < args.zoom <= WORLD_M:
+        ap.error(f"--zoom must be in (0, {WORLD_M:g}] metres")
     if (args.episode is None) != (args.t is None):
         ap.error("--episode and --t go together")
-    return cmd_plot(args.dir, args.split, args.episode, args.t, args.seed, args.approaching, args.probe, args.out)
+    return cmd_plot(args.dir, args.split, args.episode, args.t, args.seed, args.approaching, args.probe, args.out, args.zoom)
 
 
 if __name__ == "__main__":
