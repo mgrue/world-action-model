@@ -35,20 +35,21 @@ TAN_MAX = math.tan(DELTA_MAX)
 A_LAT_PLAN = 5.0  # m/s² used to plan curve speeds (clamp is 8)
 A_BRK_PLAN = 6.0  # m/s² planned braking (limit 8)
 A_ACC_PLAN = 4.0
+GRACE_S = 2.0  # s without bursts after reset
 WS = 0.5  # spatial bandwidth 1/m → ke = WS², kθ = 2·WS (critically damped)
 SPEED_LOOKAHEAD_M = 0.5
-ALIGN_DEG = 20.0  # at reset inside the section: switch plan only if the planned branch needs > this heading change
+ROLLOUT_S = 3.0  # at reset: keep the preferred branch unless a clean rollout of it crashes within this time
 WRONG_BRANCH_M = 2.5  # switch plan to the branch we're in only when this far off the planned Route
 
 
 # ---- speed profile ---------------------------------------------------------------------------
 @lru_cache(maxsize=8)
-def profile(route_name: str, d: int, a_lat: float = A_LAT_PLAN, ds: float = 0.05) -> tuple[np.ndarray, float, float]:
+def profile(route_name: str, d: int, a_lat: float = A_LAT_PLAN, v_cap: float = V_MAX, ds: float = 0.05) -> tuple[np.ndarray, float, float]:
     route = Track.default().route(route_name)
     n = int(math.ceil(route.length_m / ds))
     st = [(d * i * ds) % route.length_m for i in range(n)]
     kap = np.array([abs(route.curvature_at(s)) for s in st])
-    v = np.minimum(V_MAX, np.sqrt(a_lat / np.maximum(kap, 1e-9)))
+    v = np.minimum(v_cap, np.sqrt(a_lat / np.maximum(kap, 1e-9)))
     for _ in range(2):
         for i in range(1, 2 * n):
             j, p = i % n, (i - 1) % n
@@ -59,8 +60,8 @@ def profile(route_name: str, d: int, a_lat: float = A_LAT_PLAN, ds: float = 0.05
     return v, ds, route.length_m
 
 
-def profile_at(route_name: str, d: int, s: float) -> float:
-    v, ds, length = profile(route_name, d)
+def profile_at(route_name: str, d: int, s: float, a_lat: float = A_LAT_PLAN, v_cap: float = V_MAX) -> float:
+    v, ds, length = profile(route_name, d, a_lat, v_cap)
     return float(v[int(round(((d * s) % length) / ds)) % len(v)])
 
 
@@ -68,34 +69,44 @@ def profile_at(route_name: str, d: int, s: float) -> float:
 class Expert:
     """Instruction-following expert. Stateful only in the Planned branch (ticket 02)."""
 
-    def __init__(self, track: Track, instruction: str, direction: str, seed: int) -> None:
+    def __init__(self, track: Track, instruction: str, direction: str, seed: int,
+                 a_lat_plan: float = A_LAT_PLAN, v_cap: float = V_MAX, p_outer: float = 0.5) -> None:
         self.track, self.instruction = track, instruction
         self.d = 1 if direction == "cw" else -1
-        self.rng = np.random.default_rng([seed, 2])  # expert RNG; seeding rule is ticket 04's call
+        self.rng = np.random.default_rng([seed, 1])  # coin stream (ticket 04 Q4)
+        self.a_lat_plan, self.v_cap, self.p_outer = a_lat_plan, v_cap, p_outer
         self.planned: str = "outer"
         self.exempt = False
         self.switches = 0
 
     def _draw(self) -> str:
         if self.instruction == "any":
-            return ("outer", "inner")[int(self.rng.integers(2))]
+            return "outer" if self.rng.random() < self.p_outer else "inner"
         return self.instruction
 
-    def aligned_branch(self, state, preferred: str) -> str:
-        """Branch the car is on (nearest-only is wrong near Fork/Merge). Keep `preferred` unless its
-        heading error exceeds ALIGN_DEG (beyond the ±10° start range) and the other branch fits better."""
-        other = "inner" if preferred == "outer" else "outer"
-        _, _, th_p = self.errors(state, preferred)
-        _, _, th_o = self.errors(state, other)
-        return other if abs(th_p) > math.radians(ALIGN_DEG) and abs(th_o) < abs(th_p) else preferred
+    def feasible(self, state, info, branch: str) -> bool:
+        """Clean rollout on `branch` for ROLLOUT_S: no Crash and never > WRONG_BRANCH_M from its Route?"""
+        from toycar import step_state
+        saved = self.planned
+        self.planned = branch
+        try:
+            st = state
+            if self.track.route(branch).project(st.x, st.y).distance_m > WRONG_BRANCH_M:
+                return False
+            for _ in range(round(ROLLOUT_S / DT)):
+                st = step_state(st, self._control(st, branch))
+                off = self.track.route(branch).project(st.x, st.y).distance_m > WRONG_BRANCH_M
+                if self.track.is_crash(st) or off:
+                    return False
+            return True
+        finally:
+            self.planned = saved
 
     def reset(self, state, info) -> None:
-        if info.branch is not None:  # starting inside the fork section: the branch it's on is the plan
-            self.planned = self.aligned_branch(state, self._draw())
-            self.exempt = self.planned != self.instruction and self.instruction != "any"
-        else:
-            self.planned = self._draw()
-            self.exempt = False
+        preferred = self._draw()  # Instruction, or the coin under `any` (always one draw)
+        other = "inner" if preferred == "outer" else "outer"
+        self.planned = other if not self.feasible(state, info, preferred) and self.feasible(state, info, other) else preferred
+        self.exempt = self.planned != self.instruction and self.instruction != "any"
 
     def on_exit(self) -> None:
         """Car left the fork section (either end): redraw."""
@@ -115,12 +126,14 @@ class Expert:
             if pr.distance_m > WRONG_BRANCH_M:
                 self.planned, self.exempt = info.branch, True
                 self.switches += 1
-        route_name = self.planned
+        return self._control(state, self.planned)
+
+    def _control(self, state, route_name: str) -> tuple[float, float]:
         route = self.track.route(route_name)
         pr, e, the = self.errors(state, route_name)
         s = pr.station_m
 
-        vref = profile_at(route_name, self.d, s + self.d * (state.v * DT + SPEED_LOOKAHEAD_M))
+        vref = profile_at(route_name, self.d, s + self.d * (state.v * DT + SPEED_LOOKAHEAD_M), self.a_lat_plan, self.v_cap)
         a = (vref - state.v) / DT
         thr = min(1.0, a / ACCEL) if a >= 0 else max(-1.0, a / BRAKE)
         v1 = min(max(state.v + (ACCEL * thr if thr >= 0 else BRAKE * thr) * DT, 0.0), V_MAX)
@@ -138,33 +151,44 @@ class Expert:
 
 
 class Bursts:
-    """Ticket-04 preview: sparse triangular steer bursts on the *executed* action."""
+    """Steer-only triangular bursts on the *executed* action (ticket 04 Q2); noise stream [seed, 2]."""
 
-    def __init__(self, seed: int, peak: float = 0.4, dur_s: float = 1.0, gap_s: float = 3.0) -> None:
-        self.rng = np.random.default_rng([seed, 3])
-        self.peak, self.n, self.gap = peak, round(dur_s / DT), gap_s / DT
-        self.t, self.amp = -int(self.rng.exponential(self.gap)), 0.0
+    def __init__(self, seed: int, peak: float = 0.4, gap_s: float = 3.0) -> None:
+        self.rng = np.random.default_rng([seed, 2])
+        self.peak, self.gap_s = peak, gap_s
+        self._next_gap()
+        self.wait += round(GRACE_S / DT)  # no bursts while recovering from the random start pose
+
+    def _next_gap(self) -> None:
+        self.wait = int(round(self.rng.exponential(self.gap_s) / DT))
+        self.n = int(round(self.rng.uniform(0.5, 1.5) / DT))
+        self.amp = self.peak * self.rng.uniform(0.5, 1.0) * (1 if self.rng.random() < 0.5 else -1)
+        self.k = 0
 
     def __call__(self, action):
-        self.t += 1
-        if self.t == 0:
-            self.amp = float(self.rng.uniform(-self.peak, self.peak))
-        if 0 <= self.t < self.n:
-            tri = 1 - abs(2 * (self.t + 0.5) / self.n - 1)
-            if self.t == self.n - 1:
-                self.t = -int(self.rng.exponential(self.gap)) - 1
-            return (max(-1.0, min(1.0, action[0] + self.amp * tri)), action[1]), True
-        return action, False
+        if self.peak <= 0:
+            return action, False
+        if self.wait > 0:
+            self.wait -= 1
+            return action, False
+        tri = 1 - abs(2 * (self.k + 0.5) / self.n - 1)
+        out = (max(-1.0, min(1.0, action[0] + self.amp * tri)), action[1])
+        self.k += 1
+        if self.k >= self.n:
+            self._next_gap()
+        return out, True
 
 
 # ---- one episode -----------------------------------------------------------------------------
-def episode(seed: int, instruction: str, direction: str, noise: bool = False, keep: bool = False) -> dict:
+def episode(seed: int, instruction: str, direction: str, noise: bool = False, keep: bool = False, knobs: dict | None = None) -> dict:
+    knobs = knobs or {}
     env = CarEnv()
     route = None if instruction == "any" else instruction
     state, info = env.reset(seed, StartSpec(direction=direction, route=route))
-    ex = Expert(env.track, instruction, direction, seed)
+    ex = Expert(env.track, instruction, direction, seed, **{k: knobs[k] for k in ("a_lat_plan", "v_cap", "p_outer") if k in knobs})
     ex.reset(state, info)
-    burst = Bursts(seed) if noise else None
+    burst = Bursts(seed, knobs.get("burst_peak", 0.4), knobs.get("burst_gap_s", 3.0)) if noise else None
+    perturbed_ticks = 0
     passages = []  # (branch taken, planned, exempt)
     trace = []
     max_e = 0.0
@@ -173,6 +197,7 @@ def episode(seed: int, instruction: str, direction: str, noise: bool = False, ke
     for _ in range(env.max_steps):
         a = ex.act(state, info)
         execd, pert = burst(a) if burst else (a, False)
+        perturbed_ticks += pert
         prev_branch, exempt = info.branch, ex.exempt
         r = env.step(execd)
         state, info = r.state, r.info
@@ -194,7 +219,7 @@ def episode(seed: int, instruction: str, direction: str, noise: bool = False, ke
     out = dict(
         seed=seed, instruction=instruction, direction=direction, crash=r.info.termination == "crash",
         laps=r.info.laps, progress=r.info.progress_m, passages=passages, max_e=max_e, switches=ex.switches,
-        steer_jerk=None,
+        pert_frac=perturbed_ticks / max(1, r.info.steps),
     )
     if keep:
         out["trace"] = np.array(trace)
@@ -236,6 +261,32 @@ def sweep(n: int, noise: bool) -> int:
                 print(f"   crash: seed {r['seed']}  progress {r['progress']:.1f} m")
     print("\nPASS" if bad == 0 else f"\nFAIL ({bad} crashes or wrong-branch passages)")
     return 0 if bad == 0 else 1
+
+
+def edges(n: int) -> int:
+    base = dict(a_lat_plan=5.0, v_cap=10.0, burst_peak=0.4, burst_gap_s=3.0, p_outer=0.5)
+    variants = [("defaults", {})] + [(f"{k}={v}", {k: v}) for k, vs in [
+        ("a_lat_plan", [4.0, 5.5, 6.0]), ("v_cap", [6.0, 8.0]), ("burst_peak", [0.0, 0.6, 0.8, 1.0]),
+        ("burst_gap_s", [1.5, 1.0]), ("p_outer", [0.0, 0.7, 1.0])] for v in vs]
+    variants.append(("worst: a_lat 5.5, peak 0.6, gap 1.5", dict(a_lat_plan=5.5, burst_peak=0.6, burst_gap_s=1.5)))
+    print(f"{'variant':38s} {'crash':>6s} {'wrong':>6s} {'laps/ep':>8s} {'pert%':>6s} {'outer%':>7s}")
+    bad = 0
+    with ProcessPoolExecutor() as pool:
+        for name, kv in variants:
+            knobs = {**base, **kv}
+            jobs = [(seed, i, d, True, False, knobs) for i, d in COMBOS for seed in range(n)]
+            res = list(pool.map(_job, jobs, chunksize=20))
+            crashes = sum(r["crash"] for r in res)
+            wrong = 0
+            for r in res:
+                for taken, planned, exempt, _ in r["passages"]:
+                    if not exempt and (taken != planned or (r["instruction"] != "any" and taken != r["instruction"])):
+                        wrong += 1
+            anyp = [p for r in res if r["instruction"] == "any" for p in r["passages"] if not p[2]]
+            outer = sum(p[0] == "outer" for p in anyp) / max(1, len(anyp))
+            print(f"{name:38s} {crashes:6d} {wrong:6d} {np.mean([r['progress'] for r in res]) / 88.056:8.2f} "
+                  f"{100 * np.mean([r['pert_frac'] for r in res]):5.1f}% {100 * outer:6.1f}%", flush=True)
+    return 0
 
 
 def plot() -> None:
@@ -338,7 +389,7 @@ def show(seed: int, instruction: str, direction: str, noise: bool) -> None:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["sweep", "plot", "show"])
+    ap.add_argument("cmd", choices=["sweep", "edges", "plot", "show"])
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--noise", action="store_true")
     ap.add_argument("--seed", type=int, default=0)
@@ -347,6 +398,8 @@ if __name__ == "__main__":
     args = ap.parse_args()
     if args.cmd == "sweep":
         sys.exit(sweep(args.n, args.noise))
+    elif args.cmd == "edges":
+        sys.exit(edges(args.n))
     elif args.cmd == "plot":
         plot()
     else:

@@ -37,3 +37,4 @@ Check: over ≥ 1000 seeded starts per Route × Direction, zero Crashes in 900-t
 - **Safety rule:** inside the section, if > 2.5 m from the planned Route while `locate` names the other branch, follow the occupied branch, exempt. It never fired; kept for Step 9.
 - **Passage scoring:** branch at the section midpoint; a passage that never reaches the midpoint is partial, so exempt.
 - **Verified:** 0 crashes and 0 wrong-branch passages in 12,000 episodes (clean + bursts); about 4.1 laps/episode; human approved.
+- **Amended by ticket 04 (2026-11-03):** the start-branch "20° heading" rule was replaced by a 3 s clean feasibility rollout of the preferred branch (no Crash, never > 2.5 m off its Route, start state included). The 20° rule crashed on seed 838 (`any`, cw) once the coin stream changed. A 2 s burst grace period after reset was added as well. Re-swept: 0 crashes / 0 wrong passages.
