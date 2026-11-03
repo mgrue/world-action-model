@@ -1,6 +1,7 @@
 # Step 2 scripted expert spec
 
 Labels: wayfinder:map
+Status: destination reached (2026-11-03) — see SPEC.md
 Tracker: local markdown — tickets are files in `issues/`, each with `Parent: MAP.md`.
 Ticket header fields: `Labels:` (wayfinder type), `Status:` (open/closed), `Assignee:` (empty = unclaimed — the claim), `Blocked by:` (ticket files; unblocked when all are closed).
 Frontier = open, unblocked, unassigned tickets in `issues/`.
@@ -30,10 +31,11 @@ PLAN.md check to satisfy: "the expert completes laps reliably for every behavior
 - [Expert controller and speed profile](issues/03-controller-prototype.md) — feed-forward + feedback law (ωs = 0.5) on the Planned branch's Route, curvature speed profile at a_lat_plan = 5 m/s²; start-branch by heading (20° rule), passages scored at the section midpoint; 0 crashes / 0 wrong-branch passages in 12k episodes; Step 1 `last_branch` fix reopened
 - [Expert variation knobs and demonstration noise](issues/04-expert-variation.md) — expert yields clean/executed/perturbed; Step 3 trains on clean-future windows; steer-only triangular bursts (peak 0.4, mean gap 3 s, 2 s grace); style knobs a_lat_plan/v_cap fixed by default (hidden-variable caveat); p_outer knob; same seed, coin [seed,1] / noise [seed,2]; start branch via 3 s feasibility rollout; safe ranges swept
 - [Expert API, metrics and CLI](issues/05-expert-api-and-metrics.md) — `toycar.expert`: Expert(track, instruction, params).reset(seed, state, info)/act → ExpertAction(clean, executed, perturbed), internal exit detection and noise, pure `control()`; policy-agnostic `score_episode` over the Info stream (new Step 1 `Info.passages`); `show`/`eval` CLI, eval is the acceptance check
+- [Compile SPEC.md](issues/06-compile-spec.md) — destination reached: [SPEC.md](SPEC.md); gaps filled while compiling listed in its §11
 
 ## Not yet specified
 
-_(empty — mid-episode changes and the CFG null label were resolved in [Instruction set and branch choice](issues/02-instruction-set.md))_
+_(empty — remaining work is live tickets; mid-episode changes and the CFG null label were resolved in [Instruction set and branch choice](issues/02-instruction-set.md))_
 
 ## Out of scope
 

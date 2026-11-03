@@ -84,3 +84,11 @@ _Avoid_: fork crossing, branch visit
 
 **Planned branch**:
 The Branch the expert intends to take on its current or next Passage: the Instruction itself for `outer`/`inner`, or a fair coin for `any`, drawn at reset and on each exit from the fork section.
+
+**Expert**:
+The scripted driver that follows an Instruction using privileged State and Info (never Frames). It produces a clean Action (the label) and an executed Action (clean plus noise).
+_Avoid_: oracle, teacher, autopilot
+
+**Burst**:
+A short triangular steering perturbation the Expert adds to the executed Action (never to the label) so the data shows recoveries.
+_Avoid_: noise (when meaning one perturbation event), jitter
