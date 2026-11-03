@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling, wayfinder:prototype
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-torch-on-mac.md, 04-car-visibility-check.md
 Parent: ../MAP.md
 
