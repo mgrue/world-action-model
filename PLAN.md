@@ -99,6 +99,44 @@ loss   = mse(model(x_t, t, conditioning), noise - clean)
   away from the unconditioned prediction and measure instruction-following.
 - **Chunk length and replanning rate:** how far ahead can the model plan before execution drifts?
 - **Small world changes:** change track color or shape and see what generalizes.
+- **JEPA future targets:** swap the VAE for a self-supervised JEPA encoder and see whether
+  predicting the *meaning* of future frames, not their pictures, helps the model drive.
+  The transformer, flow matching, data, seeds, step count and gates all stay the same; only
+  the frame encoder changes. Details in 10a.
+
+#### 10a. JEPA encoder and comparison
+- **Encoder `jepa-v1`** (I-JEPA style, built like Step 4: its own spec, Checkpoint and explainer):
+  - context encoder: small ViT over 8 x 8-pixel patches (64 tokens), 2D RoPE, width ~192,
+    ~6 blocks; outputs an 8 x 8 grid of ~32 features per frame (the part we keep);
+  - target encoder: slow EMA copy of the context encoder, sees the whole frame, no gradients;
+  - predictor: narrow transformer that predicts the target features of hidden patches from the
+    visible ones; discarded after training;
+  - masking: hide a few rectangles per frame, at least half of them covering the car (its
+    position is known from the State), so the features must encode the car;
+  - loss: squared error to the target features at hidden patches; no pixel reconstruction.
+- **Check (no decoder, so a probe instead of pictures):**
+  - a linear probe on frozen features reads car x, y and heading: position ≤ 0.3 m p95 and
+    heading ≤ 10° p95, the bar `vae-v1` passed;
+  - no collapse: every feature channel keeps a non-trivial spread across frames (logged in training);
+  - report only: the same probe on the colour-randomised Probe frames.
+- **WAM switch** `future_target=vae|jepa`: future frames become JEPA feature grids, normalised per
+  channel and grouped 2 x 2 into 16 tokens each, so the 162-token layout stays; only the picture
+  input and output layers widen.
+- **Runs to compare** (same seeds and recipe as `wam-v1`):
+  - `wam-v1`: VAE observed frame, VAE future targets (baseline);
+  - JEPA future targets, VAE observed frame (isolates the target);
+  - JEPA for both observed frame and future targets;
+  - optionally each with `video_stream=false`, to see whether imagining the future helps and
+    whether that depends on the encoder.
+- **Comparison:**
+  - action gates (rmse, commit, follow, balance, two-sided) and closed-loop metrics, compared directly;
+  - imagined futures: train the same kind of linear probe on `vae-v1` Latents too and score both
+    models' futures with their own probe; `carcheck` on decoded pictures stays an extra for the VAE.
+- **Open questions** for the spec: patch size (8 or 4 pixels), feature size, car-masking ratio,
+  EMA schedule and collapse diagnostics, probe thresholds.
+- **Later, separate idea:** a pure JEPA world model (V-JEPA 2-AC style) that rolls features forward
+  for candidate actions and plans by search instead of flow matching. A much bigger project; only
+  worth it if the encoder swap shows JEPA features help here.
 
 ### 11. Compare against the expert
 - The scripted controller is the upper bound.
