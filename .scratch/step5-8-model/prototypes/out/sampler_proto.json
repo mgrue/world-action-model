@@ -1,0 +1,53 @@
+{
+ "device": "mps",
+ "video_B1_steps10_cfg1.0": {
+  "ms_per_call": 65.9,
+  "ms_per_chunk": 65.88
+ },
+ "video_B1_steps10_cfg2.0": {
+  "ms_per_call": 87.5,
+  "ms_per_chunk": 87.48
+ },
+ "video_B1_steps4_cfg1.0": {
+  "ms_per_call": 27.0,
+  "ms_per_chunk": 27.04
+ },
+ "video_B1_steps20_cfg1.0": {
+  "ms_per_call": 121.7,
+  "ms_per_chunk": 121.65
+ },
+ "video_B16_steps10_cfg1.0": {
+  "ms_per_call": 347.3,
+  "ms_per_chunk": 21.71
+ },
+ "video_B256_steps10_cfg1.0": {
+  "ms_per_call": 5499.8,
+  "ms_per_chunk": 21.48
+ },
+ "novideo_B1_steps10_cfg1.0": {
+  "ms_per_call": 44.9,
+  "ms_per_chunk": 44.87
+ },
+ "novideo_B1_steps10_cfg2.0": {
+  "ms_per_call": 51.7,
+  "ms_per_chunk": 51.67
+ },
+ "novideo_B1_steps4_cfg1.0": {
+  "ms_per_call": 19.7,
+  "ms_per_chunk": 19.67
+ },
+ "novideo_B1_steps20_cfg1.0": {
+  "ms_per_call": 87.1,
+  "ms_per_chunk": 87.08
+ },
+ "novideo_B16_steps10_cfg1.0": {
+  "ms_per_call": 111.3,
+  "ms_per_chunk": 6.95
+ },
+ "novideo_B256_steps10_cfg1.0": {
+  "ms_per_call": 988.2,
+  "ms_per_chunk": 3.86
+ },
+ "same_seed_identical": true,
+ "vae_encode_1_frame_ms": 2.63
+}
