@@ -19,3 +19,4 @@ What does one block look like, and how big is the stack?
 Check: a block diagram / layer table, parameter count, measured ms/step at the chosen size, and a short prototype showing the loss falls on a few hundred train Windows.
 
 ## Comments
+- From 02: input projections/heads and the 162-token layout are fixed (see 02 Resolution); 3-axis RoPE (t 32 / h 16 / w 16 per 64-dim head); modulation vector = per-token noise level only (Instruction is a token, not in AdaLN). Open here: final-layer form (AdaLN-out as FLUX).

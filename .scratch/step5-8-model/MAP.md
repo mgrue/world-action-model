@@ -36,6 +36,7 @@ PLAN.md checks to satisfy, turned into measurable checks:
 <!-- one line per closed ticket -->
 
 - [Throughput and size budget on MPS](issues/01-throughput-budget.md) — SDPA = plain attention on MPS (no memory saving), bf16 20–30% slower, speed ∝ params × tokens; PLAN's 1106-token Window = 15 W/s (19 h per 1 M Windows); envelope: 2×2 patchify (16 tokens per Frame) → 160–300 tokens, 8–20 M params, batch 32, fp32; 290 tokens at d256×8 = 47 W/s end to end incl. 8 ms vae-v1 encode; full run 3–8 h
+- [Token layout, positions and Instruction encoding](issues/02-tokens-and-positions.md) — 162 tokens: obs Frame 16 + State + Instruction + 8 even future Frames × 16 (2×2 patchify, shared `Linear(64→d)`) + 16 actions; 3-axis RoPE (t in Ticks, h, w), no type embedding; full attention; Instruction token only via `Embedding(4,d)` incl. `null`, `p_uncond = 0.1` default; switch `future_stride` (default 2)
 
 ## Not yet specified
 

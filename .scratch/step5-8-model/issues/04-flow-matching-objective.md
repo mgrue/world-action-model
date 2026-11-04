@@ -20,3 +20,4 @@ Exactly what is noised, at which level, and what is the loss?
 Check: the exact loss formula with all weights and the t distribution, action normalisation rule, the Step 10 variants written as config switches, and the action statistics that justify them.
 
 ## Comments
+- From 02: 128 future-Frame tokens × 64 values = 8192 video values vs 32 action values per Window (`future_stride=2`). Open here: action scaling vs Latents, action loss weight, and no-video-loss mechanics (drop the future tokens → 34-token sequence, or keep them noised with zero weight).

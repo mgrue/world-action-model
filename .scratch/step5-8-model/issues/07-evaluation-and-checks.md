@@ -20,3 +20,4 @@ How do we measure that training worked (Step 7) and that sampled chunks look lik
 Check: a list of metrics with thresholds (gate vs report), the val subset they run on, and validation of the metric on fakes (labels themselves pass, shuffled labels fail, averaged two-branch chunks fail the commit test).
 
 ## Comments
+- From 02: `p_uncond = 0.1` by default, so every Policy supports CFG; `future_stride` is a training switch; no-video-loss mechanics are decided in 04.

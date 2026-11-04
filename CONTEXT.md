@@ -78,6 +78,10 @@ One full Route length (88 m) of accumulated Progress.
 The per-episode command the driver follows: `outer`, `inner` or `any`. It picks which Branch to take at every Passage. It does not include Direction, which comes from the start pose.
 _Avoid_: command, task, goal
 
+**Null Instruction**:
+The model-side placeholder `null` that stands for "Instruction withheld": swapped in for a fraction of training Windows and used for the unconditioned pass of classifier-free guidance. Never in the data; distinct from `any`, which is a real Instruction.
+_Avoid_: empty instruction, `any` (when meaning withheld)
+
 **Passage**:
 One traversal of the fork section, from entering it at one end (the Fork or the Merge) to leaving it at the other.
 _Avoid_: fork crossing, branch visit
@@ -121,3 +125,14 @@ _Avoid_: model file, weights (when meaning the named, frozen artefact)
 One training run's scratch directory under `runs/` (config, logs, metrics, contact sheet, final weights); only a Checkpoint promoted from it is used by later Steps.
 _Avoid_: experiment, job
 
+**Token**:
+One d-dimensional vector in the world action model's input sequence: a 2×2 patch of one Frame's Latent (64 values), the State, the Instruction, or one Action.
+_Avoid_: patch (when meaning the projected vector), embedding
+
+**Stream**:
+All Tokens of one kind in a Window's sequence, sharing an input projection and (if predicted) an output head: observed Frame, State, Instruction, future Frame, Action.
+_Avoid_: modality, channel
+
+**Chunk**:
+The sequence of H = 16 Actions the model predicts for one Window (the action Stream's output); Step 9 executes its first few and replans.
+_Avoid_: trajectory, plan, window
