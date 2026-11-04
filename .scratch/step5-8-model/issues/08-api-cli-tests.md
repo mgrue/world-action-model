@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 03-transformer-blocks.md, 05-training-recipe.md, 06-sampler.md, 07-evaluation-and-checks.md
 Parent: ../MAP.md
 
