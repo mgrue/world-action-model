@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling, wayfinder:prototype
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 02-tokens-and-positions.md, 04-flow-matching-objective.md
 Parent: ../MAP.md
 
