@@ -1,0 +1,157 @@
+{
+ "val_fork_windows": 7357,
+ "by_entry": {
+  "1": {
+   "n": 466,
+   "ref_sep_rms": 1.617,
+   "label_acc": 1.0,
+   "label_r_p95": 0.091
+  },
+  "2": {
+   "n": 463,
+   "ref_sep_rms": 1.563,
+   "label_acc": 1.0,
+   "label_r_p95": 0.094
+  },
+  "3": {
+   "n": 458,
+   "ref_sep_rms": 1.507,
+   "label_acc": 1.0,
+   "label_r_p95": 0.097
+  },
+  "4": {
+   "n": 462,
+   "ref_sep_rms": 1.449,
+   "label_acc": 1.0,
+   "label_r_p95": 0.101
+  },
+  "5": {
+   "n": 456,
+   "ref_sep_rms": 1.389,
+   "label_acc": 1.0,
+   "label_r_p95": 0.105
+  },
+  "6": {
+   "n": 458,
+   "ref_sep_rms": 1.325,
+   "label_acc": 1.0,
+   "label_r_p95": 0.11
+  },
+  "7": {
+   "n": 455,
+   "ref_sep_rms": 1.259,
+   "label_acc": 1.0,
+   "label_r_p95": 0.115
+  },
+  "8": {
+   "n": 461,
+   "ref_sep_rms": 1.188,
+   "label_acc": 1.0,
+   "label_r_p95": 0.12
+  },
+  "9": {
+   "n": 456,
+   "ref_sep_rms": 1.114,
+   "label_acc": 1.0,
+   "label_r_p95": 0.126
+  },
+  "10": {
+   "n": 455,
+   "ref_sep_rms": 1.034,
+   "label_acc": 1.0,
+   "label_r_p95": 0.134
+  },
+  "11": {
+   "n": 460,
+   "ref_sep_rms": 0.948,
+   "label_acc": 1.0,
+   "label_r_p95": 0.144
+  },
+  "12": {
+   "n": 464,
+   "ref_sep_rms": 0.852,
+   "label_acc": 1.0,
+   "label_r_p95": 0.154
+  },
+  "13": {
+   "n": 461,
+   "ref_sep_rms": 0.745,
+   "label_acc": 1.0,
+   "label_r_p95": 0.171
+  },
+  "14": {
+   "n": 463,
+   "ref_sep_rms": 0.619,
+   "label_acc": 1.0,
+   "label_r_p95": 0.195
+  },
+  "15": {
+   "n": 462,
+   "ref_sep_rms": 0.461,
+   "label_acc": 1.0,
+   "label_r_p95": 0.241
+  },
+  "16": {
+   "n": 457,
+   "ref_sep_rms": 0.204,
+   "label_acc": 0.912,
+   "label_r_p95": 0.421
+  }
+ },
+ "R0.25": {
+  "labels_commit": 0.979,
+  "labels_commit_and_correct": 0.978,
+  "average_commit": 0.0,
+  "shuffled_commit": 0.559
+ },
+ "R0.3": {
+  "labels_commit": 0.987,
+  "labels_commit_and_correct": 0.986,
+  "average_commit": 0.0,
+  "shuffled_commit": 0.626
+ },
+ "R0.35": {
+  "labels_commit": 0.993,
+  "labels_commit_and_correct": 0.991,
+  "average_commit": 0.0,
+  "shuffled_commit": 0.703
+ },
+ "R0.4": {
+  "labels_commit": 0.996,
+  "labels_commit_and_correct": 0.993,
+  "average_commit": 0.0,
+  "shuffled_commit": 0.794
+ },
+ "entry<=8": {
+  "n": 3679,
+  "n_any": 1255,
+  "label_acc": 1.0,
+  "labels_commit_R0.3": 0.9997,
+  "average_commit_R0.3": 0.0,
+  "shuffled_acc": 0.5
+ },
+ "entry<=10": {
+  "n": 4590,
+  "n_any": 1569,
+  "label_acc": 1.0,
+  "labels_commit_R0.3": 0.9993,
+  "average_commit_R0.3": 0.0,
+  "shuffled_acc": 0.502
+ },
+ "entry<=12": {
+  "n": 5514,
+  "n_any": 1890,
+  "label_acc": 1.0,
+  "labels_commit_R0.3": 0.9995,
+  "average_commit_R0.3": 0.0,
+  "shuffled_acc": 0.504
+ },
+ "entry<=16": {
+  "n": 7357,
+  "n_any": 2534,
+  "label_acc": 0.9946,
+  "labels_commit_R0.3": 0.9871,
+  "average_commit_R0.3": 0.0,
+  "shuffled_acc": 0.505
+ }
+}

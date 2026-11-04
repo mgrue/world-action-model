@@ -1,0 +1,8 @@
+zero               {'rmse_steer_throttle': [0.6107, 0.4], 'rmse_k1-4': [0.6198, 0.4379]}
+shuffled           {'rmse_steer_throttle': [0.8609, 0.5423], 'rmse_k1-4': [0.8803, 0.577]}
+train_mean         {'rmse_steer_throttle': [0.6107, 0.3865], 'rmse_k1-4': [0.6198, 0.4193]}
+executed           {'rmse_steer_throttle': [0.0, 0.0], 'rmse_k1-4': [0.0, 0.0]}
+labels             {'rmse_steer_throttle': [0.0, 0.0], 'rmse_k1-4': [0.0, 0.0]}
+labels+N(0,0.05)   {'rmse_steer_throttle': [0.0499, 0.0481], 'rmse_k1-4': [0.0499, 0.0474]}
+labels+N(0,0.1)    {'rmse_steer_throttle': [0.0992, 0.0966], 'rmse_k1-4': [0.0988, 0.0975]}
+labels+N(0,0.2)    {'rmse_steer_throttle': [0.1899, 0.1931], 'rmse_k1-4': [0.1917, 0.1954]}
