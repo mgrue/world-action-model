@@ -21,3 +21,4 @@ Check: a list of metrics with thresholds (gate vs report), the val subset they r
 
 ## Comments
 - From 02: `p_uncond = 0.1` by default, so every Policy supports CFG; `future_stride` is a training switch; no-video-loss mechanics are decided in 04.
+- From 04: Fork data (train, `any`, approaching the fork section, steer × Direction sign): outer Chunk 0.52 → −0.78, inner 0.57 → 0.82, d′ 0.3 (k=1) → 1.6 (k=8) → 11 (k=16) — use the late-k steer / Chunk-mean steer as the commit statistic; short `horizon` shows less of the effect. Caveat: `video_stream = false` also has less compute per action. Regression is compared against flow + `video_stream = false` (same tokens).

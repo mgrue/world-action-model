@@ -20,3 +20,4 @@ How is the model trained, for how long, and when is a run good enough to freeze?
 Check: a recipe table (data, optimiser, schedule, batch, steps, expected hours), monitoring list, and a freeze rule.
 
 ## Comments
+- From 04: loss and switches fixed (see 04 Resolution). If `loss_action` stalls, sweep `action_loss_weight ∈ {1, 5}` in a 100k-Window quick run. Logs: `loss_video`, `loss_action`, `loss_action_hi_t` (t > 0.7), `loss_action_lo_t`. Action normalisation constants (steer /0.618; throttle −0.077, /0.373) go into the config.

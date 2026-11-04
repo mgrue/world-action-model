@@ -20,3 +20,4 @@ What modules, API and commands deliver the model, and what proves them correct?
 Check: API and CLI sketch with signatures, the list of automated tests, and the manual acceptance steps.
 
 ## Comments
+- From 04: the Policy API takes and returns raw actions in [−1, 1] (de-normalise + clip inside); training switches to expose: `objective`, `video_stream`, `video_loss_weight`, `action_loss_weight`, `t_shift`, `horizon` (+ 02's `future_stride`, `p_uncond`), with the cross-checks (regression ⇒ no video; w_v = 0 ⇒ no video). Replanning rate is an inference argument, not a training switch.

@@ -136,3 +136,8 @@ _Avoid_: modality, channel
 **Chunk**:
 The sequence of H = 16 Actions the model predicts for one Window (the action Stream's output); Step 9 executes its first few and replans.
 _Avoid_: trajectory, plan, window
+
+**Noise level**:
+The flow-matching time t ∈ [0, 1] of a Token: x_t = t·noise + (1 − t)·clean, so 0 is clean and 1 is pure noise. One per Window for the predicted Streams; always 0 for the conditioning Streams.
+_Avoid_: timestep (when meaning the value), sigma, diffusion step
+

@@ -20,3 +20,4 @@ Check: a block diagram / layer table, parameter count, measured ms/step at the c
 
 ## Comments
 - From 02: input projections/heads and the 162-token layout are fixed (see 02 Resolution); 3-axis RoPE (t 32 / h 16 / w 16 per 64-dim head); modulation vector = per-token noise level only (Instruction is a token, not in AdaLN). Open here: final-layer form (AdaLN-out as FLUX).
+- From 04: regression baseline uses this same model: zero action-token inputs, noise-level modulation fixed at t = 1, action head reads clean normalised actions (no extra head). With `video_stream = false` the sequence is 34 tokens (no future-Frame projection/head used); `horizon` changes the token count (162 / 90 / 54).

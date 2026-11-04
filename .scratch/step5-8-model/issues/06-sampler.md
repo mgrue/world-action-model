@@ -19,3 +19,4 @@ How is an action chunk (and the imagined future) sampled from a trained model?
 Check: sampler pseudo-code with defaults, measured ms per chunk on MPS, and the API signature Step 9 will call.
 
 ## Comments
+- From 04: velocity target is ε − clean (x_t = t·ε + (1−t)·clean), so Euler steps go from t = 1 to 0 with x ← x + (t_next − t)·v. Step schedule uses the same rational shift `t_shift` (1.65) as training. Output actions are normalised: de-normalise (steer ×0.618; throttle ×0.373 + 0.077) and clip to [−1, 1]. Regression objective: one forward pass, no sampling.
