@@ -1,7 +1,7 @@
 # Steps 5–8 world action model spec
 
 Labels: wayfinder:map
-Status: open
+Status: done (2026-11-04) — destination reached: SPEC.md
 Tracker: local markdown — tickets are files in `issues/`, each with `Parent: MAP.md`.
 Ticket header fields: `Labels:` (wayfinder type), `Status:` (open/closed), `Assignee:` (empty = unclaimed — the claim), `Blocked by:` (ticket files; unblocked when all are closed).
 Frontier = open, unblocked, unassigned tickets in `issues/`.
@@ -43,6 +43,7 @@ PLAN.md checks to satisfy, turned into measurable checks:
 - [Sampler](issues/06-sampler.md) — Euler, 10 steps on the training shift (1.65); per-Stream CFG `cfg_action` / `cfg_video` default off (batched 2B); `wam.policy.load(name)` → `Policy.act(frame, state, instruction, *, n_samples, n_steps, cfg_*, seed, return_latents)` → raw clipped actions (B, n_samples, H, 2); 66 ms per Chunk at B = 1 on MPS, 21.5 ms batched
 - [Evaluation and checks](issues/07-evaluation-and-checks.md) — gates for `wam-v1`: 1-sample RMSE steer, throttle ≤ 0.15 on 970 general val Windows (train mean 0.61 / 0.39); Fork (e ≤ 12, nearest of 2 train reference Chunks per entry offset, × 16 samples on 512 Windows): commit (r < 0.3) ≥ 0.90, following ≥ 0.90, `any` balance 0.3–0.7, two-sided ≥ 0.80 — validated on fakes (labels pass, averaged and shuffled fail); imagined future, CFG / n_steps sweeps report-only; thresholds tighten once, never loosen
 - [Package layout, API, CLI, tests and acceptance](issues/08-api-cli-tests.md) — `wam.{runs (extracted from compressor), model, flow, policy, train, evaluate}` + `einops`; CLI `python -m wam.policy {train [--quick] [--set k=v], eval [--sweeps], show, promote}`; Checkpoint `wam-v1` = EMA weights + card (hashes, thresholds); eval data computed, hash recorded; 23 CPU tests (< 60 s) incl. exact param count, RoPE relativity, resume bit-identity, metric fakes; manual: quick Run → full Run → contact sheet → promote → eval; variants committed only when cited
+- [Compile SPEC.md](issues/09-compile-spec.md) — [`SPEC.md`](SPEC.md) assembled from 01–08, with 12 compile-time clarifications (§16)
 
 ## Not yet specified
 
