@@ -376,7 +376,7 @@ For **both** Streams (action only without video): final EMA val loss ≤ **0.5 �
 
 ### 9.2 General action error (gate)
 
-- **Set:** `eval_subset(val, 1024)` minus Windows with `approaches_section`, which leaves 970 Windows at H = 16 with a single valid answer.
+- **Set:** `eval_subset(val, 1024)` minus Windows with `approaches_section`, which leaves 951 Windows at H = 16 with a single valid answer (`prototypes/out/action_baselines.json`; an earlier draft said 970).
 - **Metric:** **one** sample per Window, RMSE against the clean label in raw units per dimension, over all H steps; also over k ≤ 4 (reported).
 - **Gate:** **`rmse_steer ≤ 0.15` and `rmse_throttle ≤ 0.15`.**
 - **Baselines on the same Windows** (reported):
@@ -605,7 +605,7 @@ These fill gaps between ticket decisions without changing any decision. If one l
    - The general set is `eval_subset(val, 1024)` from `windows(horizon=H)` minus `approaches_section`.
    - Fork references are truncated to the first H steps, and Windows need e ≤ min(12, H).
    - Variants are never gated, so no threshold changes.
-5. **Stratified Fork set:** for each Instruction, the e ≤ 12 val Windows are split by e, and `n // 12` (plus one for the first `n % 12` offsets) are drawn per offset without replacement with numpy `default_rng([7, instruction_id, e])`, then sorted. The periodic set uses the same rule with its own counts and `[8, …]`. The general periodic 192 is the first 192 of a `default_rng(9)` permutation of the 970-Window general set.
+5. **Stratified Fork set:** for each Instruction, the e ≤ 12 val Windows are split by e, and `n // 12` (plus one for the first `n % 12` offsets) are drawn per offset without replacement with numpy `default_rng([7, instruction_id, e])`, then sorted. The periodic set uses the same rule with its own counts and `[8, …]`. The general periodic 192 is the first 192 of a `default_rng(9)` permutation of the 951-Window general set.
 6. **Code-hash warning scope:** the card records every `src/wam/*.py` hash, but `load` warns only for `model.py` and `flow.py`, the files that define what the weights mean, as Step 4 restricted its warning to `compressor.py`.
 7. **Run directory name clashes** get a numeric suffix rather than an error (Step 4).
 8. **Hidden `--arch`, `--batch`, `--eval-windows`** exist for the CLI smoke test and tiny runs (Step 4 pattern).
