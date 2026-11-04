@@ -2,7 +2,7 @@
 
 Labels: wayfinder:task
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-throughput-budget.md, 02-tokens-and-positions.md, 03-transformer-blocks.md, 04-flow-matching-objective.md, 05-training-recipe.md, 06-sampler.md, 07-evaluation-and-checks.md, 08-api-cli-tests.md
 Parent: ../MAP.md
 
