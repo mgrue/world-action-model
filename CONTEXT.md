@@ -106,3 +106,18 @@ _Avoid_: sample, clip, chunk (chunk = the predicted action sequence)
 **Probe**:
 A named world change reserved for Step 10 generalisation tests (a colour or track-shape change outside the training jitter); never used in training data.
 _Avoid_: variant, test set (a Probe is a world change, not a Split)
+
+## Model
+
+**Latent**:
+The compressor's 8×8 grid of 16-channel values for one Frame (normalised per channel), the unit the world action model reads and predicts instead of pixels.
+_Avoid_: embedding, code, feature map
+
+**Checkpoint**:
+A promoted, frozen set of trained weights with its provenance card, stored under `checkpoints/<name>/` and referred to by name (e.g. `vae-v1`); never overwritten.
+_Avoid_: model file, weights (when meaning the named, frozen artefact)
+
+**Run**:
+One training run's scratch directory under `runs/` (config, logs, metrics, contact sheet, final weights); only a Checkpoint promoted from it is used by later Steps.
+_Avoid_: experiment, job
+
