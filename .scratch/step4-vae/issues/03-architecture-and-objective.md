@@ -36,4 +36,16 @@ Check: a chosen architecture (layer table, parameter count), loss with weights, 
 
   KL weight is per latent value relative to the mean L1. **Selection:** must pass ticket 04 on clean latents → prefer passing on noisy latents → prefer the larger KL weight → prefer higher car-region PSNR.
 
-**Status:** design decided (2026-11-03); the prototype runs wait for ticket 01 (torch install, run length per variant).
+- Prototype round 1 (2026-11-04, 6000 steps × 128 Frames ≈ 28–32 min each on MPS, 1.84 M params; outputs in `prototypes/out/vae_A…D/`). Clean latents, all 4096 val Frames:
+
+  | Run | found | pos p95 / max (m) | head p95 / max (°) | car PSNR | vs true head p95 | clean / noisy |
+  |---|---|---|---|---|---|---|
+  | A | 14.5% | 1.79 / ∞ | 180 / 180 | 12.1 | — | FAIL / FAIL |
+  | B | 100% | 0.21 / 0.39 | 12.2 / 35.3 | 35.7 | 13.9 | FAIL / FAIL |
+  | C | 100% | 0.19 / 0.43 | 11.5 / 38.0 | 35.8 | 13.8 | FAIL / FAIL |
+  | D | 100% | 0.18 / 0.36 | 10.9 / 31.7 | 35.7 | 12.8 | FAIL / FAIL |
+
+  Readings: without car weighting (A) the car is erased; λ = 30 is essential. B–D pass position comfortably and miss only on heading, just above the limits (D: 10.9° vs 10°, 31.7° vs 30°). The `fast` slice passes for C and D; the `kerb` slice is worst (head p95 23–28°, 51 Frames). Noisy latents cost almost nothing. KL 1e-3 is not worse than 0 — D is best on heading. For reference, the estimator itself on originals vs the true State is heading p95 9.2° / max 31°, so the misses are at the estimator's own resolution; worst-heading cases on the contact sheet are a nose that is a fraction of a pixel off. Losses were still falling at the end. Probes (report only): colour Probes degrade heavily (brown_grass / light_road car PSNR 17–24 dB, heading p95 50–105°); the decoder repaints the training colours — expected for Step 10.
+- Next per the selection rule: none of A–D passes → run **E** (bigger network) with KL **1e-3** (D's weight: best on every metric, and the larger KL is preferred).
+
+**Status:** design decided (2026-11-03); round 1 done (2026-11-04), run E pending.
