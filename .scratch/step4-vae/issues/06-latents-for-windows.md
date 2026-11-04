@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-torch-on-mac.md, 02-package-layout-and-checkpoints.md, 03-architecture-and-objective.md
 Parent: ../MAP.md
 
