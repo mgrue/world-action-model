@@ -1,0 +1,18 @@
+{
+  "16 future": {
+    "load_render_ms": 2.33,
+    "encode_ms": 5.98,
+    "windows_s_ceiling": 120.0
+  },
+  "8 future": {
+    "load_render_ms": 1.16,
+    "encode_ms": 3.2,
+    "windows_s_ceiling": 230.0
+  },
+  "4 future": {
+    "load_render_ms": 0.61,
+    "encode_ms": 1.82,
+    "windows_s_ceiling": 411.0
+  },
+  "train_windows": 797262
+}

@@ -1,0 +1,86 @@
+{"group": "attn", "d": 256, "layers": 8, "tokens": 1106, "batch": 8, "attn": "plain", "prec": "fp32", "params": 8535824, "ms_step": 515.3, "windows_s": 15.5, "mem_gb": 4.23}
+{"group": "attn", "d": 256, "layers": 8, "tokens": 1106, "batch": 16, "attn": "plain", "prec": "fp32", "params": 8535824, "ms_step": 1017.1, "windows_s": 15.7, "mem_gb": 8.15}
+{"group": "attn", "d": 256, "layers": 8, "tokens": 1106, "batch": 32, "attn": "plain", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.74 GiB, other allocations: 88.38 MiB, max allowed: 11.84 GiB). Tried to allocate 35.00 MiB on shared "}
+{"group": "attn", "d": 256, "layers": 8, "tokens": 1106, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 518.1, "windows_s": 15.4, "mem_gb": 4.2}
+{"group": "attn", "d": 256, "layers": 8, "tokens": 1106, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 1014.9, "windows_s": 15.8, "mem_gb": 8.15}
+{"group": "attn", "d": 256, "layers": 8, "tokens": 1106, "batch": 32, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.35 GiB, other allocations: 88.62 MiB, max allowed: 11.84 GiB). Tried to allocate 608.00 MiB on shared"}
+{"group": "size", "d": 256, "layers": 8, "tokens": 1106, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 495.1, "windows_s": 16.2, "mem_gb": 4.2}
+{"group": "size", "d": 256, "layers": 8, "tokens": 1106, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 954.7, "windows_s": 16.8, "mem_gb": 8.15}
+{"group": "size", "d": 256, "layers": 8, "tokens": 1106, "batch": 32, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.35 GiB, other allocations: 88.62 MiB, max allowed: 11.84 GiB). Tried to allocate 608.00 MiB on shared"}
+{"group": "size", "d": 256, "layers": 8, "tokens": 594, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 231.5, "windows_s": 34.6, "mem_gb": 2.26}
+{"group": "size", "d": 256, "layers": 8, "tokens": 594, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 446.1, "windows_s": 35.9, "mem_gb": 4.26}
+{"group": "size", "d": 256, "layers": 8, "tokens": 594, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 869.3, "windows_s": 36.8, "mem_gb": 7.15}
+{"group": "size", "d": 256, "layers": 8, "tokens": 594, "batch": 64, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.63 GiB, other allocations: 88.62 MiB, max allowed: 11.84 GiB). Tried to allocate 352.00 MiB on shared"}
+{"group": "size", "d": 256, "layers": 8, "tokens": 338, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 127.0, "windows_s": 63.0, "mem_gb": 1.19}
+{"group": "size", "d": 256, "layers": 8, "tokens": 338, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 238.8, "windows_s": 67.0, "mem_gb": 2.2}
+{"group": "size", "d": 256, "layers": 8, "tokens": 338, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 490.5, "windows_s": 65.2, "mem_gb": 4.14}
+{"group": "size", "d": 256, "layers": 8, "tokens": 338, "batch": 64, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 963.2, "windows_s": 66.4, "mem_gb": 7.15}
+{"group": "size", "d": 256, "layers": 8, "tokens": 290, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 114.9, "windows_s": 69.6, "mem_gb": 1.15}
+{"group": "size", "d": 256, "layers": 8, "tokens": 290, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 213.9, "windows_s": 74.8, "mem_gb": 2.23}
+{"group": "size", "d": 256, "layers": 8, "tokens": 290, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 412.7, "windows_s": 77.5, "mem_gb": 3.26}
+{"group": "size", "d": 256, "layers": 8, "tokens": 290, "batch": 64, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 805.3, "windows_s": 79.5, "mem_gb": 6.18}
+{"group": "size", "d": 256, "layers": 8, "tokens": 162, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 66.0, "windows_s": 121.3, "mem_gb": 0.49}
+{"group": "size", "d": 256, "layers": 8, "tokens": 162, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 120.1, "windows_s": 133.2, "mem_gb": 1.19}
+{"group": "size", "d": 256, "layers": 8, "tokens": 162, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 224.3, "windows_s": 142.7, "mem_gb": 2.23}
+{"group": "size", "d": 256, "layers": 8, "tokens": 162, "batch": 64, "attn": "sdpa", "prec": "fp32", "params": 8535824, "ms_step": 438.0, "windows_s": 146.1, "mem_gb": 3.14}
+{"group": "size", "d": 384, "layers": 8, "tokens": 1106, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 859.8, "windows_s": 9.3, "mem_gb": 6.15}
+{"group": "size", "d": 384, "layers": 8, "tokens": 1106, "batch": 16, "attn": "sdpa", "prec": "fp32", "error": "timeout > 180 s (swapping?)"}
+{"group": "size", "d": 384, "layers": 8, "tokens": 1106, "batch": 32, "attn": "sdpa", "prec": "fp32", "error": "skipped (smaller batch failed)"}
+{"group": "size", "d": 384, "layers": 8, "tokens": 594, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 410.9, "windows_s": 19.5, "mem_gb": 3.2}
+{"group": "size", "d": 384, "layers": 8, "tokens": 594, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 805.4, "windows_s": 19.9, "mem_gb": 5.15}
+{"group": "size", "d": 384, "layers": 8, "tokens": 594, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 1602.0, "windows_s": 20.0, "mem_gb": 10.16}
+{"group": "size", "d": 384, "layers": 8, "tokens": 594, "batch": 64, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.38 GiB, other allocations: 140.62 MiB, max allowed: 11.84 GiB). Tried to allocate 336.00 MiB on share"}
+{"group": "size", "d": 384, "layers": 8, "tokens": 338, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 228.3, "windows_s": 35.0, "mem_gb": 2.13}
+{"group": "size", "d": 384, "layers": 8, "tokens": 338, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 434.1, "windows_s": 36.9, "mem_gb": 3.17}
+{"group": "size", "d": 384, "layers": 8, "tokens": 338, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 838.8, "windows_s": 38.1, "mem_gb": 5.15}
+{"group": "size", "d": 384, "layers": 8, "tokens": 338, "batch": 64, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 1682.5, "windows_s": 38.0, "mem_gb": 10.17}
+{"group": "size", "d": 384, "layers": 8, "tokens": 290, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 192.8, "windows_s": 41.5, "mem_gb": 2.16}
+{"group": "size", "d": 384, "layers": 8, "tokens": 290, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 354.2, "windows_s": 45.2, "mem_gb": 2.32}
+{"group": "size", "d": 384, "layers": 8, "tokens": 290, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 674.7, "windows_s": 47.4, "mem_gb": 4.34}
+{"group": "size", "d": 384, "layers": 8, "tokens": 290, "batch": 64, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 1350.2, "windows_s": 47.4, "mem_gb": 9.16}
+{"group": "size", "d": 384, "layers": 8, "tokens": 162, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 108.7, "windows_s": 73.6, "mem_gb": 1.16}
+{"group": "size", "d": 384, "layers": 8, "tokens": 162, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 193.7, "windows_s": 82.6, "mem_gb": 2.13}
+{"group": "size", "d": 384, "layers": 8, "tokens": 162, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 369.6, "windows_s": 86.6, "mem_gb": 2.42}
+{"group": "size", "d": 384, "layers": 8, "tokens": 162, "batch": 64, "attn": "sdpa", "prec": "fp32", "params": 19143824, "ms_step": 722.4, "windows_s": 88.6, "mem_gb": 5.15}
+{"group": "size", "d": 384, "layers": 12, "tokens": 1106, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 1237.5, "windows_s": 6.5, "mem_gb": 9.19}
+{"group": "size", "d": 384, "layers": 12, "tokens": 1106, "batch": 16, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.83 GiB, other allocations: 640.00 KiB, max allowed: 11.84 GiB). Tried to allocate 26.00 MiB on shared"}
+{"group": "size", "d": 384, "layers": 12, "tokens": 1106, "batch": 32, "attn": "sdpa", "prec": "fp32", "error": "skipped (smaller batch failed)"}
+{"group": "size", "d": 384, "layers": 12, "tokens": 594, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 582.5, "windows_s": 13.7, "mem_gb": 4.24}
+{"group": "size", "d": 384, "layers": 12, "tokens": 594, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 1148.7, "windows_s": 13.9, "mem_gb": 7.41}
+{"group": "size", "d": 384, "layers": 12, "tokens": 594, "batch": 32, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.80 GiB, other allocations: 384.00 KiB, max allowed: 11.84 GiB). Tried to allocate 264.00 MiB on share"}
+{"group": "size", "d": 384, "layers": 12, "tokens": 594, "batch": 64, "attn": "sdpa", "prec": "fp32", "error": "skipped (smaller batch failed)"}
+{"group": "size", "d": 384, "layers": 12, "tokens": 338, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 320.1, "windows_s": 25.0, "mem_gb": 2.23}
+{"group": "size", "d": 384, "layers": 12, "tokens": 338, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 618.9, "windows_s": 25.9, "mem_gb": 4.21}
+{"group": "size", "d": 384, "layers": 12, "tokens": 338, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 1219.0, "windows_s": 26.3, "mem_gb": 7.47}
+{"group": "size", "d": 384, "layers": 12, "tokens": 338, "batch": 64, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.75 GiB, other allocations: 384.00 KiB, max allowed: 11.84 GiB). Tried to allocate 96.00 MiB on shared"}
+{"group": "size", "d": 384, "layers": 12, "tokens": 290, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 278.7, "windows_s": 28.7, "mem_gb": 2.17}
+{"group": "size", "d": 384, "layers": 12, "tokens": 290, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 539.0, "windows_s": 29.7, "mem_gb": 3.39}
+{"group": "size", "d": 384, "layers": 12, "tokens": 290, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 1037.9, "windows_s": 30.8, "mem_gb": 6.31}
+{"group": "size", "d": 384, "layers": 12, "tokens": 290, "batch": 64, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.75 GiB, other allocations: 30.67 MiB, max allowed: 11.84 GiB). Tried to allocate 82.00 MiB on shared "}
+{"group": "size", "d": 384, "layers": 12, "tokens": 162, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 151.1, "windows_s": 53.0, "mem_gb": 1.29}
+{"group": "size", "d": 384, "layers": 12, "tokens": 162, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 285.6, "windows_s": 56.0, "mem_gb": 2.17}
+{"group": "size", "d": 384, "layers": 12, "tokens": 162, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 551.1, "windows_s": 58.1, "mem_gb": 3.55}
+{"group": "size", "d": 384, "layers": 12, "tokens": 162, "batch": 64, "attn": "sdpa", "prec": "fp32", "params": 28586128, "ms_step": 1074.1, "windows_s": 59.6, "mem_gb": 7.19}
+{"group": "size", "d": 512, "layers": 8, "tokens": 1106, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 1216.7, "windows_s": 6.6, "mem_gb": 8.23}
+{"group": "size", "d": 512, "layers": 8, "tokens": 1106, "batch": 16, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.37 GiB, other allocations: 640.00 KiB, max allowed: 11.84 GiB). Tried to allocate 608.00 MiB on share"}
+{"group": "size", "d": 512, "layers": 8, "tokens": 1106, "batch": 32, "attn": "sdpa", "prec": "fp32", "error": "skipped (smaller batch failed)"}
+{"group": "size", "d": 512, "layers": 8, "tokens": 594, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 574.4, "windows_s": 13.9, "mem_gb": 4.25}
+{"group": "size", "d": 512, "layers": 8, "tokens": 594, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 1145.3, "windows_s": 14.0, "mem_gb": 7.23}
+{"group": "size", "d": 512, "layers": 8, "tokens": 594, "batch": 32, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.67 GiB, other allocations: 384.00 KiB, max allowed: 11.84 GiB). Tried to allocate 352.00 MiB on share"}
+{"group": "size", "d": 512, "layers": 8, "tokens": 594, "batch": 64, "attn": "sdpa", "prec": "fp32", "error": "skipped (smaller batch failed)"}
+{"group": "size", "d": 512, "layers": 8, "tokens": 338, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 319.9, "windows_s": 25.0, "mem_gb": 2.21}
+{"group": "size", "d": 512, "layers": 8, "tokens": 338, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 613.8, "windows_s": 26.1, "mem_gb": 4.22}
+{"group": "size", "d": 512, "layers": 8, "tokens": 338, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 1189.0, "windows_s": 26.9, "mem_gb": 7.2}
+{"group": "size", "d": 512, "layers": 8, "tokens": 338, "batch": 64, "attn": "sdpa", "prec": "fp32", "error": "RuntimeError: MPS backend out of memory (MPS allocated: 11.80 GiB, other allocations: 384.00 KiB, max allowed: 11.84 GiB). Tried to allocate 43.00 MiB on shared"}
+{"group": "size", "d": 512, "layers": 8, "tokens": 290, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 269.6, "windows_s": 29.7, "mem_gb": 2.24}
+{"group": "size", "d": 512, "layers": 8, "tokens": 290, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 519.3, "windows_s": 30.8, "mem_gb": 3.34}
+{"group": "size", "d": 512, "layers": 8, "tokens": 290, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 1018.0, "windows_s": 31.4, "mem_gb": 6.23}
+{"group": "size", "d": 512, "layers": 8, "tokens": 290, "batch": 64, "attn": "sdpa", "prec": "fp32", "error": "timeout > 180 s (swapping?)"}
+{"group": "size", "d": 512, "layers": 8, "tokens": 162, "batch": 8, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 181.4, "windows_s": 44.1, "mem_gb": 1.43}
+{"group": "size", "d": 512, "layers": 8, "tokens": 162, "batch": 16, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 300.0, "windows_s": 53.3, "mem_gb": 2.21}
+{"group": "size", "d": 512, "layers": 8, "tokens": 162, "batch": 32, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 571.0, "windows_s": 56.0, "mem_gb": 3.34}
+{"group": "size", "d": 512, "layers": 8, "tokens": 162, "batch": 64, "attn": "sdpa", "prec": "fp32", "params": 33978896, "ms_step": 1132.6, "windows_s": 56.5, "mem_gb": 6.2}
+{"group": "prec", "d": 256, "layers": 8, "tokens": 1106, "batch": 16, "attn": "sdpa", "prec": "bf16", "params": 8535824, "ms_step": 1274.6, "windows_s": 12.6, "mem_gb": 7.25}
+{"group": "prec", "d": 384, "layers": 8, "tokens": 594, "batch": 32, "attn": "sdpa", "prec": "bf16", "params": 19143824, "ms_step": 2100.4, "windows_s": 15.2, "mem_gb": 8.22}
+{"group": "prec", "d": 384, "layers": 8, "tokens": 290, "batch": 32, "attn": "sdpa", "prec": "bf16", "params": 19143824, "ms_step": 960.6, "windows_s": 33.3, "mem_gb": 4.2}
+{"group": "prec", "d": 384, "layers": 12, "tokens": 290, "batch": 32, "attn": "sdpa", "prec": "bf16", "params": 28586128, "ms_step": 1421.1, "windows_s": 22.5, "mem_gb": 5.26}

@@ -25,7 +25,7 @@ PLAN.md checks to satisfy, turned into measurable checks:
 - Planning only: no model code in `src/` beyond throwaway prototypes.
 - Facts that constrain the model:
   - Frozen compressor `vae-v1` (`wam.compressor.load`): a Frame → normalised Latent (16, 8, 8), 64 row-major tokens of 16 channels, each a 5 × 5 m patch; ≈ 6 ms per Window on MPS, encoded on the fly. The decoder tolerates normalised noise 0.1. Weak spots: off-Route Frames, colour Probes.
-  - Windows (Step 3): obs Frame + State features (x/40, y/40, cos θ, sin θ, v/10) + Instruction (`outer` / `inner` / `any`) + H = 16 clean expert actions [steer, throttle] ∈ [−1, 1] + 16 future Frames (action k ↔ future Frame k). `future_frames` can select a subset of the 16 Frames. Train ≈ 1.29 M Windows (clean-future filter), val/test their own seed blocks; `eval_subset(n)` gives fixed val subsets; `approaches_section` flags Windows before the fork section.
+  - Windows (Step 3): obs Frame + State features (x/40, y/40, cos θ, sin θ, v/10) + Instruction (`outer` / `inner` / `any`) + H = 16 clean expert actions [steer, throttle] ∈ [−1, 1] + 16 future Frames (action k ↔ future Frame k). `future_frames` can select a subset of the 16 Frames. Train 797,262 Windows with the default clean-future filter (val 98,579, test 98,904); `eval_subset(n)` gives fixed val subsets; `approaches_section` flags Windows before the fork section.
   - The two-valid-answers case PLAN cares about: Instruction `any` at the Fork (expert flips a fair coin per Passage). That is where flow matching should commit and regression should average into the Island.
   - **Throughput is the binding constraint.** Step 3 measured a stand-in 6.3 M-param transformer (d256 × 8) on MPS at full PLAN size (64 × 17 + 1 + 1 + 16 = 1106 tokens): 13 Windows/s, batch 8 max (batch 16 swaps, 32 OOM); d384 swapped. Plain attention. Step 6 needs fewer tokens per Window, memory-efficient attention, or shorter futures.
   - Hardware: Apple M1 Pro, 16 GB, MPS, float32 eager was right for the VAE (ticket 01 of Step 4); Python 3.14, torch 2.15.
@@ -34,6 +34,8 @@ PLAN.md checks to satisfy, turned into measurable checks:
 ## Decisions so far
 
 <!-- one line per closed ticket -->
+
+- [Throughput and size budget on MPS](issues/01-throughput-budget.md) — SDPA = plain attention on MPS (no memory saving), bf16 20–30% slower, speed ∝ params × tokens; PLAN's 1106-token Window = 15 W/s (19 h per 1 M Windows); envelope: 2×2 patchify (16 tokens per Frame) → 160–300 tokens, 8–20 M params, batch 32, fp32; 290 tokens at d256×8 = 47 W/s end to end incl. 8 ms vae-v1 encode; full run 3–8 h
 
 ## Not yet specified
 
