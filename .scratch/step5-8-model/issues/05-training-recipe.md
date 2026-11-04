@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-throughput-budget.md, 03-transformer-blocks.md, 04-flow-matching-objective.md
 Parent: ../MAP.md
 
