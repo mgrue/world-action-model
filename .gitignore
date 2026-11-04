@@ -6,4 +6,5 @@ runs/
 .idea/
 data/
 *.pt
+!checkpoints/**
 .scratch/step4-vae/prototypes/out/*.npz

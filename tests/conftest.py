@@ -21,3 +21,15 @@ def pursuit_action(env: CarEnv, route: str, direction: str, speed: float = 5.0, 
     steer = max(-1.0, min(1.0, math.atan(kappa * WHEELBASE) / DELTA_MAX))
     throttle = max(-1.0, min(1.0, (speed - s.v) * 2.0))
     return steer, throttle
+
+
+TINY_EPISODES = {"train": 12, "val": 6, "test": 6}
+TINY_LENGTH = 60
+
+
+@pytest.fixture(scope="session")
+def tiny_data(tmp_path_factory):
+    """A tiny recorded Step 3 dataset (Step 4 tests)."""
+    from toycar import dataset as D
+
+    return D.record(tmp_path_factory.mktemp("tiny") / "tiny", episodes=TINY_EPISODES, length=TINY_LENGTH, workers=2)

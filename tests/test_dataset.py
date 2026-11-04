@@ -311,6 +311,8 @@ def test_frame_dataset(ds):
     assert len(fd) == len(es) * (LENGTH + 1)
     for e, t in [(0, 0), (0, LENGTH), (1, 0), (3, 17), (len(es) - 1, LENGTH)]:
         assert np.array_equal(fd[e * (LENGTH + 1) + t], es.frames(e, ticks=[t])[0])
+        assert fd.locate(e * (LENGTH + 1) + t) == (e, t)
+    assert fd.locate(-1) == (len(es) - 1, LENGTH)
     with pytest.raises(IndexError):
         fd[len(fd)]
     with pytest.raises(IndexError):

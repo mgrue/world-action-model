@@ -605,13 +605,17 @@ class FrameItems:
     def __len__(self) -> int:
         return int(self._offsets[-1])
 
-    def __getitem__(self, i: int) -> np.ndarray:
+    def locate(self, i: int) -> tuple[int, int]:
+        """(episode, tick) of item i (Step 4 SPEC §14.1)."""
         N = len(self)
         if not isinstance(i, (int, np.integer)) or not -N <= i < N:
             raise IndexError(f"frame {i} out of range ({N} frames)")
         i = int(i) % N
         e = int(np.searchsorted(self._offsets, i, side="right")) - 1
-        t = i - int(self._offsets[e])
+        return e, i - int(self._offsets[e])
+
+    def __getitem__(self, i: int) -> np.ndarray:
+        e, t = self.locate(i)
         return self.episodes._render(e, t, self.episodes.render_params(e, self.probe))
 
 

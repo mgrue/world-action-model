@@ -1,7 +1,7 @@
 [project]
 name = "toycar"
 version = "0.1.0"
-description = "Toy 2D overhead car simulator for a toy world action model (PLAN.md Step 1)"
+description = "Toy 2D overhead car simulator and a toy world action model (PLAN.md)"
 requires-python = ">=3.14,<3.15"
 dependencies = [
     "numpy>=2.5,<2.6",
@@ -13,6 +13,13 @@ dev = ["pytest"]
 viz = [
     "matplotlib>=3.10,<4",
 ]
+model = ["torch>=2.15,<2.16"]
+
+[tool.uv]
+default-groups = ["dev", "model"]
+
+[tool.uv.build-backend]
+module-name = ["toycar", "wam"]
 
 [build-system]
 requires = ["uv_build>=0.9,<0.14"]
