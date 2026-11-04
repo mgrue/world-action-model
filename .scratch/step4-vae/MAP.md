@@ -1,7 +1,7 @@
 # Step 4 frame compressor spec
 
 Labels: wayfinder:map
-Status: charted (2026-11-03)
+Status: done (2026-11-04) — destination reached: SPEC.md
 Tracker: local markdown — tickets are files in `issues/`, each with `Parent: MAP.md`.
 Ticket header fields: `Labels:` (wayfinder type), `Status:` (open/closed), `Assignee:` (empty = unclaimed — the claim), `Blocked by:` (ticket files; unblocked when all are closed).
 Frontier = open, unblocked, unassigned tickets in `issues/`.
@@ -40,6 +40,7 @@ PLAN.md check to satisfy: "reconstructions keep the car's position and heading c
 - [Training recipe and freezing](issues/05-training-recipe.md) — run E's recipe unchanged: uniform random train Frames via `frame_dataset`, AdamW 1e-3, 200 warm-up + cosine to 0.05×, batch 128, 12,000 steps, float32, no EMA; ≈ 1 h 35 min; no early stopping, `val_rec` every 1,000 steps; resumable; freeze = latent stats → ticket 04 check → promote, never fine-tuned; a failed check reopens ticket 03 (no seed rerolls)
 - [Latents for Steps 6–8](issues/06-latents-for-windows.md) — encode on the fly, no cache (6.1 ms per Window on MPS ≈ 8% of a Step 6 step); `load(name, device)` → frozen Compressor with `encode` (uint8 HWC, any leading dims → normalised float32 (…, 16, 8, 8) mean latents), `decode` (→ uint8, or differentiable float), `encode_windows`; row-major 64-token order; same path for Probes and closed loop; bit-identical per call, ≈ 1e-5 across batch sizes
 - [Compressor API, CLI, tests and acceptance](issues/07-api-cli-tests.md) — `wam/compressor.py` (network, Compressor, load, promote, train, CLI `train` / `eval` / `show` / `promote`, exit 0 = clean PASS) and `wam/carcheck.py` (the ticket 04 check, reusable for Steps 8 / 10); 15 CPU tests with a tiny arch (< 60 s) + DataLoader + skip-if-absent real-checkpoint test; 6-step manual acceptance ending in a committed `vae-v1`
+- [Compile SPEC.md](issues/08-compile-spec.md) — `SPEC.md` written; 12 clarifications, incl. one additive Step 3 method `FrameItems.locate(i)`
 - [Measuring car visibility](issues/04-car-visibility-check.md) — colour-centroid pose estimator, reconstruction vs original on 4096 fixed val Frames: car found 100%, position p95 ≤ 0.3 m / max ≤ 0.6 m, heading p95 ≤ 10° / max ≤ 30°; PSNR (whole, car region, background) as diagnostics; Probes report-only; ~30-entry contact sheet; validated on six fake reconstructions (8×8 block average fails on heading); amended 2026-11-04: Frames whose original the estimator misreads by > 20° are left out (`skip`, > 1% → INVALID)
 - [Package layout, runs and checkpoints](issues/02-package-layout-and-checkpoints.md) — second module `src/wam/` in the same uv project, torch in a default `model` group, test that `toycar` never imports torch; runs in `runs/vae/<date>-<name>/` (CSV/JSON/PNG, no TensorBoard); promoted, committed `checkpoints/vae-v1/{model.pt, card.json}` with provenance (commit, code hash, manifest hash, config, ticket 04 verdicts, repo-relative paths); load by name; bit-identical only on same device + torch
 
