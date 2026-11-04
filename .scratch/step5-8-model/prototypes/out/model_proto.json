@@ -1,0 +1,39 @@
+{
+ "device": "mps",
+ "d": 256,
+ "depth": 8,
+ "params": {
+  "total": 8229888,
+  "blocks": 6816768,
+  "modulations": 983040,
+  "t_in": 131072,
+  "in_projections": 19968,
+  "last_layers": 279040
+ },
+ "tokens": {
+  "default": 162,
+  "stride1": 290,
+  "no_video": 34,
+  "h8": 90,
+  "h4": 54
+ },
+ "smoke": "ok",
+ "ms_per_step_b32": 236.1,
+ "model_windows_per_s": 135.5,
+ "end_to_end_windows_per_s_est": 84.9,
+ "load_encode_s": 2.5,
+ "overfit": {
+  "windows": 512,
+  "steps": 1500,
+  "batch": 32,
+  "lr": 0.0003,
+  "loss_video_first100": 1.6613,
+  "loss_action_first100": 1.2,
+  "loss_action_hi_t_first100": 1.3571,
+  "loss_action_lo_t_first100": 1.0978,
+  "loss_video_last100": 0.2199,
+  "loss_action_last100": 0.0446,
+  "loss_action_hi_t_last100": 0.03,
+  "loss_action_lo_t_last100": 0.0528
+ }
+}

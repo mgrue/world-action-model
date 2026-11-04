@@ -21,3 +21,4 @@ Check: a recipe table (data, optimiser, schedule, batch, steps, expected hours),
 
 ## Comments
 - From 04: loss and switches fixed (see 04 Resolution). If `loss_action` stalls, sweep `action_loss_weight ∈ {1, 5}` in a 100k-Window quick run. Logs: `loss_video`, `loss_action`, `loss_action_hi_t` (t > 0.7), `loss_action_lo_t`. Action normalisation constants (steer /0.618; throttle −0.077, /0.373) go into the config.
+- From 03: model 8.23 M params at d256×8; 236 ms/step at batch 32 on MPS (≈ 85 W/s end to end, ≈ 3.3 h per 1 M Windows). Overfit sanity run used AdamW 3e-4, grad clip 1.0, no warm-up, no weight decay — stable; a starting point, not a decision. Escalate to d384×8 only if the quick run underfits.

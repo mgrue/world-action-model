@@ -1,0 +1,51 @@
+{
+ "device": "mps",
+ "d": 256,
+ "depth": 8,
+ "params": {
+  "total": 8229888,
+  "blocks": 6816768,
+  "modulations": 983040,
+  "t_in": 131072,
+  "in_projections": 19968,
+  "last_layers": 279040
+ },
+ "tokens": {
+  "default": 162,
+  "stride1": 290,
+  "no_video": 34,
+  "h8": 90,
+  "h4": 54
+ }
+}
+ms/step b32: 236.1 model W/s: 135.5 end-to-end est W/s: 84.9
+0 {'loss_video': 2.018, 'loss_action': 2.134, 'loss_action_hi_t': 2.7203, 'loss_action_lo_t': 1.7329}
+100 {'loss_video': 1.4422, 'loss_action': 0.8909, 'loss_action_hi_t': 1.3101, 'loss_action_lo_t': 0.5649}
+200 {'loss_video': 1.2791, 'loss_action': 0.793, 'loss_action_hi_t': 1.1417, 'loss_action_lo_t': 0.5544}
+300 {'loss_video': 0.7709, 'loss_action': 0.4725, 'loss_action_hi_t': 0.6749, 'loss_action_lo_t': 0.3805}
+400 {'loss_video': 0.5833, 'loss_action': 0.5093, 'loss_action_hi_t': 0.9158, 'loss_action_lo_t': 0.2655}
+500 {'loss_video': 0.4931, 'loss_action': 0.3753, 'loss_action_hi_t': 0.5242, 'loss_action_lo_t': 0.2859}
+600 {'loss_video': 0.3718, 'loss_action': 0.2413, 'loss_action_hi_t': 0.2014, 'loss_action_lo_t': 0.2652}
+700 {'loss_video': 0.3735, 'loss_action': 0.1918, 'loss_action_hi_t': 0.1198, 'loss_action_lo_t': 0.22}
+800 {'loss_video': 0.3603, 'loss_action': 0.1209, 'loss_action_hi_t': 0.0904, 'loss_action_lo_t': 0.1369}
+900 {'loss_video': 0.2973, 'loss_action': 0.0937, 'loss_action_hi_t': 0.0752, 'loss_action_lo_t': 0.1021}
+1000 {'loss_video': 0.2732, 'loss_action': 0.1045, 'loss_action_hi_t': 0.1145, 'loss_action_lo_t': 0.0993}
+1100 {'loss_video': 0.2791, 'loss_action': 0.077, 'loss_action_hi_t': 0.0678, 'loss_action_lo_t': 0.0833}
+1200 {'loss_video': 0.249, 'loss_action': 0.0907, 'loss_action_hi_t': 0.035, 'loss_action_lo_t': 0.1199}
+1300 {'loss_video': 0.2563, 'loss_action': 0.1007, 'loss_action_hi_t': 0.0297, 'loss_action_lo_t': 0.1379}
+1400 {'loss_video': 0.2232, 'loss_action': 0.0326, 'loss_action_hi_t': 0.0213, 'loss_action_lo_t': 0.0385}
+1499 {'loss_video': 0.222, 'loss_action': 0.049, 'loss_action_hi_t': 0.0199, 'loss_action_lo_t': 0.0587}
+{
+ "windows": 512,
+ "steps": 1500,
+ "batch": 32,
+ "lr": 0.0003,
+ "loss_video_first100": 1.6613,
+ "loss_action_first100": 1.2,
+ "loss_action_hi_t_first100": 1.3571,
+ "loss_action_lo_t_first100": 1.0978,
+ "loss_video_last100": 0.2199,
+ "loss_action_last100": 0.0446,
+ "loss_action_hi_t_last100": 0.03,
+ "loss_action_lo_t_last100": 0.0528
+}
