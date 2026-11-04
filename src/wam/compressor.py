@@ -14,14 +14,9 @@ from __future__ import annotations
 import argparse
 import contextlib
 import csv
-import datetime
-import hashlib
-import io
 import json
 import math
-import os
 import shutil
-import subprocess
 import sys
 import time
 import warnings
@@ -38,6 +33,20 @@ from toycar import State
 from toycar.dataset import PROBES, open_dataset
 
 from . import carcheck as cc
+from .runs import (  # noqa: F401  (re-exported: Step 4 names stay importable from here)
+    CHECKPOINTS,
+    REPO,
+    _git_info,
+    _new_run_dir,
+    _now,
+    _read_weights,
+    _rel,
+    _save_atomic,
+    _sha256,
+    _sync,
+    _Tee,
+    data_path,
+)
 
 # -- constants (SPEC §3, §5) ----------------------------------------------------------------
 ARCH: dict = {"channels": [32, 64, 128, 128], "blocks": 2, "z": 16}
@@ -51,11 +60,9 @@ NOISE_SEED = 7
 WARMUP = 200
 ENCODE_CHUNK = 1024
 
-REPO = Path(__file__).resolve().parents[2]
 CODE_FILE = Path(__file__).resolve()
 DEFAULT_DATA = "data/step3-v1"
 RUNS_DIR = Path("runs/vae")
-CHECKPOINTS = Path("checkpoints")
 
 DEFAULT_CONFIG: dict = {
     "arch": ARCH,
@@ -247,40 +254,8 @@ class Compressor:
 
 
 # -- provenance helpers ---------------------------------------------------------------------
-def _sha256(path: Path) -> str:
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
-
-
 def code_sha256() -> str:
     return _sha256(CODE_FILE)
-
-
-def _rel(path: str | Path) -> str:
-    """Repo-relative path (never absolute)."""
-    p = Path(path).resolve()
-    try:
-        return p.relative_to(REPO).as_posix()
-    except ValueError:
-        return Path(os.path.relpath(p, REPO)).as_posix()
-
-
-def data_path(data: str | Path) -> Path:
-    """A dataset path from a config or card (repo-relative) or the command line (as given)."""
-    p = Path(data)
-    return p if p.is_absolute() or p.exists() else REPO / p
-
-
-def _git_info() -> tuple[str | None, bool | None]:
-    try:
-        commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=REPO, capture_output=True, text=True, check=True)
-        status = subprocess.run(["git", "status", "--porcelain"], cwd=REPO, capture_output=True, text=True, check=True)
-    except (OSError, subprocess.CalledProcessError):
-        return None, None
-    return commit.stdout.strip(), bool(status.stdout.strip())
-
-
-def _now() -> str:
-    return datetime.datetime.now(datetime.UTC).isoformat(timespec="seconds")
 
 
 def _provenance(data: str | Path, device: torch.device, stats_frames: int) -> dict:
@@ -291,11 +266,6 @@ def _provenance(data: str | Path, device: torch.device, stats_frames: int) -> di
         "dataset": _rel(data_path(data)), "manifest_sha256": _sha256(data_path(data) / "manifest.json"),
         "split": "train", "stats_frames": int(stats_frames),
     }
-
-
-def _sync(device: torch.device) -> None:
-    if device.type == "mps":
-        torch.mps.synchronize()
 
 
 # -- training data (SPEC §3.2, §5.1) --------------------------------------------------------
@@ -346,36 +316,6 @@ def lr_factor(s: int, steps: int, warmup: int = WARMUP, final: float = 0.05) -> 
     if s < warmup:
         return (s + 1) / warmup
     return final + (1 - final) * 0.5 * (1 + math.cos(math.pi * (s - warmup) / max(1, steps - warmup)))
-
-
-class _Tee(io.TextIOBase):
-    def __init__(self, *streams) -> None:
-        self.streams = streams
-
-    def write(self, s: str) -> int:
-        for st in self.streams:
-            st.write(s)
-        return len(s)
-
-    def flush(self) -> None:
-        for st in self.streams:
-            st.flush()
-
-
-def _new_run_dir(root: Path, name: str) -> Path:
-    base = root / f"{datetime.datetime.now():%Y%m%d-%H%M}-{name}"
-    out, k = base, 1
-    while out.exists():
-        k += 1
-        out = base.with_name(f"{base.name}-{k}")
-    out.mkdir(parents=True)
-    return out
-
-
-def _save_atomic(obj, path: Path) -> None:
-    tmp = path.with_name(path.name + ".tmp")
-    torch.save(obj, tmp)
-    tmp.replace(path)
 
 
 def train(config: dict, out: Path, *, resume: bool = False, device=None, _stop_at: int | None = None) -> Path:
@@ -602,10 +542,6 @@ def _build(arch: dict, state_dict: dict, where: str) -> VAE:
     except RuntimeError as exc:
         raise ValueError(f"{where}: state dict does not fit the arch {arch}: {exc}") from None
     return vae
-
-
-def _read_weights(path: Path) -> dict:
-    return torch.load(path, map_location="cpu", weights_only=True)
 
 
 def load(name: str | Path, device: str | torch.device | None = None, *, root: Path = CHECKPOINTS) -> Compressor:

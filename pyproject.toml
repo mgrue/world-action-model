@@ -13,7 +13,10 @@ dev = ["pytest"]
 viz = [
     "matplotlib>=3.10,<4",
 ]
-model = ["torch>=2.15,<2.16"]
+model = [
+    "einops>=0.8.2",
+    "torch>=2.15,<2.16",
+]
 
 [tool.uv]
 default-groups = ["dev", "model"]

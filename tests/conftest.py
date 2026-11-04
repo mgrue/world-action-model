@@ -33,3 +33,24 @@ def tiny_data(tmp_path_factory):
     from toycar import dataset as D
 
     return D.record(tmp_path_factory.mktemp("tiny") / "tiny", episodes=TINY_EPISODES, length=TINY_LENGTH, workers=2)
+
+
+TINY_VAE = {"channels": [8, 8, 16, 16], "blocks": 1, "z": 16}
+
+
+@pytest.fixture(scope="session")
+def tiny_root(tmp_path_factory):
+    """A Checkpoint root holding a tiny, untrained `vae-v1` (Steps 5–8 tests)."""
+    import json
+
+    torch = pytest.importorskip("torch")
+    from wam import compressor as C
+
+    root = tmp_path_factory.mktemp("ck")
+    (root / "vae-v1").mkdir()
+    torch.manual_seed(0)
+    vae = C.VAE(TINY_VAE)
+    torch.save({"state_dict": vae.state_dict(), "arch": vae.arch, "latent_mean": torch.zeros(16),
+                "latent_std": torch.ones(16)}, root / "vae-v1" / "model.pt")
+    (root / "vae-v1" / "card.json").write_text(json.dumps({"name": "vae-v1", "code_sha256": C.code_sha256()}))
+    return root
