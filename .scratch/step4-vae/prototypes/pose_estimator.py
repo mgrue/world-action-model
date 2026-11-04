@@ -24,6 +24,13 @@ CUTOFF = 9.0  # summed |ΔRGB| below this is ignored
 FULL = 60.0  # summed |ΔRGB| at which a pixel counts fully as car
 N_FRAMES = 4096
 THRESH = {"pos_p95": 0.3, "pos_max": 0.6, "head_p95": 10.0, "head_max": 30.0}
+READABLE_DEG = 20.0  # a Frame counts only if the estimator reads the ORIGINAL within this of the true heading
+MAX_UNREADABLE = 0.01  # more unreadable Frames than this share → the check itself is invalid
+
+
+def readable(po, theta):
+    """True if the estimator's reading of the original Frame is within READABLE_DEG of the true heading."""
+    return po[2] is not None and abs(math.degrees((po[2] - theta + math.pi) % (2 * math.pi) - math.pi)) <= READABLE_DEG
 
 
 def estimate(frame, background, rp, centre=None):
@@ -93,35 +100,40 @@ def evaluate(es, frames, recon_fn: Callable, label: str):
         st = min(st, es.track.route("inner").project(s.x, s.y).distance_m)
         rows.append(dict(found=found, pos=pos, head=head,
                          psnr=psnr(orig, rec), psnr_car=psnr(orig, rec, g2), psnr_bg=psnr(orig, rec, ~g2),
-                         section=es.arrays["branch"][e, t] != -1, fast=s.v >= 8.0, kerb=st >= 0.5))
+                         section=es.arrays["branch"][e, t] != -1, fast=s.v >= 8.0, kerb=st >= 0.5, readable=readable(po, s.theta)))
     return summarise(rows, label)
 
 
 def summarise(rows, label):
+    """Stats per slice over the readable rows (ticket 04 amendment, 2026-11-04); `skip` = unreadable rows left out."""
     def stats(rs):
-        pos = np.array([r["pos"] for r in rs]); head = np.array([r["head"] for r in rs])
-        found = np.mean([r["found"] for r in rs])
+        rd = [r for r in rs if r.get("readable", True)]
+        pos = np.array([r["pos"] for r in rd]); head = np.array([r["head"] for r in rd])
+        found = np.mean([r["found"] for r in rd])
         fin = pos[np.isfinite(pos)]
-        s = dict(n=len(rs), found=found,
+        s = dict(n=len(rs), skip=len(rs) - len(rd), found=found,
                  pos_p95=np.percentile(fin, 95) if len(fin) else math.inf, pos_max=pos.max(),
                  head_p95=np.percentile(head, 95), head_max=head.max(),
-                 psnr=np.mean([r["psnr"] for r in rs]), psnr_car=np.mean([r["psnr_car"] for r in rs]),
-                 psnr_bg=np.mean([r["psnr_bg"] for r in rs]))
+                 psnr=np.mean([r["psnr"] for r in rd]), psnr_car=np.mean([r["psnr_car"] for r in rd]),
+                 psnr_bg=np.mean([r["psnr_bg"] for r in rd]))
         s["pass"] = (found == 1.0 and s["pos_p95"] <= THRESH["pos_p95"] and s["pos_max"] <= THRESH["pos_max"]
                      and s["head_p95"] <= THRESH["head_p95"] and s["head_max"] <= THRESH["head_max"])
         return s
 
     out = {"all": stats(rows)}
+    out["all"]["valid"] = out["all"]["skip"] <= MAX_UNREADABLE * out["all"]["n"]
+    out["all"]["pass"] = out["all"]["pass"] and out["all"]["valid"]
     for k in ("section", "fast", "kerb"):
         sub = [r for r in rows if r[k]]
         if sub:
             out[k] = stats(sub)
     print(f"\n{label}")
-    print(f"  {'slice':8s} {'n':>5s} {'found':>6s} {'pos p95':>8s} {'pos max':>8s} {'head p95':>9s} {'head max':>9s} "
+    print(f"  {'slice':8s} {'n':>5s} {'skip':>4s} {'found':>6s} {'pos p95':>8s} {'pos max':>8s} {'head p95':>9s} {'head max':>9s} "
           f"{'PSNR':>6s} {'car':>6s} {'bg':>6s}  verdict")
     for k, s in out.items():
-        print(f"  {k:8s} {s['n']:5d} {100 * s['found']:5.1f}% {s['pos_p95']:8.3f} {s['pos_max']:8.3f} {s['head_p95']:9.1f} "
-              f"{s['head_max']:9.1f} {s['psnr']:6.1f} {s['psnr_car']:6.1f} {s['psnr_bg']:6.1f}  {'PASS' if s['pass'] else 'FAIL'}")
+        v = "PASS" if s["pass"] else ("INVALID" if not s.get("valid", True) else "FAIL")
+        print(f"  {k:8s} {s['n']:5d} {s['skip']:4d} {100 * s['found']:5.1f}% {s['pos_p95']:8.3f} {s['pos_max']:8.3f} {s['head_p95']:9.1f} "
+              f"{s['head_max']:9.1f} {s['psnr']:6.1f} {s['psnr_car']:6.1f} {s['psnr_bg']:6.1f}  {v}")
     return out
 
 
@@ -167,6 +179,8 @@ def main():
         pe.append(math.hypot(po[0] - s.x, po[1] - s.y))
         he.append(abs(math.degrees((po[2] - s.theta + math.pi) % (2 * math.pi) - math.pi)))
     pe, he = np.array(pe), np.array(he)
+    print(f"Unreadable originals (estimator > {READABLE_DEG:.0f}° off the true heading; left out of the check): "
+          f"{int((he > READABLE_DEG).sum())} of {len(he)}")
     print(f"Estimator on {len(frames)} original val Frames vs true State: "
           f"position median {np.median(pe):.3f} / p95 {np.percentile(pe, 95):.3f} / max {pe.max():.3f} m; "
           f"heading median {np.median(he):.1f} / p95 {np.percentile(he, 95):.1f} / max {he.max():.1f}°")

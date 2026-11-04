@@ -1,7 +1,7 @@
 # Architecture and training objective
 
 Labels: wayfinder:grilling, wayfinder:prototype
-Status: open
+Status: closed
 Assignee: mgrue
 Blocked by: 01-torch-on-mac.md, 04-car-visibility-check.md
 Parent: ../MAP.md
@@ -50,4 +50,30 @@ Check: a chosen architecture (layer table, parameter count), loss with weights, 
 
 - Run E (2026-11-04, KL 1e-3, λ 30, 2 residual blocks per stage, 3.17 M params, 41 min): clean — found 100%, pos p95 / max 0.15 / 0.35 m, head p95 / max **9.7 / 35.3°**, car PSNR 36.4; noisy — head p95 / max 10.1 / 36.2°. Fails on heading max only, because of **a single Frame** (val episode 240, tick 0, off the Route): it is the only one of 4096 over 25° in both clean and noisy, and the next worst are 24°, 23° and 22°. p99 is 15°. Against the true State, that Frame's reconstruction is 41.5° off. `section` and `fast` pass.
 
-**Status:** design decided (2026-11-03); round 1 and run E done (2026-11-04); E misses by one Frame, decision pending.
+- Run E, 12,000 steps (89 min, same seed): clean — found 100%, pos p95 / max 0.12 / 0.26 m, head p95 / max 8.0 / 31.4°, car PSNR 38.3. The one Frame over 30° (val episode 223, tick 7) is reconstructed 0.0° from the true heading; the estimator misreads the original. This led to the **ticket 04 amendment** (Frames whose original the estimator misreads by > 20° are left out; exactly 1 of 4096). All runs re-scored under it (`--eval-only`, same model weights):
+
+  | Run | skip | pos p95 / max (m) | head p95 / max (°) | car PSNR | clean / noisy |
+  |---|---|---|---|---|---|
+  | A | 1 | 1.79 / ∞ (found 14.5%) | 180 / 180 | 12.1 | FAIL / FAIL |
+  | B | 1 | 0.21 / 0.39 | 12.2 / 28.6 | 35.7 | FAIL / FAIL |
+  | C | 1 | 0.19 / 0.43 | 11.5 / 38.0 | 35.8 | FAIL / FAIL |
+  | D | 1 | 0.18 / 0.36 | 10.9 / 31.7 | 35.7 | FAIL / FAIL |
+  | **E, 12k steps** | 1 | **0.12 / 0.26** | **8.0 / 24.7** | **38.3** | **PASS / PASS** (noisy: 0.12 / 0.31 m, 8.2 / 25.4°) |
+
+**Resolution (2026-11-04):** run **E** is the only variant that passes, clean and noisy.
+- **Network** (`prototypes/vae_proto.py`, `VAE(blocks=2)`), 3,166,435 params; Res = (GroupNorm, SiLU, 3×3 conv) × 2 + skip; GroupNorm groups = min(32, c/4); no attention; nearest-neighbour upsampling, no transposed convs:
+
+  | Encoder | out | Decoder | out |
+  |---|---|---|---|
+  | 3×3 conv 3 → 32 (no Res at 64×64) | 64×64×32 | 3×3 conv 16 → 128, 2 × Res | 8×8×128 |
+  | 3×3 conv stride 2 → 64, 2 × Res | 32×32×64 | up ×2, 3×3 conv → 128, 2 × Res | 16×16×128 |
+  | 3×3 conv stride 2 → 128, 2 × Res | 16×16×128 | up ×2, 3×3 conv → 64, 2 × Res | 32×32×64 |
+  | 3×3 conv stride 2 → 128, 2 × Res | 8×8×128 | up ×2, 3×3 conv → 32 | 64×64×32 |
+  | GroupNorm, SiLU, 1×1 conv → 32 (16 μ + 16 log σ², clamped −30 … 20) | 8×8×32 | GroupNorm, SiLU, 3×3 conv → 3 | 64×64×3 |
+
+  This refines Q3: the stride-2 conv comes before the stage's residual blocks, and the 64×64 stage has no residual block (ticket 01 speed).
+- **Loss:** L1 on pixels in [−1, 1], weight 1 + **λ = 30** in the car region (car mask grown by 1 px), weighted mean; plus **KL weight 1e-3** per latent value; z sampled in training only. Without car weighting (A) the car is erased.
+- **Latent normalisation:** per-channel mean / std of the mean latents over 65,536 train Frames, stored with the weights (Q4). E's spreads range 0.08–1.01: channels 6 and 15 are nearly unused (std 0.11, 0.08), so normalisation scales them ~10×; the noisy-latent test passed regardless — ticket 05/06 to keep an eye on it.
+- **Prototype recipe that produced it** (input to ticket 05): AdamW lr 1e-3, weight decay 1e-4, 200 warm-up steps, cosine to 0.05×; batch 128 random train Frames; 12,000 steps (1.54 M Frames ≈ 1.06 × the train Frames); 89 min on MPS at ≈ 290 Frames/s; seed 0. At 6,000 steps E missed (head p95 9.7°, max 35.3° on a readable Frame), so the step count matters.
+- **Known weak spot:** off the Route (`kerb`, 51 Frames) head p95 17° — thin recovery data (Step 3 §13); report it in Steps 8 / 10, not a gate. Colour Probes degrade heavily (the decoder repaints training colours), as expected for Step 10.
+- Outputs: `prototypes/out/vae_A … vae_E/` (metrics.json, contact.png, log.csv; model.pt gitignored).
