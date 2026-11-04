@@ -2,7 +2,7 @@
 
 Labels: wayfinder:task
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-torch-on-mac.md, 02-package-layout-and-checkpoints.md, 03-architecture-and-objective.md, 04-car-visibility-check.md, 05-training-recipe.md, 06-latents-for-windows.md, 07-api-cli-tests.md
 Parent: ../MAP.md
 
