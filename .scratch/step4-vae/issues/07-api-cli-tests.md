@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 02-package-layout-and-checkpoints.md, 04-car-visibility-check.md, 05-training-recipe.md, 06-latents-for-windows.md
 Parent: ../MAP.md
 
