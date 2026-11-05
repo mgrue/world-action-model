@@ -1,0 +1,418 @@
+{
+  "name": "wam-v1",
+  "created": "2026-11-05T05:16:56+00:00",
+  "source_run": "runs/wam/20261104-1928-v1",
+  "config": {
+    "d": 256,
+    "depth": 8,
+    "mlp_ratio": 3.0,
+    "objective": "flow",
+    "video_stream": true,
+    "video_loss_weight": 1.0,
+    "action_loss_weight": 1.0,
+    "t_shift": 1.65,
+    "horizon": 16,
+    "future_stride": 2,
+    "p_uncond": 0.1,
+    "action_mean": [
+      0.0,
+      0.077
+    ],
+    "action_std": [
+      0.618,
+      0.373
+    ]
+  },
+  "recipe": {
+    "steps": 32000,
+    "batch": 32,
+    "lr": 0.0003,
+    "betas": [
+      0.9,
+      0.99
+    ],
+    "weight_decay": 0.01,
+    "warmup": 1000,
+    "lr_final": 0.05,
+    "grad_clip": 1.0,
+    "ema_max": 0.999,
+    "seed": 0,
+    "data": "data/step3-v1",
+    "compressor": "vae-v1",
+    "log_every": 100,
+    "val_every": 2000,
+    "val_windows": 1024,
+    "val_seed": 0,
+    "periodic_every": 8000,
+    "resume_every": 1000,
+    "eval_windows": null,
+    "name": "v1"
+  },
+  "compressor": "vae-v1",
+  "compressor_card_sha256": "7350b277564a58e319899f1fe244328a851c807ce8ec16d34c3f54c9d1daf14d",
+  "dataset": "data/step3-v1",
+  "manifest_sha256": "90307ae1e3a55790fd0d5ec5480fe9fbcb1e43d82eab284779b8e13cac86a2cd",
+  "git_commit": "f269e4bb6f15603fbcf8448796e997720541f91d",
+  "git_dirty": false,
+  "code_sha256": {
+    "__init__.py": "c8a9e48241a6447226efd76d52de7d539a1c5ff0c1305bead8e0d674d4f22cd3",
+    "carcheck.py": "2d32597209f7e9c719ca9cc5c902069a9247d49ad03cbf897eac5eb3feef692c",
+    "compressor.py": "d635853f0f6de6b6dbaacce50be3645c379ca294232aa62ab1fd593daa4b9fea",
+    "evaluate.py": "fb4157e3465fa322238bfe17b394befd571de6fc139c811547bcce29b764e276",
+    "flow.py": "d4c88bb3d4d0d3efb134142a38cffd5eb49c045c1b174b7fca4d5c92c15b59f9",
+    "model.py": "a834cb57aa4bb9ef749d03bd8cf2a33d08f2ad93a8b878699a46a35528278b8a",
+    "policy.py": "30f1dd4039b368508af472f35cb6dd288f8fb108808841115e3b53906c332a73",
+    "runs.py": "1ae1b8ec2483025234ebbcacd48940270171254d26af389cd582600d855dbeab",
+    "train.py": "2aaafc4cf1da45fa5c08109e154e8ccc177888567212abf6630357c55e532d4f"
+  },
+  "torch_version": "2.15.0",
+  "device": "mps",
+  "metrics": {
+    "step7": {
+      "thresholds": {
+        "vs_start": 0.5,
+        "vs_min": 1.05
+      },
+      "streams": {
+        "video": {
+          "start": 1.979196,
+          "final": 0.026253,
+          "min": 0.026253,
+          "ratio_start": 0.013264477090697434,
+          "pass": true
+        },
+        "action": {
+          "start": 2.03306,
+          "final": 0.008286,
+          "min": 0.008286,
+          "ratio_start": 0.004075629838765212,
+          "pass": true
+        }
+      },
+      "verdict": "PASS"
+    },
+    "gates": {
+      "rmse_steer": {
+        "value": 0.06347367261320123,
+        "threshold": 0.15,
+        "pass": true
+      },
+      "rmse_throttle": {
+        "value": 0.019348908369784763,
+        "threshold": 0.15,
+        "pass": true
+      },
+      "commit": {
+        "value": 0.9903564453125,
+        "threshold": 0.9,
+        "pass": true
+      },
+      "follow": {
+        "value": 1.0,
+        "threshold": 0.9,
+        "pass": true
+      },
+      "any_balance": {
+        "value": 0.467529296875,
+        "threshold": [
+          0.3,
+          0.7
+        ],
+        "pass": true
+      },
+      "any_two_sided": {
+        "value": 0.99609375,
+        "threshold": 0.8,
+        "pass": true
+      }
+    },
+    "general": {
+      "n": 951,
+      "rmse_steer": 0.06347367261320123,
+      "rmse_throttle": 0.019348908369784763,
+      "rmse_steer_k4": 0.07142201740387996,
+      "rmse_throttle_k4": 0.021237255187319694,
+      "per_k_steer": [
+        0.07844138250529878,
+        0.07213308781506825,
+        0.06849379983620231,
+        0.06600594531615953,
+        0.06357415486146438,
+        0.0645570250192107,
+        0.06292691284619634,
+        0.06274342824834081,
+        0.06094064426205648,
+        0.05927313111788108,
+        0.059465281874741274,
+        0.06085947717206069,
+        0.05772806621829538,
+        0.05899348973846981,
+        0.05791933181691855,
+        0.057600402784537603
+      ],
+      "per_k_throttle": [
+        0.021088547481944706,
+        0.020128166925203902,
+        0.024735741788961794,
+        0.018502896288096343,
+        0.01649305462912526,
+        0.020153817306362485,
+        0.01641379393720995,
+        0.018781467774145202,
+        0.015860048446880003,
+        0.017747449167586388,
+        0.017878094290030264,
+        0.01599277114381307,
+        0.022070185791831124,
+        0.02038797908111585,
+        0.0239978746990058,
+        0.01628121091711883
+      ],
+      "best_of": 16,
+      "best_rmse_steer": 0.02115837598804827,
+      "best_rmse_throttle": 0.009399230221935322
+    },
+    "fork": {
+      "commit": 0.9903564453125,
+      "follow": 1.0,
+      "any_balance": 0.467529296875,
+      "any_two_sided": 0.99609375,
+      "n_windows": 512,
+      "n_samples": 16
+    },
+    "report": {
+      "baselines": {
+        "train_mean": {
+          "rmse_steer": 0.6106936336233031,
+          "rmse_throttle": 0.38653458362419946
+        },
+        "zero": {
+          "rmse_steer": 0.6106936336233031,
+          "rmse_throttle": 0.39996775695828696
+        },
+        "shuffled": {
+          "rmse_steer": 0.8608771386566744,
+          "rmse_throttle": 0.5423089274969376
+        },
+        "labels_noise_0.1": {
+          "rmse_steer": 0.0998391020567212,
+          "rmse_throttle": 0.09956270644267637
+        }
+      },
+      "imagined_future": {
+        "n": 256,
+        "per_k": {
+          "2": {
+            "imagined": {
+              "found": 1.0,
+              "pos_median": 0.055811355088613644,
+              "pos_p95": 0.1511439181398292,
+              "head_median": 2.447722222911796,
+              "head_p95": 10.050485667289756
+            },
+            "reconstruction": {
+              "found": 1.0,
+              "pos_median": 0.048305721743924175,
+              "pos_p95": 0.11632929363759371,
+              "head_median": 2.0799685929576905,
+              "head_p95": 7.941215744975799
+            },
+            "true": {
+              "found": 1.0,
+              "pos_median": 0.0,
+              "pos_p95": 0.0,
+              "head_median": 0.0,
+              "head_p95": 0.0
+            }
+          },
+          "4": {
+            "imagined": {
+              "found": 1.0,
+              "pos_median": 0.05610453357156718,
+              "pos_p95": 0.1575978603226436,
+              "head_median": 2.2727908039038085,
+              "head_p95": 8.610260915797742
+            },
+            "reconstruction": {
+              "found": 1.0,
+              "pos_median": 0.04731423979445394,
+              "pos_p95": 0.1128452793483159,
+              "head_median": 2.048218650653948,
+              "head_p95": 7.613195210052709
+            },
+            "true": {
+              "found": 1.0,
+              "pos_median": 0.0,
+              "pos_p95": 0.0,
+              "head_median": 0.0,
+              "head_p95": 0.0
+            }
+          },
+          "6": {
+            "imagined": {
+              "found": 1.0,
+              "pos_median": 0.05789716584451196,
+              "pos_p95": 0.17007988910922028,
+              "head_median": 2.5304609239679103,
+              "head_p95": 9.426494699187508
+            },
+            "reconstruction": {
+              "found": 1.0,
+              "pos_median": 0.04382408629123078,
+              "pos_p95": 0.12494287541920208,
+              "head_median": 2.291077921421583,
+              "head_p95": 7.9486011034797635
+            },
+            "true": {
+              "found": 1.0,
+              "pos_median": 0.0,
+              "pos_p95": 0.0,
+              "head_median": 0.0,
+              "head_p95": 0.0
+            }
+          },
+          "8": {
+            "imagined": {
+              "found": 1.0,
+              "pos_median": 0.053234675270436405,
+              "pos_p95": 0.14107228045485395,
+              "head_median": 2.378032551026197,
+              "head_p95": 9.92617303413704
+            },
+            "reconstruction": {
+              "found": 1.0,
+              "pos_median": 0.04294285135181365,
+              "pos_p95": 0.1096922833189285,
+              "head_median": 2.1304325101436925,
+              "head_p95": 7.8642431826935
+            },
+            "true": {
+              "found": 1.0,
+              "pos_median": 0.0,
+              "pos_p95": 0.0,
+              "head_median": 0.0,
+              "head_p95": 0.0
+            }
+          },
+          "10": {
+            "imagined": {
+              "found": 1.0,
+              "pos_median": 0.05672016946022586,
+              "pos_p95": 0.15723739654143865,
+              "head_median": 2.7983950730277938,
+              "head_p95": 9.115612950768334
+            },
+            "reconstruction": {
+              "found": 1.0,
+              "pos_median": 0.04721661089126114,
+              "pos_p95": 0.11239461508875112,
+              "head_median": 1.8335533423561565,
+              "head_p95": 7.155552570863257
+            },
+            "true": {
+              "found": 1.0,
+              "pos_median": 0.0,
+              "pos_p95": 0.0,
+              "head_median": 0.0,
+              "head_p95": 0.0
+            }
+          },
+          "12": {
+            "imagined": {
+              "found": 1.0,
+              "pos_median": 0.06092382816585887,
+              "pos_p95": 0.1697086591977452,
+              "head_median": 2.513112913473064,
+              "head_p95": 9.964506405464352
+            },
+            "reconstruction": {
+              "found": 1.0,
+              "pos_median": 0.048598975087422405,
+              "pos_p95": 0.11511079165005161,
+              "head_median": 1.8694469493397943,
+              "head_p95": 8.912351398088301
+            },
+            "true": {
+              "found": 1.0,
+              "pos_median": 0.0,
+              "pos_p95": 0.0,
+              "head_median": 0.0,
+              "head_p95": 0.0
+            }
+          },
+          "14": {
+            "imagined": {
+              "found": 1.0,
+              "pos_median": 0.06460044451892849,
+              "pos_p95": 0.18442920201974322,
+              "head_median": 2.5737650427528456,
+              "head_p95": 9.302549444858265
+            },
+            "reconstruction": {
+              "found": 1.0,
+              "pos_median": 0.042567854783013545,
+              "pos_p95": 0.10143078570359354,
+              "head_median": 1.7317731965734389,
+              "head_p95": 7.425963118009532
+            },
+            "true": {
+              "found": 1.0,
+              "pos_median": 0.0,
+              "pos_p95": 0.0,
+              "head_median": 0.0,
+              "head_p95": 0.0
+            }
+          },
+          "16": {
+            "imagined": {
+              "found": 1.0,
+              "pos_median": 0.06847964917994492,
+              "pos_p95": 0.2068946862634628,
+              "head_median": 2.3813620049198434,
+              "head_p95": 10.453405167910937
+            },
+            "reconstruction": {
+              "found": 1.0,
+              "pos_median": 0.04129684934893299,
+              "pos_p95": 0.11460812082594893,
+              "head_median": 1.970741864071464,
+              "head_p95": 8.192132538647323
+            },
+            "true": {
+              "found": 1.0,
+              "pos_median": 0.0,
+              "pos_p95": 0.0,
+              "head_median": 0.0,
+              "head_p95": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "thresholds": {
+    "gates": {
+      "rmse_steer": 0.15,
+      "rmse_throttle": 0.15,
+      "commit": 0.9,
+      "follow": 0.9,
+      "any_balance": [
+        0.3,
+        0.7
+      ],
+      "any_two_sided": 0.8
+    },
+    "commit_r": 0.3,
+    "max_entry": 12,
+    "step7": {
+      "vs_start": 0.5,
+      "vs_min": 1.05
+    }
+  },
+  "verdict": "PASS",
+  "forced": false,
+  "eval_data_sha256": "aed2713a97ed9f038b93310540473cf726b2dd2df6da55bf7e1b96b4635be4e2",
+  "resumes": [],
+  "params": 8229888,
+  "train_s": 11040.7
+}
