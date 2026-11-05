@@ -78,9 +78,14 @@ class Policy:
 
     def act(self, frame, state, instruction, *, n_samples: int = 1, n_steps: int = 10, cfg_action: float = 1.0,
             cfg_video: float = 1.0, seed: int | torch.Generator | None = None,
-            return_latents: bool = False) -> ActResult:
+            return_latents: bool = False, noise: tuple[Tensor | None, Tensor] | None = None) -> ActResult:
         """frame uint8 (64,64,3) or (B,64,64,3); state = State.features() (5,) or (B,5); instruction a name or id,
-        or a sequence of B. Each input is repeated n_samples times along the batch."""
+        or a sequence of B. Each input is repeated n_samples times along the batch.
+
+        `noise = (x_z, x_a)` of shapes (B·n_samples, K, 16, 8, 8) | None and (B·n_samples, H, 2), row-major
+        (row, sample), replaces the draw from `seed` (Step 9 SPEC §11); ignored by the regression objective."""
+        if noise is not None and seed is not None:
+            raise ValueError("pass either noise or seed, not both")
         fr = torch.from_numpy(np.ascontiguousarray(frame)) if isinstance(frame, np.ndarray) else frame
         if fr.dim() == 3:
             fr = fr[None]
@@ -96,7 +101,9 @@ class Policy:
         ins = self._instr(instruction, B)
         obs = self.compressor.encode(fr).clone()
         rep = lambda x: x.repeat_interleave(n_samples, 0)  # noqa: E731
-        if isinstance(seed, torch.Generator):
+        if noise is not None:
+            g = None
+        elif isinstance(seed, torch.Generator):
             g = seed
         else:
             g = torch.Generator()
@@ -106,8 +113,10 @@ class Policy:
                                  cfg_video=cfg_video, generator=g)
             a_n = rep(a_n)
         else:
+            if noise is not None:
+                flow.check_noise(self.config, B * n_samples, noise)
             z, a_n = self.sample(rep(obs), rep(st.to(self.device)), rep(ins), n_steps=n_steps,
-                                 cfg_action=cfg_action, cfg_video=cfg_video, generator=g)
+                                 cfg_action=cfg_action, cfg_video=cfg_video, generator=g, noise=noise)
         acts = flow.denormalise(a_n, self.config).clamp(-1, 1)
         acts = acts.reshape(B, n_samples, self.horizon, 2).float().cpu().numpy()
         lat = None
@@ -117,11 +126,12 @@ class Policy:
 
     @torch.no_grad()
     def sample(self, obs_z: Tensor, state: Tensor, instr: Tensor, *, n_steps: int = 10, cfg_action: float = 1.0,
-               cfg_video: float = 1.0, generator: torch.Generator | None = None) -> tuple[Tensor | None, Tensor]:
+               cfg_video: float = 1.0, generator: torch.Generator | None = None,
+               noise: tuple[Tensor | None, Tensor] | None = None) -> tuple[Tensor | None, Tensor]:
         """(B,16,8,8), (B,5), (B,) long → (future Latents (B,K,16,8,8) normalised | None, actions (B,H,2) normalised)."""
         return flow.sample(self.model, self.config, obs_z.to(self.device), state.to(self.device),
                            instr.to(self.device), n_steps=n_steps, cfg_action=cfg_action, cfg_video=cfg_video,
-                           generator=generator)
+                           generator=generator, noise=noise)
 
 
 # -- Checkpoints (SPEC §10) -----------------------------------------------------------------

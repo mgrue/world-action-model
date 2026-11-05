@@ -124,6 +124,24 @@ def initial_noise(cfg: ModelConfig, B: int, generator: torch.Generator | None = 
     return x_z, x_a
 
 
+def check_noise(cfg: ModelConfig, B: int, noise: tuple[Tensor | None, Tensor]) -> tuple[Tensor | None, Tensor]:
+    """Validate caller-supplied initial noise against `initial_noise(cfg, B)`'s shapes."""
+    try:
+        x_z, x_a = noise
+    except (TypeError, ValueError):
+        raise ValueError("noise must be a pair (x_z, x_a)") from None
+    want_a = (B, cfg.horizon, ACTION_DIM)
+    if x_a is None or tuple(x_a.shape) != want_a:
+        raise ValueError(f"action noise must have shape {want_a}, got {None if x_a is None else tuple(x_a.shape)}")
+    if cfg.video_stream:
+        want_z = (B, cfg.n_future, 16, 8, 8)
+        if x_z is None or tuple(x_z.shape) != want_z:
+            raise ValueError(f"video noise must have shape {want_z}, got {None if x_z is None else tuple(x_z.shape)}")
+    elif x_z is not None:
+        raise ValueError("video noise given for a model without the video Stream")
+    return x_z, x_a
+
+
 def guided(model: Callable, cfg_action: float = 1.0, cfg_video: float = 1.0) -> Callable:
     """model(obs, state, instr, x_z, x_a, t) with per-Stream classifier-free guidance:
     v = v_uc + w·(v_c − v_uc), v_uc with the Null Instruction, in one batched forward of 2B.
@@ -161,17 +179,22 @@ def euler(model: Callable, obs: Tensor, state: Tensor, instr: Tensor, x_z: Tenso
 
 @torch.no_grad()
 def sample(model: Callable, cfg: ModelConfig, obs: Tensor, state: Tensor, instr: Tensor, *, n_steps: int = 10,
-           cfg_action: float = 1.0, cfg_video: float = 1.0,
-           generator: torch.Generator | None = None) -> tuple[Tensor | None, Tensor]:
-    """(future Latents (B,K,16,8,8) normalised | None, actions (B,H,2) normalised)."""
+           cfg_action: float = 1.0, cfg_video: float = 1.0, generator: torch.Generator | None = None,
+           noise: tuple[Tensor | None, Tensor] | None = None) -> tuple[Tensor | None, Tensor]:
+    """(future Latents (B,K,16,8,8) normalised | None, actions (B,H,2) normalised).
+
+    `noise = (x_z, x_a)` as `initial_noise` returns it replaces the draw from `generator` (Step 9 SPEC §11);
+    giving both, or a wrong shape, raises ValueError. Ignored by the regression objective."""
     B, dev = obs.shape[0], obs.device
+    if noise is not None and generator is not None:
+        raise ValueError("pass either noise or generator, not both")
     if cfg.objective == "regression":
         if cfg_action != 1.0 or cfg_video != 1.0:
             raise ValueError("classifier-free guidance is not defined for objective=regression")
         ones = torch.ones(B, device=dev, dtype=obs.dtype)
         _, a = model(obs, state, instr, None, torch.zeros(B, cfg.horizon, ACTION_DIM, device=dev), ones)
         return None, a
-    x_z, x_a = initial_noise(cfg, B, generator)
+    x_z, x_a = initial_noise(cfg, B, generator) if noise is None else check_noise(cfg, B, noise)
     x_z = None if x_z is None else x_z.to(dev)
     return euler(guided(model, cfg_action, cfg_video), obs, state, instr, x_z, x_a.to(dev),
                  n_steps=n_steps, t_shift=cfg.t_shift)

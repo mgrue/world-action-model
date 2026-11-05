@@ -19,8 +19,8 @@ The full plan is in [`PLAN.md`](PLAN.md); the vocabulary (Frame, State, Window, 
 | 2 | Scripted expert with Instructions | done |
 | 3 | Dataset of expert episodes and training Windows | done |
 | 4 | Frame compressor `vae-v1` | done, Checkpoint committed |
-| 5–8 | World action model: Instruction encoding, transformer, flow-matching training, sampler | implemented; `wam-v1` not trained yet |
-| 9 | Closed-loop driving in the simulator | not started |
+| 5–8 | World action model: Instruction encoding, transformer, flow-matching training, sampler | done, Checkpoint `wam-v1` committed |
+| 9 | Closed-loop driving in the simulator | implemented; `wam-v1` gate run: FAIL (30.8 % crashes, 3.36 laps; Fork gates pass), see [`docs/step9-closed-loop.md`](docs/step9-closed-loop.md) |
 | 10–11 | Experiments, comparison with the expert | not started |
 
 ## Documentation
@@ -29,6 +29,7 @@ Plain-language explainers, for readers without a machine-learning background:
 
 - [`docs/step4-vae.md`](docs/step4-vae.md): the VAE frame compressor, what it does, how it is trained and checked.
 - [`docs/step5-8-wam.md`](docs/step5-8-wam.md): the main model, flow matching, how it is trained and the checks it must pass.
+- [`docs/step9-closed-loop.md`](docs/step9-closed-loop.md): letting the model drive, the replanning Scheme, the gates and what `wam-v1` does.
 
 The exact, buildable specifications behind each Step live in `.scratch/` (one folder per Step, each with a `SPEC.md`, the decision tickets and the prototypes that measured things):
 
@@ -37,6 +38,7 @@ The exact, buildable specifications behind each Step live in `.scratch/` (one fo
 - [`.scratch/step3-dataset/SPEC.md`](.scratch/step3-dataset/SPEC.md)
 - [`.scratch/step4-vae/SPEC.md`](.scratch/step4-vae/SPEC.md)
 - [`.scratch/step5-8-model/SPEC.md`](.scratch/step5-8-model/SPEC.md)
+- [`.scratch/step9-closed-loop/SPEC.md`](.scratch/step9-closed-loop/SPEC.md)
 
 ## Requirements
 
@@ -154,7 +156,24 @@ result.actions[0, 0]                               # (16, 2) steer, throttle in 
 policy.compressor.decode(result.latents[0, 0])     # (8, 64, 64, 3) imagined future Frames
 ```
 
-One call takes about 70 ms on an M1 Pro. Optional arguments: `n_steps` (default 10), `cfg_action` / `cfg_video` (classifier-free guidance, default off).
+One call takes about 70 ms on an M1 Pro. Optional arguments: `n_steps` (default 10), `cfg_action` / `cfg_video` (classifier-free guidance, default off), `noise=(x_z, x_a)` (supply the initial noise yourself instead of `seed`).
+
+Loading `wam-v1` warns that `src/wam/flow.py` changed since it was trained: Step 9 added the optional `noise=` entry to the sampler. The weights and the sampling maths are unchanged.
+
+### Step 9: let the model drive
+
+```sh
+uv run python -m wam.closedloop eval expert                    # reference driver: all four gates PASS (≈ 15 s)
+uv run python -m wam.closedloop eval saboteur:<name>           # zero-steer, averaged-fork, slow, wrong-branch, always-outer:
+                                                               #   each fails exactly its gate(s)
+caffeinate -i uv run python -m wam.closedloop eval wam-v1      # 120-episode gate run (≈ 46 min); exit 0 PASS, 1 FAIL
+caffeinate -i uv run python -m wam.closedloop eval wam-v1 --sweep replan       # also: cfg, samples, steps (60 dev episodes per point)
+caffeinate -i uv run python -m wam.closedloop eval wam-v1 --robustness         # 9 Stress conditions, 60 episodes each (≈ 3.5 h)
+uv run python -m wam.closedloop show wam-v1 --imagine          # watch it live (pygame); Space pause, N next, Esc quit
+uv run --group viz python -m wam.closedloop video runs/drive/<run> --episode K [--hires]   # PNG Frames + trajectory.png
+```
+
+`<driver>` is a Checkpoint name, a Run directory, `expert` or `saboteur:<name>`. Every `eval` also runs the clean expert on the same episodes as the reference row, and writes `config.json`, `episodes.jsonl`, `ticks.npz`, `metrics.json`, `report.md` and `stdout.txt` to `runs/drive/<date-time>-<name>/`. The four gates are: crashes ≤ 5 %, Fractional laps ≥ 3.5, Instruction followed ≥ 95 %, `any` outer fraction between 0.30 and 0.70. Only a default-Scheme, 120-episode gate run of `wam-v1` gets a PASS/FAIL verdict. Every other run prints the table with a reason instead. Scheme overrides: `--execute-k --n-samples --n-steps --cfg-action --cfg-video --select first|coherence --rho --seed-mode per_replan|per_episode`.
 
 ## Repository layout
 
@@ -169,11 +188,13 @@ src/wam/             models (PyTorch)
   train.py           training loop, EMA, validation, logging, resume
   evaluate.py        eval sets, Fork references, metrics, gates, contact sheet
   policy.py          Policy API (load / act / sample / promote) and the wam.policy CLI
+  drive.py           Step 9 Drivers (Policy + Scheme, expert, Saboteurs), Stress conditions, the lockstep loop
+  closedloop.py      Step 9 Evaluation sets, metrics, gates, sweeps, robustness report and the wam.closedloop CLI
 tests/               pytest suite (CPU, tiny models and a tiny recorded dataset)
 checkpoints/         promoted, frozen Checkpoints with their card.json (committed)
 docs/                plain-language explainers
 .scratch/            per-Step specs, decision tickets, prototypes and measurements
-data/, runs/         recorded dataset and training Runs (gitignored)
+data/, runs/         recorded dataset, training Runs and closed-loop Runs (gitignored)
 ```
 
 ## Credits
