@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 03-replanning-scheme.md, 05-metrics-and-gates.md, 06-robustness-report.md
 Parent: ../MAP.md
 
