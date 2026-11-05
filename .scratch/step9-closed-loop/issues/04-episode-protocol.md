@@ -15,3 +15,6 @@ Which episodes is a driver evaluated on?
 - Same seeds for every driver (expert and Policies) so rows are paired.
 
 Check: the seed list rule, counts, and expected runtime; confidence intervals for the headline rates at that count.
+
+## Comments
+- From 01: per-episode outcomes are very variable at the current skill level (crash ticks 19–822); 60 episodes at execute 4 took 121 s wall, 24 at execute 1 took 420 s (lockstep, MPS). Expert parity holds with the Step 3 start rule + `sample_render_params`.

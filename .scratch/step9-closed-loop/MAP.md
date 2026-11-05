@@ -33,15 +33,17 @@ PLAN.md check to satisfy, turned into measurable gates: "Each tick: feed current
 ## Decisions so far
 
 <!-- one line per closed ticket -->
+
+- [Does wam-v1 drive at all?](issues/01-does-it-drive.md) — drives and follows Instructions, but doesn't correct small lateral errors: naive loop (execute 4) crashes 82 % (expert 0 %), execute 1 → 29 %; crashes at the straight→end-arc entry, not the Fork; compounding error. Step 9 stays evaluation only: gates from what a good driver needs, `wam-v1` may fail; act 64 ms at B = 1, 19 ms/Chunk batched
 - [How chunked policies are executed in practice](issues/02-chunk-execution-practice.md) — execute 25–50 % of a Chunk then replan; never average Chunks (it picks the Island at the Fork); keep branches across replans training-free via shared noise or best-of-N backward-coherence selection (BID), with RTC-style inpainting as a fallback
 
 ## Not yet specified
 
-- **If `wam-v1` fails the closed-loop gates:** which remedies stay inside this spec (loop/sampler-side: replan rate, sample selection, CFG, ensembling) and at what point the answer becomes "retrain" (out of scope). Sharpens once the prototype and the replanning ticket have numbers.
+_(empty — every known question has a ticket)_
 
 ## Out of scope
 
-- Retraining or new data for the model (DAgger, noise-injected recordings, fork oversampling) — a new map if Step 9 shows it is needed.
+- Retraining or new data for the model (DAgger, noise-injected recordings / DART, fork oversampling) — [Does wam-v1 drive at all?](issues/01-does-it-drive.md) showed it is needed (no lateral-error correction); it becomes a separate follow-up map ("teach the model to recover", `wam-v2`) after this spec. Step 9 only evaluates.
 - The Step 10 experiment analyses and the Step 11 comparison write-up themselves — this spec only makes them one command each.
 - Real-time / wall-clock constraints: the simulator waits for the model.
 - Changing the simulator, expert, dataset or Checkpoints.

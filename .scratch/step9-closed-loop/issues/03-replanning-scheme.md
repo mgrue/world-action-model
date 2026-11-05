@@ -26,3 +26,4 @@ Check: one default scheme with its measured closed-loop numbers vs the alternati
   5. Only if flip-flops remain: hard-prefix inpainting in a custom Euler loop (`prototypes/`).
 - Never average samples or Chunks. Measure the flip-flop rate on the approach to the Fork under `any`.
 - Driver parameters to expose: `execute_k`, `n_samples`, `select` (first|coherence) with `rho`, `seed_mode` (per_replan|per_episode), `n_steps`, `cfg_action`, `cfg_video`.
+- From 01: execute-k dominates — crash 100 / 96 / 79 / 29 % at k = 16 / 8 / 4 / 1 (24 episodes); the Fork is not where it fails, lateral drift on the top straight → end arc is. Expect k = 1 (or 2) as default; test whether best-of-N selection (and fixed per-episode seed) changes crashes, not just Fork flips. Cost at k = 1: 900 batched calls per episode set (≈ 7 min for 24 episodes lockstep). Results are reported, not tuned to pass: Step 9 is evaluation only.
