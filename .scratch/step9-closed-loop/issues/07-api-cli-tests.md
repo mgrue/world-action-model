@@ -18,3 +18,4 @@ Check: module/API/CLI listing, output files, test list, manual acceptance proced
 
 ## Comments
 - From 03: per-episode-row noise (generator seeded by (episode seed, Tick), sample i offset) bypasses `Policy.act`'s single generator — the driver needs a sampling entry point with per-row initial noise (e.g. `flow.euler` + `flow.guided` with caller-supplied noise, as in `prototypes/replan_variants.py`), or an `act` argument for it. Selection state (previous Chunk) lives in the driver.
+- From 04: Evaluation set constants (`dev` `+0…99_999`, `gate` `+100_000 + k` × 120, `robustness` `+200_000 + k`) and the episode list builder (`COMBINATIONS[k % 6]`) live in the driver module; `--episodes N` (multiple of 6) runs a prefix, verdict only at the full gate set (report says "not a gate run" otherwise).

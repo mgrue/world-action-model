@@ -141,3 +141,9 @@ _Avoid_: trajectory, plan, window
 The flow-matching time t ∈ [0, 1] of a Token: x_t = t·noise + (1 − t)·clean, so 0 is clean and 1 is pure noise. One per Window for the predicted Streams; always 0 for the conditioning Streams.
 _Avoid_: timestep (when meaning the value), sigma, diffusion step
 
+
+## Closed loop
+
+**Evaluation set**:
+One of the disjoint closed-loop episode lists `dev`, `gate`, `robustness`, each a fixed seed range inside `CLOSED_LOOP_SEED_BLOCK`; episode k of a set plays Instruction × Direction combination k mod 6. Every driver runs the same list. Only the `gate` set produces a verdict, and it is never used for tuning.
+_Avoid_: Split (that is recorded data), test set, validation set
