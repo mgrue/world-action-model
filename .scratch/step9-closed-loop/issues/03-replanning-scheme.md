@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling, wayfinder:prototype
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-does-it-drive.md, 02-chunk-execution-practice.md
 Parent: ../MAP.md
 
