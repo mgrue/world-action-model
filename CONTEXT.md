@@ -159,3 +159,11 @@ _Avoid_: dithering, wobble
 **Saboteur**:
 A deliberately broken driver (the clean Expert with one defect) used to prove a gate fails when it should.
 _Avoid_: baseline, negative control (when meaning these drivers)
+
+**Stress condition**:
+One report-only change to the gate-style episode used by the robustness report: a colour Probe, the `wide_fork` Track, an off-distribution start (`offset_start`), or Pushes. `none` is the unstressed baseline on the same seeds.
+_Avoid_: test case, scenario
+
+**Push**:
+A loop-side disturbance: for a few Ticks a fixed steer offset (random sign) is added to whatever the driver commands; the driver is not told, and recovers from the State it finds. The simulator itself is unchanged.
+_Avoid_: perturbation (too broad), burst (that is the Expert's recording noise)

@@ -1,0 +1,142 @@
+{
+ "none": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 228,
+   "wrong_passages": 0,
+   "outer_fraction": 0.68
+  },
+  "frac_laps": 4.117598694722244
+ },
+ "wide_fork": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 0.0,
+   "laps_mean": 3.25,
+   "laps_min": 3,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 222,
+   "wrong_passages": 0,
+   "outer_fraction": 0.6891891891891891
+  },
+  "frac_laps": 4.059995657655776
+ },
+ "push 0.3 8": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 228,
+   "wrong_passages": 0,
+   "outer_fraction": 0.68
+  },
+  "frac_laps": 4.115064066615064
+ },
+ "push 0.4 8": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 228,
+   "wrong_passages": 0,
+   "outer_fraction": 0.68
+  },
+  "frac_laps": 4.108945461184817
+ },
+ "push 0.5 8": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 226,
+   "wrong_passages": 0,
+   "outer_fraction": 0.68
+  },
+  "frac_laps": 4.099081454152502
+ },
+ "push 0.6 10": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 1.0,
+   "laps_mean": 0.45,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.0,
+   "scored_passages": 38,
+   "wrong_passages": 0,
+   "outer_fraction": 0.5625
+  },
+  "frac_laps": 0.9223905275703764
+ },
+ "push 0.8 10": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 1.0,
+   "laps_mean": 0.18333333333333332,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.0,
+   "scored_passages": 19,
+   "wrong_passages": 0,
+   "outer_fraction": 0.7142857142857143
+  },
+  "frac_laps": 0.5969319907689811
+ },
+ "offset (1.0, 1.5) (10, 20)": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 0.11666666666666667,
+   "laps_mean": 3.533333333333333,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.8833333333333333,
+   "scored_passages": 192,
+   "wrong_passages": 0,
+   "outer_fraction": 0.6285714285714286
+  },
+  "frac_laps": 3.6430277823373345
+ },
+ "offset (1.0, 1.5) (10, 15)": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 0.11666666666666667,
+   "laps_mean": 3.533333333333333,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.8833333333333333,
+   "scored_passages": 194,
+   "wrong_passages": 0,
+   "outer_fraction": 0.6285714285714286
+  },
+  "frac_laps": 3.6419281511856694
+ },
+ "offset (1.0, 1.25) (10, 15)": {
+  "summary": {
+   "episodes": 60,
+   "crash_rate": 0.1,
+   "laps_mean": 3.6,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.9,
+   "scored_passages": 202,
+   "wrong_passages": 0,
+   "outer_fraction": 0.6285714285714286
+  },
+  "frac_laps": 3.7149919564937393
+ }
+}
