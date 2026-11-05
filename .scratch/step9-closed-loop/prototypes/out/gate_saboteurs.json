@@ -1,0 +1,226 @@
+{
+ "expert": {
+  "summary": {
+   "episodes": 120,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 447,
+   "wrong_passages": 0,
+   "outer_fraction": 0.4342105263157895,
+   "frac_laps_mean": 4.119574087609184
+  },
+  "gates": {
+   "crash": true,
+   "laps": true,
+   "followed": true,
+   "balance": true
+  },
+  "crash_ci": [
+   0.0,
+   0.031020271055929513
+  ],
+  "followed_ci": [
+   0.9689797289440706,
+   1.0
+  ]
+ },
+ "zero-steer": {
+  "summary": {
+   "episodes": 120,
+   "crash_rate": 1.0,
+   "laps_mean": 0.0,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.0,
+   "scored_passages": 0,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "frac_laps_mean": 0.05428082788310186
+  },
+  "gates": {
+   "crash": false,
+   "laps": false,
+   "followed": true,
+   "balance": false
+  },
+  "crash_ci": [
+   0.9689797289440706,
+   1.0
+  ],
+  "followed_ci": [
+   0.9689797289440706,
+   1.0
+  ]
+ },
+ "averaged-fork": {
+  "summary": {
+   "episodes": 120,
+   "crash_rate": 0.3333333333333333,
+   "laps_mean": 2.683333333333333,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.6666666666666666,
+   "scored_passages": 295,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "frac_laps_mean": 2.8935759789992193
+  },
+  "gates": {
+   "crash": false,
+   "laps": false,
+   "followed": true,
+   "balance": false
+  },
+  "crash_ci": [
+   0.255316102227993,
+   0.4216906547906502
+  ],
+  "followed_ci": [
+   0.9689797289440706,
+   1.0
+  ]
+ },
+ "slow(v_cap=5)": {
+  "summary": {
+   "episodes": 120,
+   "crash_rate": 0.0,
+   "laps_mean": 3.0,
+   "laps_min": 3,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 360,
+   "wrong_passages": 0,
+   "outer_fraction": 0.4344262295081967,
+   "frac_laps_mean": 3.3862880232592056
+  },
+  "gates": {
+   "crash": true,
+   "laps": false,
+   "followed": true,
+   "balance": true
+  },
+  "crash_ci": [
+   0.0,
+   0.031020271055929513
+  ],
+  "followed_ci": [
+   0.9689797289440706,
+   1.0
+  ]
+ },
+ "slow(v_cap=6)": {
+  "summary": {
+   "episodes": 120,
+   "crash_rate": 0.0,
+   "laps_mean": 3.0,
+   "laps_min": 3,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 408,
+   "wrong_passages": 0,
+   "outer_fraction": 0.43661971830985913,
+   "frac_laps_mean": 3.84776879489659
+  },
+  "gates": {
+   "crash": true,
+   "laps": true,
+   "followed": true,
+   "balance": true
+  },
+  "crash_ci": [
+   0.0,
+   0.031020271055929513
+  ],
+  "followed_ci": [
+   0.9689797289440706,
+   1.0
+  ]
+ },
+ "slow(v_cap=7)": {
+  "summary": {
+   "episodes": 120,
+   "crash_rate": 0.0,
+   "laps_mean": 3.2666666666666666,
+   "laps_min": 3,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 429,
+   "wrong_passages": 0,
+   "outer_fraction": 0.42857142857142855,
+   "frac_laps_mean": 3.988974568085479
+  },
+  "gates": {
+   "crash": true,
+   "laps": true,
+   "followed": true,
+   "balance": true
+  },
+  "crash_ci": [
+   0.0,
+   0.031020271055929513
+  ],
+  "followed_ci": [
+   0.9689797289440706,
+   1.0
+  ]
+ },
+ "wrong-branch": {
+  "summary": {
+   "episodes": 120,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 0.3333333333333333,
+   "success_rate": 0.3333333333333333,
+   "scored_passages": 447,
+   "wrong_passages": 295,
+   "outer_fraction": 0.4342105263157895,
+   "frac_laps_mean": 4.119492172296803
+  },
+  "gates": {
+   "crash": true,
+   "laps": true,
+   "followed": false,
+   "balance": true
+  },
+  "crash_ci": [
+   0.0,
+   0.031020271055929513
+  ],
+  "followed_ci": [
+   0.255316102227993,
+   0.4216906547906502
+  ]
+ },
+ "always-outer": {
+  "summary": {
+   "episodes": 120,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 447,
+   "wrong_passages": 0,
+   "outer_fraction": 1.0,
+   "frac_laps_mean": 4.119734659565533
+  },
+  "gates": {
+   "crash": true,
+   "laps": true,
+   "followed": true,
+   "balance": false
+  },
+  "crash_ci": [
+   0.0,
+   0.031020271055929513
+  ],
+  "followed_ci": [
+   0.9689797289440706,
+   1.0
+  ]
+ }
+}

@@ -38,6 +38,7 @@ PLAN.md check to satisfy, turned into measurable gates: "Each tick: feed current
 - [How chunked policies are executed in practice](issues/02-chunk-execution-practice.md) — execute 25–50 % of a Chunk then replan; never average Chunks (it picks the Island at the Fork); keep branches across replans training-free via shared noise or best-of-N backward-coherence selection (BID), with RTC-style inpainting as a fallback
 - [Replanning scheme](issues/03-replanning-scheme.md) — default: execute 1 of 16, fresh noise per replan seeded by (episode seed, Tick), best of 4 by coherence with the previous Chunk (ρ 0.9), 4 Euler steps, no CFG, never average Chunks; on 24 dev episodes ≈ 25 % crashes, `any` flips halved; crashes set by execute-k, flips by selection; ≈ 9 min per 24 episodes batched
 - [Episode protocol](issues/04-episode-protocol.md) — fixed Evaluation sets in the closed-loop seed block (dev `+0…99_999`, gate `+100_000 + k` × 120 = 20 per combination, robustness `+200_000 + k`), combination k mod 6, same list for every driver; Step 3 start rule + colour jitter, 900 Ticks; ≈ 46 min per Policy gate run; 25 % crash → 95 % CI 18–33 %, 0 % → ≤ 3 %
+- [Metrics and gates](issues/05-metrics-and-gates.md) — 4 absolute gates for `wam-v1` (crash ≤ 5 %, Fractional laps ≥ 3.5, Instruction followed ≥ 95 %, `any` balance 0.30–0.70), all else report-only (incl. Fork flips; best of 4 stays); clean expert = reference row, Step 10 variants "not gated"; sweeps on dev seeds, never a verdict; five Saboteurs each fail exactly their gate, expert passes
 
 ## Not yet specified
 

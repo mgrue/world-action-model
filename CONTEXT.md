@@ -147,3 +147,15 @@ _Avoid_: timestep (when meaning the value), sigma, diffusion step
 **Evaluation set**:
 One of the disjoint closed-loop episode lists `dev`, `gate`, `robustness`, each a fixed seed range inside `CLOSED_LOOP_SEED_BLOCK`; episode k of a set plays Instruction × Direction combination k mod 6. Every driver runs the same list. Only the `gate` set produces a verdict, and it is never used for tuning.
 _Avoid_: Split (that is recorded data), test set, validation set
+
+**Fractional laps**:
+`progress_m / track.length_m` at the end of an episode — the Lap count without the floor. The Step 9 laps gate uses it; the integer Lap count stays in reports.
+_Avoid_: laps (when meaning the fractional value)
+
+**Fork flip**:
+A Passage approach where the replans in the 1–12 Ticks before fork entry select Chunks that classify (against the Fork references) to different Branches. Report-only in Step 9.
+_Avoid_: dithering, wobble
+
+**Saboteur**:
+A deliberately broken driver (the clean Expert with one defect) used to prove a gate fails when it should.
+_Avoid_: baseline, negative control (when meaning these drivers)
