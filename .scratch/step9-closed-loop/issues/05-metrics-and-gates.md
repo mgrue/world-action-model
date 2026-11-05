@@ -18,3 +18,4 @@ Check: a metric/gate table with thresholds and the run that validates them.
 
 ## Comments
 - From 01: Step 9 is evaluation only — set gates from what a good driver must achieve (expert row as reference), not from `wam-v1`'s numbers; `wam-v1` failing is an accepted outcome. Useful diagnostics seen in 01: distance off the centreline (mean / p95), Crash location (Station, fork section or not), and executed action vs `Expert.control` on visited States (the off-distribution action error) — consider them for the report.
+- From 03: Fork flip metric used in the prototype — per Passage approach, classify every replan's selected Chunk 1–12 Ticks before entry against `evaluate.fork_references` (Direction-normalised steer), flip if they disagree; default scheme ≈ 14/32 `any` approaches flip, never into the Island. Decide whether flips are a gate, report-only, or justify best of 8 (≈ 2× cost).

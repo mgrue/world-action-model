@@ -15,3 +15,6 @@ How is the driver packaged?
 - CPU tests with tiny/untrained Policies and the expert (parity with Step 2), runtime < 60 s; manual acceptance steps.
 
 Check: module/API/CLI listing, output files, test list, manual acceptance procedure.
+
+## Comments
+- From 03: per-episode-row noise (generator seeded by (episode seed, Tick), sample i offset) bypasses `Policy.act`'s single generator — the driver needs a sampling entry point with per-row initial noise (e.g. `flow.euler` + `flow.guided` with caller-supplied noise, as in `prototypes/replan_variants.py`), or an `act` argument for it. Selection state (previous Chunk) lives in the driver.

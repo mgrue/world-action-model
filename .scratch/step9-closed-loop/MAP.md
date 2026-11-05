@@ -36,6 +36,7 @@ PLAN.md check to satisfy, turned into measurable gates: "Each tick: feed current
 
 - [Does wam-v1 drive at all?](issues/01-does-it-drive.md) — drives and follows Instructions, but doesn't correct small lateral errors: naive loop (execute 4) crashes 82 % (expert 0 %), execute 1 → 29 %; crashes at the straight→end-arc entry, not the Fork; compounding error. Step 9 stays evaluation only: gates from what a good driver needs, `wam-v1` may fail; act 64 ms at B = 1, 19 ms/Chunk batched
 - [How chunked policies are executed in practice](issues/02-chunk-execution-practice.md) — execute 25–50 % of a Chunk then replan; never average Chunks (it picks the Island at the Fork); keep branches across replans training-free via shared noise or best-of-N backward-coherence selection (BID), with RTC-style inpainting as a fallback
+- [Replanning scheme](issues/03-replanning-scheme.md) — default: execute 1 of 16, fresh noise per replan seeded by (episode seed, Tick), best of 4 by coherence with the previous Chunk (ρ 0.9), 4 Euler steps, no CFG, never average Chunks; on 24 dev episodes ≈ 25 % crashes, `any` flips halved; crashes set by execute-k, flips by selection; ≈ 9 min per 24 episodes batched
 
 ## Not yet specified
 
