@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-does-it-drive.md
 Parent: ../MAP.md
 
