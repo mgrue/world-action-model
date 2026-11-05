@@ -33,6 +33,7 @@ PLAN.md check to satisfy, turned into measurable gates: "Each tick: feed current
 ## Decisions so far
 
 <!-- one line per closed ticket -->
+- [How chunked policies are executed in practice](issues/02-chunk-execution-practice.md) — execute 25–50 % of a Chunk then replan; never average Chunks (it picks the Island at the Fork); keep branches across replans training-free via shared noise or best-of-N backward-coherence selection (BID), with RTC-style inpainting as a fallback
 
 ## Not yet specified
 
