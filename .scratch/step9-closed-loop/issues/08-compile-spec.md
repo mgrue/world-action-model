@@ -2,7 +2,7 @@
 
 Labels: wayfinder:task
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-does-it-drive.md, 02-chunk-execution-practice.md, 03-replanning-scheme.md, 04-episode-protocol.md, 05-metrics-and-gates.md, 06-robustness-report.md, 07-api-cli-tests.md
 Parent: ../MAP.md
 
