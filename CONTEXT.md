@@ -167,3 +167,11 @@ _Avoid_: test case, scenario
 **Push**:
 A loop-side disturbance: for a few Ticks a fixed steer offset (random sign) is added to whatever the driver commands; the driver is not told, and recovers from the State it finds. The simulator itself is unchanged.
 _Avoid_: perturbation (too broad), burst (that is the Expert's recording noise)
+
+**Driver**:
+Anything the closed loop can run: each Tick it gets the Frames, States and Infos of its episodes and returns one Action per episode. A Policy is wrapped as a Driver by the replanning Scheme; the Expert and the Saboteurs are Drivers directly.
+_Avoid_: agent, controller (when meaning the closed-loop interface)
+
+**Scheme**:
+The loop-side settings that turn a Policy into a Driver: actions executed per replan, samples and selection, Euler steps, guidance, noise seeding. The Step 9 default is execute 1, best of 4 by coherence, 4 steps, no guidance, per-replan noise.
+_Avoid_: config (too broad), strategy

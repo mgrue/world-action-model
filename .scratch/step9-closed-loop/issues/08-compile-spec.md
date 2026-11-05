@@ -11,3 +11,6 @@ Parent: ../MAP.md
 Assemble `SPEC.md` from the closed tickets, with a clarifications section for gaps filled while compiling.
 
 Check: `SPEC.md` covers every closed ticket and the PLAN Step 9 check; an agent could implement it without follow-up questions.
+
+## Comments
+- All decision tickets (01–07) are closed; vocabulary added to `CONTEXT.md` (Evaluation set, Fractional laps, Fork flip, Saboteur, Stress condition, Push, Driver, Scheme). Prototypes to cite as references: `prototypes/replan_variants.py` (Scheme), `prototypes/gate_saboteurs.py` (gates), `prototypes/stress_calibrate.py` (Stress conditions). Deliverables include the explainer `docs/step9-closed-loop.md`.
