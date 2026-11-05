@@ -1,7 +1,7 @@
 # Step 9 closed-loop evaluation spec
 
 Labels: wayfinder:map
-Status: open
+Status: closed
 Tracker: local markdown — tickets are files in `issues/`, each with `Parent: ../MAP.md`.
 Ticket header fields: `Labels:` (wayfinder type), `Status:` (open/closed), `Assignee:` (empty = unclaimed — the claim), `Blocked by:` (ticket files; unblocked when all are closed).
 Frontier = open, unblocked, unassigned tickets in `issues/`.
@@ -41,6 +41,7 @@ PLAN.md check to satisfy, turned into measurable gates: "Each tick: feed current
 - [Metrics and gates](issues/05-metrics-and-gates.md) — 4 absolute gates for `wam-v1` (crash ≤ 5 %, Fractional laps ≥ 3.5, Instruction followed ≥ 95 %, `any` balance 0.30–0.70), all else report-only (incl. Fork flips; best of 4 stays); clean expert = reference row, Step 10 variants "not gated"; sweeps on dev seeds, never a verdict; five Saboteurs each fail exactly their gate, expert passes
 - [Robustness report](issues/06-robustness-report.md) — report-only, 9 Stress conditions on the same 60 robustness seeds (`none`, 4 colour Probes, `wide_fork`, `offset_start` 1.0–1.5 m / 10–20°, additive Pushes ±0.4 and ±0.5 × 8 Ticks every 4 s); calibrated on the clean expert (pushes cliff at ±0.6; ≈ 10 % of offset starts unrecoverable even for it → also report crashes on expert-survived episodes); ≈ 3.5 h per Policy
 - [Package layout, API, CLI, outputs and tests](issues/07-api-cli-tests.md) — `wam/drive.py` (Driver protocol, Scheme, PolicyDriver/ExpertDriver/Saboteurs, lockstep `run_episodes`) + `wam/closedloop.py` (sets, conditions, metrics, gates, report, CLI `eval|show|video`); `noise=` added to `flow.sample`/`Policy.act`; Run dir `runs/drive/…` with episodes.jsonl + ticks.npz; CPU test list < 60 s; manual acceptance incl. full `wam-v1` gate run and explainer `docs/step9-closed-loop.md`
+- [Compile SPEC.md](issues/08-compile-spec.md) — [`SPEC.md`](SPEC.md) written: 17 sections, every ticket linked, 10 clarifications made while compiling (expert reference row in every eval, shadow-expert exclusion near the Fork, Fork references from `data/step3-v1` with hidden `--data`, …)
 
 ## Not yet specified
 
