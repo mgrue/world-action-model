@@ -1,0 +1,1988 @@
+{
+ "expert": {
+  "outer/cw": {
+   "episodes": 10,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 38,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "lat_mean_m": 0.0,
+   "lat_p95_m": 0.0,
+   "crash_in_fork_section": 0
+  },
+  "outer/ccw": {
+   "episodes": 10,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 36,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "lat_mean_m": 0.0,
+   "lat_p95_m": 0.0,
+   "crash_in_fork_section": 0
+  },
+  "inner/cw": {
+   "episodes": 10,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 37,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "lat_mean_m": 0.0,
+   "lat_p95_m": 0.0,
+   "crash_in_fork_section": 0
+  },
+  "inner/ccw": {
+   "episodes": 10,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 38,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "lat_mean_m": 0.0,
+   "lat_p95_m": 0.0,
+   "crash_in_fork_section": 0
+  },
+  "any/cw": {
+   "episodes": 10,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 39,
+   "wrong_passages": 0,
+   "outer_fraction": 0.5897435897435898,
+   "lat_mean_m": 0.0,
+   "lat_p95_m": 0.0,
+   "crash_in_fork_section": 0
+  },
+  "any/ccw": {
+   "episodes": 10,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 38,
+   "wrong_passages": 0,
+   "outer_fraction": 0.3684210526315789,
+   "lat_mean_m": 0.0,
+   "lat_p95_m": 0.0,
+   "crash_in_fork_section": 0
+  },
+  "all/all": {
+   "episodes": 60,
+   "crash_rate": 0.0,
+   "laps_mean": 4.0,
+   "laps_min": 4,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 1.0,
+   "scored_passages": 226,
+   "wrong_passages": 0,
+   "outer_fraction": 0.4805194805194805,
+   "lat_mean_m": 0.0,
+   "lat_p95_m": 0.0,
+   "crash_in_fork_section": 0
+  }
+ },
+ "expert_parity": [
+  60,
+  60
+ ],
+ "wam_k4": {
+  "outer/cw": {
+   "episodes": 10,
+   "crash_rate": 0.9,
+   "laps_mean": 1.1,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.1,
+   "scored_passages": 12,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "lat_mean_m": 0.4414150445040022,
+   "lat_p95_m": 1.0706915444796543,
+   "crash_in_fork_section": 0
+  },
+  "outer/ccw": {
+   "episodes": 10,
+   "crash_rate": 0.8,
+   "laps_mean": 1.3,
+   "laps_min": 0,
+   "instruction_followed_rate": 0.9,
+   "success_rate": 0.2,
+   "scored_passages": 13,
+   "wrong_passages": 1,
+   "outer_fraction": null,
+   "lat_mean_m": 0.3691491761955251,
+   "lat_p95_m": 0.9084546835868955,
+   "crash_in_fork_section": 2
+  },
+  "inner/cw": {
+   "episodes": 10,
+   "crash_rate": 0.9,
+   "laps_mean": 1.0,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.1,
+   "scored_passages": 10,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "lat_mean_m": 0.47617011001047094,
+   "lat_p95_m": 1.1262954698955212,
+   "crash_in_fork_section": 1
+  },
+  "inner/ccw": {
+   "episodes": 10,
+   "crash_rate": 0.9,
+   "laps_mean": 1.2,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.1,
+   "scored_passages": 11,
+   "wrong_passages": 0,
+   "outer_fraction": null,
+   "lat_mean_m": 0.4491240866434818,
+   "lat_p95_m": 1.103529146564233,
+   "crash_in_fork_section": 3
+  },
+  "any/cw": {
+   "episodes": 10,
+   "crash_rate": 0.8,
+   "laps_mean": 1.1,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.2,
+   "scored_passages": 13,
+   "wrong_passages": 0,
+   "outer_fraction": 0.15384615384615385,
+   "lat_mean_m": 0.4761467653928769,
+   "lat_p95_m": 1.1007948646599943,
+   "crash_in_fork_section": 0
+  },
+  "any/ccw": {
+   "episodes": 10,
+   "crash_rate": 0.6,
+   "laps_mean": 2.3,
+   "laps_min": 0,
+   "instruction_followed_rate": 1.0,
+   "success_rate": 0.4,
+   "scored_passages": 24,
+   "wrong_passages": 0,
+   "outer_fraction": 0.25,
+   "lat_mean_m": 0.383349290652457,
+   "lat_p95_m": 0.9896769116562949,
+   "crash_in_fork_section": 1
+  },
+  "all/all": {
+   "episodes": 60,
+   "crash_rate": 0.8166666666666667,
+   "laps_mean": 1.3333333333333333,
+   "laps_min": 0,
+   "instruction_followed_rate": 0.9833333333333333,
+   "success_rate": 0.18333333333333332,
+   "scored_passages": 83,
+   "wrong_passages": 1,
+   "outer_fraction": 0.21621621621621623,
+   "lat_mean_m": 0.4264002747675411,
+   "lat_p95_m": 1.058688691562043,
+   "crash_in_fork_section": 7
+  }
+ },
+ "episodes": [
+  {
+   "seed": 9000000,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 305,
+    "station_m": 72.48313513484963,
+    "branch": null,
+    "lat": 1.1530211638040901,
+    "x": 3.429544996278708,
+    "y": 24.190821673356293,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 305,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 130.61571717524063,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000001,
+   "instruction": "outer",
+   "direction": "ccw",
+   "crash": {
+    "tick": 366,
+    "station_m": 45.9181715816524,
+    "branch": null,
+    "lat": 1.216978673902449,
+    "x": 29.668661027705646,
+    "y": 28.691295049145307,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 366,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 151.57438335200703,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer",
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000002,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 75,
+    "station_m": 73.04812311602687,
+    "branch": null,
+    "lat": 1.1599831331900592,
+    "x": 3.129284714220935,
+    "y": 23.612083714054833,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 75,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 30.91166487717536,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000003,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 66,
+    "station_m": 35.38658001376288,
+    "branch": null,
+    "lat": 1.2192117564444782,
+    "x": 37.68407871078412,
+    "y": 20.781940278170655,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 66,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 26.8773770928303,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000004,
+   "instruction": "any",
+   "direction": "cw",
+   "crash": {
+    "tick": 206,
+    "station_m": 69.81246081967048,
+    "branch": null,
+    "lat": 1.2945971841118709,
+    "x": 5.273243123782963,
+    "y": 26.674518358015767,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 206,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 78.53985354214221,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000005,
+   "instruction": "any",
+   "direction": "ccw",
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 362.4537375500753,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "outer",
+     "inner",
+     "outer"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000006,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 556,
+    "station_m": 57.643204452310925,
+    "branch": null,
+    "lat": 1.4088681946350974,
+    "x": 17.850841987967662,
+    "y": 26.09113180536491,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 556,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 2,
+    "progress_m": 231.2428710371596,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer",
+     "outer",
+     "outer"
+    ],
+    "scored": 2,
+    "correct": 2,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000007,
+   "instruction": "outer",
+   "direction": "ccw",
+   "crash": {
+    "tick": 104,
+    "station_m": 19.20019955382137,
+    "branch": "inner",
+    "lat": 0.6624558861772114,
+    "x": 25.163036800207884,
+    "y": 13.38236539427915,
+    "in_fork_section": true
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 104,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 48.95407891910154,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000008,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 175,
+    "station_m": 3.653442213002352,
+    "branch": "outer",
+    "lat": 0.6273478459560285,
+    "x": 14.748294137040002,
+    "y": 11.65316619321106,
+    "in_fork_section": true
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 175,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 73.85854126991924,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000009,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 410,
+    "station_m": 46.586419049246494,
+    "branch": null,
+    "lat": 1.3216715875833955,
+    "x": 28.90762739103209,
+    "y": 28.821671587583396,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 410,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 158.0876660064905,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner"
+    ],
+    "scored": 2,
+    "correct": 2,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000010,
+   "instruction": "any",
+   "direction": "cw",
+   "crash": {
+    "tick": 95,
+    "station_m": 71.30315246551666,
+    "branch": null,
+    "lat": 1.2078535479309436,
+    "x": 4.136458339949138,
+    "y": 25.358965319253326,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 95,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 40.77254904261915,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000011,
+   "instruction": "any",
+   "direction": "ccw",
+   "crash": {
+    "tick": 474,
+    "station_m": 46.77901352187297,
+    "branch": null,
+    "lat": 1.2467006798669118,
+    "x": 28.715032918405615,
+    "y": 28.746700679866912,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 474,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 2,
+    "progress_m": 196.1038204736127,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner"
+    ],
+    "scored": 2,
+    "correct": 2,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000012,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 281,
+    "station_m": 72.05877785901066,
+    "branch": null,
+    "lat": 1.234193312961754,
+    "x": 3.609974083234341,
+    "y": 24.655496727280322,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 281,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 119.78946682607864,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000013,
+   "instruction": "outer",
+   "direction": "ccw",
+   "crash": {
+    "tick": 413,
+    "station_m": 18.306365213879676,
+    "branch": "inner",
+    "lat": 0.7798958827770861,
+    "x": 24.403943249375484,
+    "y": 14.080442398426149,
+    "in_fork_section": true
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 413,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 2,
+    "progress_m": 176.66645719542782,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer",
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 0,
+    "instruction_followed": false,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000014,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 85,
+    "station_m": 70.8300408869418,
+    "branch": null,
+    "lat": 1.195878277953954,
+    "x": 4.496893003076673,
+    "y": 25.77303199467649,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 85,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 39.875931771496376,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000015,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 319,
+    "station_m": 21.664709982220543,
+    "branch": "outer",
+    "lat": 0.8353360218558097,
+    "x": 27.961567796939175,
+    "y": 11.528913884291248,
+    "in_fork_section": true
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 319,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 125.7252300069309,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000016,
+   "instruction": "any",
+   "direction": "cw",
+   "crash": {
+    "tick": 52,
+    "station_m": 43.25628782326221,
+    "branch": null,
+    "lat": 1.2121411054284386,
+    "x": 32.64530345474416,
+    "y": 27.912848119591718,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 52,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 16.185040116970136,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000017,
+   "instruction": "any",
+   "direction": "ccw",
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 363.3873475468067,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "outer",
+     "outer"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000018,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 384,
+    "station_m": 75.88420418486588,
+    "branch": null,
+    "lat": 1.257625128574669,
+    "x": 2.254262010723825,
+    "y": 20.45614133289368,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 384,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 157.79857472937823,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer",
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000019,
+   "instruction": "outer",
+   "direction": "ccw",
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 358.3076355117678,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer",
+     "outer",
+     "outer",
+     "outer"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000020,
+   "instruction": "inner",
+   "direction": "cw",
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 374.26869584781593,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "inner",
+     "inner"
+    ],
+    "scored": 3,
+    "correct": 3,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000021,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 530,
+    "station_m": 43.38746109730293,
+    "branch": null,
+    "lat": 1.2101633635399962,
+    "x": 32.5055631190587,
+    "y": 27.9735796878096,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 530,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 2,
+    "progress_m": 227.61462187371006,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000022,
+   "instruction": "any",
+   "direction": "cw",
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 393.05647045314134,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "inner",
+     "inner"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000023,
+   "instruction": "any",
+   "direction": "ccw",
+   "crash": {
+    "tick": 565,
+    "station_m": 47.040940374690244,
+    "branch": null,
+    "lat": 1.304389471132584,
+    "x": 28.453106065588344,
+    "y": 28.804389471132584,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 565,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 2,
+    "progress_m": 239.5035050958944,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "inner"
+    ],
+    "scored": 2,
+    "correct": 2,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000024,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 213,
+    "station_m": 81.56755629055368,
+    "branch": null,
+    "lat": 1.1720328035995748,
+    "x": 4.39905566614964,
+    "y": 14.375794558507325,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 213,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 84.47069560825159,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000025,
+   "instruction": "outer",
+   "direction": "ccw",
+   "crash": {
+    "tick": 19,
+    "station_m": 75.4924074594835,
+    "branch": null,
+    "lat": 1.5589349447901077,
+    "x": 5.091250383412481,
+    "y": 20.618814963226477,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 19,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 8.347334574211288,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000026,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 349,
+    "station_m": 72.86638017442439,
+    "branch": null,
+    "lat": 1.2041604207708123,
+    "x": 3.179423615390465,
+    "y": 23.82112465682564,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 349,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 142.40110360989098,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000027,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 63,
+    "station_m": 21.306773827782408,
+    "branch": "outer",
+    "lat": 0.855950852549694,
+    "x": 27.68473313555267,
+    "y": 11.422740002278713,
+    "in_fork_section": true
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 63,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 21.11220817551247,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000028,
+   "instruction": "any",
+   "direction": "cw",
+   "crash": {
+    "tick": 408,
+    "station_m": 77.3250043493293,
+    "branch": null,
+    "lat": 1.222520314402049,
+    "x": 2.362818497413155,
+    "y": 18.782849094595072,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 408,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 166.50388626969777,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner"
+    ],
+    "scored": 2,
+    "correct": 2,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000029,
+   "instruction": "any",
+   "direction": "ccw",
+   "crash": {
+    "tick": 40,
+    "station_m": 50.33055609588134,
+    "branch": null,
+    "lat": 1.3183379054600586,
+    "x": 25.163490344397243,
+    "y": 28.818337905460062,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 40,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 17.764467920432388,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000030,
+   "instruction": "outer",
+   "direction": "cw",
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 384.1809845929311,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer",
+     "outer",
+     "outer",
+     "outer"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000031,
+   "instruction": "outer",
+   "direction": "ccw",
+   "crash": {
+    "tick": 220,
+    "station_m": 44.197526494590036,
+    "branch": null,
+    "lat": 1.1976803621989032,
+    "x": 31.62182973199654,
+    "y": 28.293108737946188,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 220,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 87.08368898730201,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000032,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 452,
+    "station_m": 74.3596295556427,
+    "branch": null,
+    "lat": 1.2074992831629736,
+    "x": 2.574919333541064,
+    "y": 22.19967259607961,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 452,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 2,
+    "progress_m": 182.46385479508453,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner"
+    ],
+    "scored": 2,
+    "correct": 2,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000033,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 698,
+    "station_m": 21.61253042572298,
+    "branch": "outer",
+    "lat": 0.8876191198943864,
+    "x": 27.933822410973768,
+    "y": 11.46719619901041,
+    "in_fork_section": true
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 698,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 3,
+    "progress_m": 290.4490279839224,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "inner"
+    ],
+    "scored": 3,
+    "correct": 3,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000034,
+   "instruction": "any",
+   "direction": "cw",
+   "crash": {
+    "tick": 174,
+    "station_m": 76.95722678370943,
+    "branch": null,
+    "lat": 1.2151432665239013,
+    "x": 2.320886050005892,
+    "y": 19.20835412016827,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 174,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 70.37762739581902,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer"
+    ],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000035,
+   "instruction": "any",
+   "direction": "ccw",
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 365.8457432983252,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "outer",
+     "inner",
+     "inner"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000036,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 238,
+    "station_m": 67.91395065309692,
+    "branch": null,
+    "lat": 1.2467875463430511,
+    "x": 7.148361827917226,
+    "y": 27.85309975565171,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 238,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 95.69994542618781,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000037,
+   "instruction": "outer",
+   "direction": "ccw",
+   "crash": {
+    "tick": 68,
+    "station_m": 73.41284915252392,
+    "branch": null,
+    "lat": 1.1943313881294353,
+    "x": 2.931125371149404,
+    "y": 23.23800254949003,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 68,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 23.631725582706398,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000038,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 524,
+    "station_m": 72.84481100873386,
+    "branch": null,
+    "lat": 1.2173152064875266,
+    "x": 3.178642321520758,
+    "y": 23.849408847414438,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 524,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 2,
+    "progress_m": 218.38534286623343,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner"
+    ],
+    "scored": 2,
+    "correct": 2,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000039,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 320,
+    "station_m": 43.65246346265649,
+    "branch": null,
+    "lat": 1.229568794219392,
+    "x": 32.22887565519864,
+    "y": 28.11047059894027,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 320,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 133.92930285473977,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000040,
+   "instruction": "any",
+   "direction": "cw",
+   "crash": {
+    "tick": 249,
+    "station_m": 69.13844814417247,
+    "branch": null,
+    "lat": 1.2641762277048572,
+    "x": 5.913031210280521,
+    "y": 27.136773324317303,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 249,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 114.72242005226892,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000041,
+   "instruction": "any",
+   "direction": "ccw",
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 373.66374515594913,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "inner",
+     "inner"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000042,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 71,
+    "station_m": 72.60802593065915,
+    "branch": null,
+    "lat": 1.1796929399532103,
+    "x": 3.3372650335872684,
+    "y": 24.076709747626065,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 71,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 33.86047488170178,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000043,
+   "instruction": "outer",
+   "direction": "ccw",
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 369.1053617063931,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer",
+     "outer",
+     "outer",
+     "outer"
+    ],
+    "scored": 3,
+    "correct": 3,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000044,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 208,
+    "station_m": 74.5045505440027,
+    "branch": null,
+    "lat": 1.1935474789870977,
+    "x": 2.5475558082835064,
+    "y": 22.033212963592614,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 208,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 81.79288766298734,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000045,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 59,
+    "station_m": 45.047242574702956,
+    "branch": null,
+    "lat": 1.1915616490472305,
+    "x": 30.666284993179985,
+    "y": 28.530342210057682,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 59,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 28.338239719199684,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000046,
+   "instruction": "any",
+   "direction": "cw",
+   "crash": {
+    "tick": 52,
+    "station_m": 74.1239300927375,
+    "branch": null,
+    "lat": 1.1470427447731544,
+    "x": 2.706183196700544,
+    "y": 22.4462115736873,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 52,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 21.494976122208612,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000047,
+   "instruction": "any",
+   "direction": "ccw",
+   "crash": {
+    "tick": 199,
+    "station_m": 18.711472244235807,
+    "branch": "outer",
+    "lat": 0.7783176088126733,
+    "x": 24.694464045218666,
+    "y": 11.288653931281805,
+    "in_fork_section": true
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 199,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 77.6848669233581,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000048,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 240,
+    "station_m": 67.2993909870228,
+    "branch": null,
+    "lat": 1.2138963380329668,
+    "x": 7.816076454495825,
+    "y": 28.111388305732174,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 240,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 94.3993659767306,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000049,
+   "instruction": "outer",
+   "direction": "ccw",
+   "crash": {
+    "tick": 176,
+    "station_m": 42.2908420007789,
+    "branch": null,
+    "lat": 1.2358687821072132,
+    "x": 33.64353485883299,
+    "y": 27.39952616003202,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 176,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 71.35079073409113,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000050,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 214,
+    "station_m": 70.04387019825005,
+    "branch": null,
+    "lat": 1.2229903626563354,
+    "x": 5.11834441886123,
+    "y": 26.441792335356254,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 214,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 84.80100037982645,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000051,
+   "instruction": "inner",
+   "direction": "ccw",
+   "crash": {
+    "tick": 63,
+    "station_m": 34.40832816773152,
+    "branch": null,
+    "lat": 1.2080136917211026,
+    "x": 37.70082611742747,
+    "y": 19.646266584142506,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 63,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 26.726212757672826,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000052,
+   "instruction": "any",
+   "direction": "cw",
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 374.18441482285266,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "outer",
+     "outer"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000053,
+   "instruction": "any",
+   "direction": "ccw",
+   "crash": {
+    "tick": 822,
+    "station_m": 46.22685260048075,
+    "branch": null,
+    "lat": 1.2321169157890397,
+    "x": 29.311023244867794,
+    "y": 28.726576096738114,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 822,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 3,
+    "progress_m": 332.0755960165922,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "outer",
+     "inner"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000054,
+   "instruction": "outer",
+   "direction": "cw",
+   "crash": {
+    "tick": 102,
+    "station_m": 82.42102221235156,
+    "branch": null,
+    "lat": 1.2228325735105636,
+    "x": 5.045700879876869,
+    "y": 13.625509424777718,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "cw",
+    "steps": 102,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 44.407069360912764,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000055,
+   "instruction": "outer",
+   "direction": "ccw",
+   "crash": {
+    "tick": 457,
+    "station_m": 46.09583133501309,
+    "branch": null,
+    "lat": 1.1885205624017863,
+    "x": 29.461103295497963,
+    "y": 28.676276465982372,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "outer",
+    "direction": "ccw",
+    "steps": 457,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 2,
+    "progress_m": 186.96337152658288,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "outer",
+     "outer"
+    ],
+    "scored": 2,
+    "correct": 2,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000056,
+   "instruction": "inner",
+   "direction": "cw",
+   "crash": {
+    "tick": 270,
+    "station_m": 71.14981323022448,
+    "branch": null,
+    "lat": 1.180781865481761,
+    "x": 4.268443323274799,
+    "y": 25.48106910229323,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "inner",
+    "direction": "cw",
+    "steps": 270,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 114.57767379643262,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000057,
+   "instruction": "inner",
+   "direction": "ccw",
+   "score": {
+    "instruction": "inner",
+    "direction": "ccw",
+    "steps": 900,
+    "termination": "max_steps",
+    "crashed": false,
+    "laps": 4,
+    "progress_m": 356.0015096086871,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner",
+     "inner",
+     "inner",
+     "inner"
+    ],
+    "scored": 4,
+    "correct": 4,
+    "instruction_followed": true,
+    "success": true
+   }
+  },
+  {
+   "seed": 9000058,
+   "instruction": "any",
+   "direction": "cw",
+   "crash": {
+    "tick": 273,
+    "station_m": 57.97858548271278,
+    "branch": null,
+    "lat": 1.4184890371729217,
+    "x": 17.515460957565804,
+    "y": 26.081510962827085,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "cw",
+    "steps": 273,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 1,
+    "progress_m": 112.86973255877993,
+    "wrong_way_ticks": 0,
+    "passages": [
+     "inner"
+    ],
+    "scored": 1,
+    "correct": 1,
+    "instruction_followed": true,
+    "success": false
+   }
+  },
+  {
+   "seed": 9000059,
+   "instruction": "any",
+   "direction": "ccw",
+   "crash": {
+    "tick": 22,
+    "station_m": 24.405832161391693,
+    "branch": null,
+    "lat": 0.9029427144221679,
+    "x": 30.640551495918302,
+    "y": 11.758759980979754,
+    "in_fork_section": false
+   },
+   "score": {
+    "instruction": "any",
+    "direction": "ccw",
+    "steps": 22,
+    "termination": "crash",
+    "crashed": true,
+    "laps": 0,
+    "progress_m": 6.018082098315713,
+    "wrong_way_ticks": 0,
+    "passages": [],
+    "scored": 0,
+    "correct": 0,
+    "instruction_followed": true,
+    "success": false
+   }
+  }
+ ],
+ "wall_s": 120.99456833291333,
+ "calls": 225,
+ "t_act_s": 118.49820999987423
+}

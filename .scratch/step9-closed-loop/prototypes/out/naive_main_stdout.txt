@@ -1,0 +1,71 @@
+  comp = C.load(comp_name, device, root=root)
+
+expert (same seeds; lat columns not measured)
+  combo       eps  crash  laps minlap follow success wrongP outer%   lat lat95 fkCr
+  outer/cw     10   0.00  4.00      4   1.00    1.00      0         0.00  0.00    0
+  outer/ccw    10   0.00  4.00      4   1.00    1.00      0         0.00  0.00    0
+  inner/cw     10   0.00  4.00      4   1.00    1.00      0         0.00  0.00    0
+  inner/ccw    10   0.00  4.00      4   1.00    1.00      0         0.00  0.00    0
+  any/cw       10   0.00  4.00      4   1.00    1.00      0     59  0.00  0.00    0
+  any/ccw      10   0.00  4.00      4   1.00    1.00      0     37  0.00  0.00    0
+  all/all      60   0.00  4.00      4   1.00    1.00      0     48  0.00  0.00    0
+expert parity with run_episode: 60/60
+
+wam-v1, k=4, n_samples=1, 60 episodes; wall 121 s, 225 act calls, 118 s in act
+  combo       eps  crash  laps minlap follow success wrongP outer%   lat lat95 fkCr
+  outer/cw     10   0.90  1.10      0   1.00    0.10      0         0.44  1.07    0
+  outer/ccw    10   0.80  1.30      0   0.90    0.20      1         0.37  0.91    2
+  inner/cw     10   0.90  1.00      0   1.00    0.10      0         0.48  1.13    1
+  inner/ccw    10   0.90  1.20      0   1.00    0.10      0         0.45  1.10    3
+  any/cw       10   0.80  1.10      0   1.00    0.20      0     15  0.48  1.10    0
+  any/ccw      10   0.60  2.30      0   1.00    0.40      0     25  0.38  0.99    1
+  all/all      60   0.82  1.33      0   0.98    0.18      1     22  0.43  1.06    7
+  crash seed 9000000 outer/cw: tick 305 station 72.5 branch None fork-section False lat 1.15
+  crash seed 9000001 outer/ccw: tick 366 station 45.9 branch None fork-section False lat 1.22
+  crash seed 9000002 inner/cw: tick 75 station 73.0 branch None fork-section False lat 1.16
+  crash seed 9000003 inner/ccw: tick 66 station 35.4 branch None fork-section False lat 1.22
+  crash seed 9000004 any/cw: tick 206 station 69.8 branch None fork-section False lat 1.29
+  crash seed 9000006 outer/cw: tick 556 station 57.6 branch None fork-section False lat 1.41
+  crash seed 9000007 outer/ccw: tick 104 station 19.2 branch inner fork-section True lat 0.66
+  crash seed 9000008 inner/cw: tick 175 station 3.7 branch outer fork-section True lat 0.63
+  crash seed 9000009 inner/ccw: tick 410 station 46.6 branch None fork-section False lat 1.32
+  crash seed 9000010 any/cw: tick 95 station 71.3 branch None fork-section False lat 1.21
+  crash seed 9000011 any/ccw: tick 474 station 46.8 branch None fork-section False lat 1.25
+  crash seed 9000012 outer/cw: tick 281 station 72.1 branch None fork-section False lat 1.23
+  crash seed 9000013 outer/ccw: tick 413 station 18.3 branch inner fork-section True lat 0.78
+  crash seed 9000014 inner/cw: tick 85 station 70.8 branch None fork-section False lat 1.20
+  crash seed 9000015 inner/ccw: tick 319 station 21.7 branch outer fork-section True lat 0.84
+  crash seed 9000016 any/cw: tick 52 station 43.3 branch None fork-section False lat 1.21
+  crash seed 9000018 outer/cw: tick 384 station 75.9 branch None fork-section False lat 1.26
+  crash seed 9000021 inner/ccw: tick 530 station 43.4 branch None fork-section False lat 1.21
+  crash seed 9000023 any/ccw: tick 565 station 47.0 branch None fork-section False lat 1.30
+  crash seed 9000024 outer/cw: tick 213 station 81.6 branch None fork-section False lat 1.17
+  crash seed 9000025 outer/ccw: tick 19 station 75.5 branch None fork-section False lat 1.56
+  crash seed 9000026 inner/cw: tick 349 station 72.9 branch None fork-section False lat 1.20
+  crash seed 9000027 inner/ccw: tick 63 station 21.3 branch outer fork-section True lat 0.86
+  crash seed 9000028 any/cw: tick 408 station 77.3 branch None fork-section False lat 1.22
+  crash seed 9000029 any/ccw: tick 40 station 50.3 branch None fork-section False lat 1.32
+  crash seed 9000031 outer/ccw: tick 220 station 44.2 branch None fork-section False lat 1.20
+  crash seed 9000032 inner/cw: tick 452 station 74.4 branch None fork-section False lat 1.21
+  crash seed 9000033 inner/ccw: tick 698 station 21.6 branch outer fork-section True lat 0.89
+  crash seed 9000034 any/cw: tick 174 station 77.0 branch None fork-section False lat 1.22
+  crash seed 9000036 outer/cw: tick 238 station 67.9 branch None fork-section False lat 1.25
+  crash seed 9000037 outer/ccw: tick 68 station 73.4 branch None fork-section False lat 1.19
+  crash seed 9000038 inner/cw: tick 524 station 72.8 branch None fork-section False lat 1.22
+  crash seed 9000039 inner/ccw: tick 320 station 43.7 branch None fork-section False lat 1.23
+  crash seed 9000040 any/cw: tick 249 station 69.1 branch None fork-section False lat 1.26
+  crash seed 9000042 outer/cw: tick 71 station 72.6 branch None fork-section False lat 1.18
+  crash seed 9000044 inner/cw: tick 208 station 74.5 branch None fork-section False lat 1.19
+  crash seed 9000045 inner/ccw: tick 59 station 45.0 branch None fork-section False lat 1.19
+  crash seed 9000046 any/cw: tick 52 station 74.1 branch None fork-section False lat 1.15
+  crash seed 9000047 any/ccw: tick 199 station 18.7 branch outer fork-section True lat 0.78
+  crash seed 9000048 outer/cw: tick 240 station 67.3 branch None fork-section False lat 1.21
+  crash seed 9000049 outer/ccw: tick 176 station 42.3 branch None fork-section False lat 1.24
+  crash seed 9000050 inner/cw: tick 214 station 70.0 branch None fork-section False lat 1.22
+  crash seed 9000051 inner/ccw: tick 63 station 34.4 branch None fork-section False lat 1.21
+  crash seed 9000053 any/ccw: tick 822 station 46.2 branch None fork-section False lat 1.23
+  crash seed 9000054 outer/cw: tick 102 station 82.4 branch None fork-section False lat 1.22
+  crash seed 9000055 outer/ccw: tick 457 station 46.1 branch None fork-section False lat 1.19
+  crash seed 9000056 inner/cw: tick 270 station 71.1 branch None fork-section False lat 1.18
+  crash seed 9000058 any/cw: tick 273 station 58.0 branch None fork-section False lat 1.42
+  crash seed 9000059 any/ccw: tick 22 station 24.4 branch None fork-section False lat 0.90
