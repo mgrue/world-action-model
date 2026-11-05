@@ -46,6 +46,8 @@ VARIANTS = {
     "k1_cfg2": dict(k=1, cfg_action=2.0),
     "k4": dict(k=4),
     "k4_coh8": dict(k=4, n=8, select="coherence"),
+    "k1_coh4_s4": dict(k=1, n=4, select="coherence", n_steps=4),
+    "k1_coh4_s4_cfg2": dict(k=1, n=4, select="coherence", n_steps=4, cfg_action=2.0),
 }
 
 

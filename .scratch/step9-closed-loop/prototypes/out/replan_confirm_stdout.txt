@@ -1,0 +1,14 @@
+
+k1_coh4_s4 {'k': 1, 'n': 4, 'select': 'coherence', 'n_steps': 4}: wall 558 s, 900 calls
+  combo       eps  crash  laps minlap follow success wrongP outer%   lat lat95 fkCr
+  all/all      24   0.25  3.08      0   0.96    0.71      1     40  0.30  0.75    0
+  any/cw        4   0.25  3.75      3   1.00    0.75      0     47  0.32  0.80    0
+  any/ccw       4   0.00  4.00      4   1.00    1.00      0     33  0.28  0.70    0
+  fork approaches 82, flips 14 (any: 14/32), uncommitted replans 8/984
+
+k1_coh4_s4_cfg2 {'k': 1, 'n': 4, 'select': 'coherence', 'n_steps': 4, 'cfg_action': 2.0}: wall 995 s, 900 calls
+  combo       eps  crash  laps minlap follow success wrongP outer%   lat lat95 fkCr
+  all/all      24   0.33  2.88      0   1.00    0.67      0     29  0.29  0.74    0
+  any/cw        4   0.00  4.00      4   1.00    1.00      0     31  0.25  0.65    0
+  any/ccw       4   0.00  4.00      4   1.00    1.00      0     27  0.27  0.68    0
+  fork approaches 76, flips 16 (any: 16/34), uncommitted replans 5/912
