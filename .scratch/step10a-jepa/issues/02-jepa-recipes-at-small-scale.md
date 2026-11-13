@@ -1,7 +1,7 @@
 # JEPA recipes at small scale
 
 Labels: wayfinder:research
-Status: open
+Status: closed
 Assignee: mgrue
 Blocked by:
 Parent: ../MAP.md
@@ -20,3 +20,8 @@ What do I-JEPA (and the follow-up literature) say about the choices `jepa-v1` mu
 Check: a findings file `research/02-jepa-recipes-at-small-scale.md` with sources, a recommended starting recipe for ticket 03 (with the numbers to try) and a list of collapse diagnostics for ticket 04.
 
 ## Comments
+
+- Resolved (research). Start from I-JEPA's official recipe translated to the 8 × 8 grid: 4 target blocks of 3×3 / 3×4 / 4×3 (scale 0.15–0.2, aspect 0.75–1.5), one context block at scale 0.85–1.0 minus the targets; LayerNorm'd last-layer targets from an EMA encoder (0.996 → 1.0, linear); a predictor narrower than the encoder (96 wide, 4 deep), RoPE mask tokens; no regulariser in the baseline. Two surprises:
+  - **Car bias must be partial.** A target that covers the whole car hides it from the context, which teaches the encoder to drop the car. Cover some of the car's patches and leave at least one visible.
+  - **A fixed Track allows a position-only degenerate solution.** The collapse checks must measure variation across Frames at a fixed position and car contrast, not only global channel std.
+  - Diagnostics and alternatives are listed in [research](../research/02-jepa-recipes-at-small-scale.md).

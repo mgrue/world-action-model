@@ -32,6 +32,7 @@ PLAN.md check to satisfy, made measurable: "a linear probe on frozen features re
 ## Decisions so far
 
 <!-- one line per closed ticket -->
+- [JEPA recipes at small scale](issues/02-jepa-recipes-at-small-scale.md) — I-JEPA defaults translate to 4 targets of 3×3–4×3 patches, a ~0.9-scale context minus the targets, LayerNorm'd EMA (0.996→1.0) targets and a predictor 96 wide, 4 deep; car bias must be partial (whole-car targets hide it from the context); collapse checks need across-Frame and car-contrast measures, because a fixed Track allows position-only features
 
 ## Not yet specified
 
