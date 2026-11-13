@@ -121,6 +121,10 @@ _Avoid_: embedding, code, feature map
 A promoted, frozen set of trained weights with its provenance card, stored under `checkpoints/<name>/` and referred to by name (e.g. `vae-v1`); never overwritten.
 _Avoid_: model file, weights (when meaning the named, frozen artefact)
 
+**Pose readout**:
+A small model fitted on top of a frozen frame encoder's feature grid (all 8×8 cells, not pooled) to read the car's x, y and heading, scored against the true State; it measures what the encoder keeps, not what it draws. The **MLP readout** gates an encoder; the **linear readout** (ridge regression) is reported only.
+_Avoid_: probe, linear probe (a Probe is a world change)
+
 **Run**:
 One training run's scratch directory under `runs/` (config, logs, metrics, contact sheet, final weights); only a Checkpoint promoted from it is used by later Steps.
 _Avoid_: experiment, job

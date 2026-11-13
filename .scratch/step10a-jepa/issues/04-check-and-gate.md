@@ -19,3 +19,4 @@ When does `jepa-v1` PASS, and what is only reported?
 Check: a written gate with numbers, the evaluation set, and the report table layout; the ticket-03 prototype result scored against it if available.
 
 ## Comments
+- From 01: the gate uses the **MLP readout** (definition in [01](01-linear-probe-on-vae-v1.md)); `vae-v1` reference: pos p95 0.24 / max 2.7 m, head p95 1.7 / max 15° — passes the Step 4 p95 bar, fails its max limits. Decide absolute vs relative, whether max limits apply (or p99 instead), and measure the MLP readout's seed spread (fit seeds 0–2) before fixing thresholds. Ridge is report-only.

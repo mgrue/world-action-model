@@ -19,3 +19,4 @@ What do the later WAM switch and the comparison rely on from `jepa-v1`?
 Check: the API signatures, the Checkpoint file list and card fields, and a fake-input test showing a `jepa-v1`-shaped grid fits the WAM `patchify` path with only the in/out widths changed.
 
 ## Comments
+- From 01: the Pose readout (MLP gate + ridge report, [01](01-linear-probe-on-vae-v1.md)) is the reusable component: fit on a frozen encoder's grid, save, apply (later also to predicted future grids). Input is the un-pooled C×8×8 grid.

@@ -21,3 +21,4 @@ What exactly is `jepa-v1`, and does it reach the probe bar in prototype runs?
 Check: one architecture and objective with measured prototype numbers (probe position/heading p95, collapse diagnostics, params, Frames/s, training minutes) vs the alternatives tried.
 
 ## Comments
+- From 01: score prototypes with the MLP readout from [01](01-linear-probe-on-vae-v1.md) (`prototypes/probe_vae.py`, ≈ 1.5 min); `vae-v1` reference pos p95 0.24 m, head p95 1.7°. Ridge alongside as the explicitness diagnostic.
