@@ -22,3 +22,4 @@ Check: one architecture and objective with measured prototype numbers (probe pos
 
 ## Comments
 - From 01: score prototypes with the MLP readout from [01](01-linear-probe-on-vae-v1.md) (`prototypes/probe_vae.py`, ≈ 1.5 min); `vae-v1` reference pos p95 0.24 m, head p95 1.7°. Ridge alongside as the explicitness diagnostic.
+- From 02 ([research](../research/02-jepa-recipes-at-small-scale.md)): start from its recommended recipe; PLAN's "at least half of the rectangles cover the car" works against I-JEPA (targets are cut from the context, so a fully hidden car is unpredictable and gets dropped). Car bias should be partial: a target covers some car patches while at least one stays visible. Compare bias off / partial / full-cover.
