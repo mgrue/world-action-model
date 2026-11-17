@@ -2,7 +2,7 @@
 
 Labels: wayfinder:grilling, wayfinder:prototype
 Status: open
-Assignee:
+Assignee: mgrue
 Blocked by: 01-linear-probe-on-vae-v1.md, 02-jepa-recipes-at-small-scale.md
 Parent: ../MAP.md
 
