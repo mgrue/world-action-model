@@ -3,7 +3,7 @@
 Labels: wayfinder:grilling
 Status: open
 Assignee:
-Blocked by: 03-architecture-and-objective.md
+Blocked by: 03-architecture-and-objective.md, 09-jepa-objective-that-keeps-the-car.md
 Parent: ../MAP.md
 
 ## Question

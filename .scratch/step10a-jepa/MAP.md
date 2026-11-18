@@ -34,6 +34,7 @@ PLAN.md check to satisfy, made measurable: "a linear probe on frozen features re
 <!-- one line per closed ticket -->
 - [Linear probe on vae-v1 Latents](issues/01-linear-probe-on-vae-v1.md) — a linear readout can't read the car from `vae-v1` (ridge pos p95 1.45 m, head 22°) but a small MLP can (0.24 m, 1.7°); named **Pose readout**: the fixed MLP readout on the un-pooled grid gates, ridge is reported; same 65,536 train / 4096 eval Frames for both encoders
 - [JEPA recipes at small scale](issues/02-jepa-recipes-at-small-scale.md) — I-JEPA defaults translate to 4 targets of 3×3–4×3 patches, a ~0.9-scale context minus the targets, LayerNorm'd EMA (0.996→1.0) targets and a predictor 96 wide, 4 deep; car bias must be partial (whole-car targets hide it from the context); collapse checks need across-Frame and car-contrast measures, because a fixed Track allows position-only features
+- [Architecture and objective](issues/03-architecture-and-objective.md) — negative: every I-JEPA variant (car bias off/partial/full, Frame-variance hinge, slow EMA) drops the car; the 30k run ends at Pose readout 7.4 m / 176°. Kept: 8 px patches, ViT 192 × 6 + 192 → 32 head with the loss on it, predictor 96 × 4; car-biased masking ruled out. Destination kept: next is [A JEPA objective that keeps the car](issues/09-jepa-objective-that-keeps-the-car.md)
 
 ## Not yet specified
 

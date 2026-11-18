@@ -1,7 +1,7 @@
 # Architecture and objective
 
 Labels: wayfinder:grilling, wayfinder:prototype
-Status: open
+Status: closed
 Assignee: mgrue
 Blocked by: 01-linear-probe-on-vae-v1.md, 02-jepa-recipes-at-small-scale.md
 Parent: ../MAP.md
@@ -34,4 +34,7 @@ Check: one architecture and objective with measured prototype numbers (probe pos
   | partial + Frame-variance hinge (1.0, γ 0.5) | 3.61 m / 174° | 3.03 m / 124° | 1.01 |
   | partial + fixed EMA 0.9995 | 1.98 m / 174° | 1.49 m / 75° | 1.02 |
 
-  Every variant drops the car in the first ~2k steps (car contrast 2.3 at random init → ≈ 1.0); global std and rank stay healthy, so only the car-contrast and readout diagnostics see it. The Frame-variance hinge is met by episode colour, not the car. Car bias (partial or full) hurts. Colour Probes break every variant (MLP pos p95 11–37 m). Running: 30k confirmation of car bias off (`jepa_c30k_off`), the user's choice.
+  Every variant drops the car in the first ~2k steps (car contrast 2.3 at random init → ≈ 1.0); global std and rank stay healthy, so only the car-contrast and readout diagnostics see it. The Frame-variance hinge is met by episode colour, not the car. Car bias (partial or full) hurts. Colour Probes break every variant (MLP pos p95 11–37 m). 30k confirmation of car bias off follows in the resolution.
+- **Resolution (2026-11-18): negative.** The 30k confirmation of car bias off (`jepa_c30k_off`, 125 min, 511 Frames/s) ends at **MLP pos p95 7.39 m, head p95 176°** (ridge 5.54 m / 163°; colour Probes 13–27 m); car contrast sits at 1.00 from step 2k to 30k while effective rank rises to 26/32. The 8k screen's 1.07 m / 19.8° was a snapshot of the short schedule's annealing, not learning; longer training removes the car completely. **No I-JEPA recipe tried yields a `jepa-v1` that sees the car**; the encoder settles on Track position + episode colour, which predicts every background target on a fixed Track.
+
+  Decided and carried forward (with the user): 8 px patches, 8 × 8 grid; ViT 192 wide, 6 deep, 3 heads, 2D RoPE (2.71 M params) with a Linear 192 → 32 head and the loss on its LayerNorm'd output; predictor 96 wide, 4 deep (0.45 M); I-JEPA multi-block masks; the prototype as the starting code. Ruled out: car-biased masking in both forms (PLAN's "at least half the rectangles cover the car" hurts), a position-centred Frame-variance hinge (met by colour), slow fixed EMA alone. For **Check and gate**: global std and effective rank pass a car-blind encoder; car contrast and the Pose readout are the diagnostics that catch it. Destination kept (the user's choice); next: [A JEPA objective that keeps the car](09-jepa-objective-that-keeps-the-car.md).

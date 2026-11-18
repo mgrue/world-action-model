@@ -3,7 +3,7 @@
 Labels: wayfinder:task
 Status: open
 Assignee:
-Blocked by: 01-linear-probe-on-vae-v1.md, 02-jepa-recipes-at-small-scale.md, 03-architecture-and-objective.md, 04-check-and-gate.md, 05-training-recipe-and-freezing.md, 06-interface-contract.md, 07-api-cli-tests.md
+Blocked by: 01-linear-probe-on-vae-v1.md, 02-jepa-recipes-at-small-scale.md, 03-architecture-and-objective.md, 04-check-and-gate.md, 05-training-recipe-and-freezing.md, 06-interface-contract.md, 07-api-cli-tests.md, 09-jepa-objective-that-keeps-the-car.md
 Parent: ../MAP.md
 
 ## Question
