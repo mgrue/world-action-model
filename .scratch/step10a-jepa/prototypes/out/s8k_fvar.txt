@@ -1,0 +1,119 @@
+device mps; encoder 2,712,800 params, predictor 453,920
+[     0]   0.1 min  gstd 0.10/0.16  afstd 0.093  contrast 2.33  rank 22.1/21.2  ridge 2.68 m 135°
+  step 500: loss 0.0188 (car 0.0214, bg 0.0184)  pstd 0.796  ctx 17.7  car hidden 0.22  521 Frames/s (data 5%)
+  step 1000: loss 0.0207 (car 0.0228, bg 0.0207)  pstd 0.943  ctx 17.1  car hidden 0.23  189 Frames/s (data 5%)
+  step 1500: loss 0.0181 (car 0.0209, bg 0.0182)  pstd 0.970  ctx 16.6  car hidden 0.23  167 Frames/s (data 5%)
+  step 2000: loss 0.0216 (car 0.0243, bg 0.0216)  pstd 0.974  ctx 17.3  car hidden 0.22  195 Frames/s (data 5%)
+[  2000]  20.2 min  gstd 0.82/0.94  afstd 0.981  contrast 1.00  rank 6.3/5.9  ridge 7.10 m 171°
+  step 2500: loss 0.0198 (car 0.0240, bg 0.0199)  pstd 0.976  ctx 17.1  car hidden 0.22  170 Frames/s (data 5%)
+  step 3000: loss 0.0200 (car 0.0254, bg 0.0202)  pstd 0.973  ctx 16.7  car hidden 0.23  442 Frames/s (data 5%)
+  step 3500: loss 0.0142 (car 0.0212, bg 0.0140)  pstd 0.973  ctx 17.4  car hidden 0.23  503 Frames/s (data 6%)
+  step 4000: loss 0.0122 (car 0.0201, bg 0.0119)  pstd 0.972  ctx 17.6  car hidden 0.23  506 Frames/s (data 6%)
+[  4000]  33.3 min  gstd 0.85/0.96  afstd 0.912  contrast 1.00  rank 10.0/8.7  ridge 5.17 m 170°
+  step 4500: loss 0.0121 (car 0.0204, bg 0.0118)  pstd 0.969  ctx 16.2  car hidden 0.23  538 Frames/s (data 7%)
+  step 5000: loss 0.0110 (car 0.0211, bg 0.0106)  pstd 0.966  ctx 17.8  car hidden 0.21  531 Frames/s (data 7%)
+  step 5500: loss 0.0121 (car 0.0241, bg 0.0115)  pstd 0.964  ctx 16.9  car hidden 0.22  449 Frames/s (data 7%)
+  step 6000: loss 0.0122 (car 0.0266, bg 0.0115)  pstd 0.962  ctx 18.4  car hidden 0.22  474 Frames/s (data 7%)
+[  6000]  41.6 min  gstd 0.82/0.97  afstd 0.878  contrast 1.00  rank 14.2/12.7  ridge 4.92 m 169°
+  step 6500: loss 0.0129 (car 0.0290, bg 0.0122)  pstd 0.962  ctx 17.8  car hidden 0.22  509 Frames/s (data 8%)
+  step 7000: loss 0.0125 (car 0.0292, bg 0.0117)  pstd 0.962  ctx 18.3  car hidden 0.22  452 Frames/s (data 8%)
+  step 7500: loss 0.0136 (car 0.0302, bg 0.0128)  pstd 0.962  ctx 16.3  car hidden 0.22  506 Frames/s (data 8%)
+  step 8000: loss 0.0133 (car 0.0302, bg 0.0124)  pstd 0.961  ctx 16.9  car hidden 0.23  504 Frames/s (data 8%)
+[  8000]  50.2 min  gstd 0.81/0.96  afstd 0.867  contrast 1.01  rank 15.7/14.0  ridge 5.24 m 171°
+mlp   clean: pos p50 1.267 p95 3.614 max 25.43 m   head p50 73.4 p95 174.0 max 180°
+ridge clean: pos p50 1.120 p95 3.027 max 5.93 m   head p50 32.8 p95 123.6 max 180°
+{
+ "name": "s8k_fvar",
+ "encoder_params": 2712800,
+ "predictor_params": 453920,
+ "train_minutes": 50.24233679771423,
+ "frames_per_s": 339.68696032950265,
+ "readout": {
+  "lambda": 0.01,
+  "ridge": {
+   "clean": {
+    "pos_p50": 1.120039002223034,
+    "pos_p95": 3.026957577696889,
+    "pos_max": 5.93375135270467,
+    "head_p50": 32.8418761195301,
+    "head_p95": 123.61533871973336,
+    "head_max": 179.95535744727624
+   },
+   "brown_grass": {
+    "pos_p50": 7.404530134666638,
+    "pos_p95": 11.173353061565173,
+    "pos_max": 17.944622082552783,
+    "head_p50": 86.21246444560721,
+    "head_p95": 168.29223023192316,
+    "head_max": 179.944570855534
+   },
+   "light_road": {
+    "pos_p50": 19.53266765507786,
+    "pos_p95": 44.987643249619246,
+    "pos_max": 83.29033125853233,
+    "head_p50": 87.92936979955005,
+    "head_p95": 171.57236989301683,
+    "head_max": 179.99809097102133
+   },
+   "blue_car": {
+    "pos_p50": 16.720729108468085,
+    "pos_p95": 43.93655069653179,
+    "pos_max": 132.4502015150246,
+    "head_p50": 85.13112323627149,
+    "head_p95": 170.35367187582648,
+    "head_max": 179.9873977214039
+   },
+   "no_kerb": {
+    "pos_p50": 5.144251032971668,
+    "pos_p95": 11.967499823434352,
+    "pos_max": 20.911187420558576,
+    "head_p50": 77.63390659365882,
+    "head_p95": 166.4271893406301,
+    "head_max": 179.94550689159527
+   }
+  },
+  "mlp": {
+   "clean": {
+    "pos_p50": 1.26666656861982,
+    "pos_p95": 3.6142375862343785,
+    "pos_max": 25.43447722858095,
+    "head_p50": 73.35013760084135,
+    "head_p95": 174.02366429721766,
+    "head_max": 179.98655987259286
+   },
+   "brown_grass": {
+    "pos_p50": 9.487931886079593,
+    "pos_p95": 16.518757621258082,
+    "pos_max": 22.54663245759863,
+    "head_p50": 89.32884676681454,
+    "head_p95": 169.6824897401316,
+    "head_max": 179.95381479992741
+   },
+   "light_road": {
+    "pos_p50": 11.73932710219665,
+    "pos_p95": 25.106785169892042,
+    "pos_max": 31.822022333038177,
+    "head_p50": 92.04626949395322,
+    "head_p95": 172.90743428840318,
+    "head_max": 179.97226016041083
+   },
+   "blue_car": {
+    "pos_p50": 16.691937053330932,
+    "pos_p95": 29.851896524112675,
+    "pos_max": 34.9686119793664,
+    "head_p50": 86.52810653461535,
+    "head_p95": 171.96100514503973,
+    "head_max": 179.98208183955256
+   },
+   "no_kerb": {
+    "pos_p50": 6.985582005412754,
+    "pos_p95": 20.50455531915411,
+    "pos_max": 33.80475919976161,
+    "head_p50": 88.08993165374142,
+    "head_p95": 172.04676022770488,
+    "head_max": 179.9808549290528
+   }
+  },
+  "seconds": 109.92239809036255
+ }
+}

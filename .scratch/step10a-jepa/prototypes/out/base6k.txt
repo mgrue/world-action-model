@@ -1,0 +1,27 @@
+device mps; encoder 2,712,800 params, predictor 453,920
+[     0]   0.0 min  gstd 0.10/0.16  afstd 0.093  contrast 2.33  rank 22.1/21.2  ridge 2.68 m 135°
+  step 500: loss 0.0035 (car 0.0046, bg 0.0034)  pstd 0.294  ctx 17.7  car hidden 0.22  511 Frames/s (data 12%)
+  step 1000: loss 0.0142 (car 0.0163, bg 0.0142)  pstd 0.650  ctx 17.1  car hidden 0.23  524 Frames/s (data 12%)
+[  1000]   4.2 min  gstd 0.16/0.70  afstd 0.667  contrast 0.96  rank 4.6/4.1  ridge 4.58 m 172°
+  step 1500: loss 0.0192 (car 0.0224, bg 0.0188)  pstd 0.828  ctx 16.6  car hidden 0.23  533 Frames/s (data 12%)
+  step 2000: loss 0.0144 (car 0.0210, bg 0.0141)  pstd 0.906  ctx 17.3  car hidden 0.22  520 Frames/s (data 12%)
+[  2000]   8.3 min  gstd 0.40/0.95  afstd 0.913  contrast 0.99  rank 5.4/5.0  ridge 7.57 m 171°
+  step 2500: loss 0.0207 (car 0.0297, bg 0.0205)  pstd 0.933  ctx 17.1  car hidden 0.22  513 Frames/s (data 12%)
+  step 3000: loss 0.0267 (car 0.0388, bg 0.0264)  pstd 0.938  ctx 16.7  car hidden 0.23  503 Frames/s (data 12%)
+[  3000]  12.5 min  gstd 0.58/0.98  afstd 0.918  contrast 1.00  rank 6.6/5.9  ridge 7.38 m 168°
+  step 3500: loss 0.0271 (car 0.0445, bg 0.0264)  pstd 0.934  ctx 17.4  car hidden 0.23  509 Frames/s (data 12%)
+  step 4000: loss 0.0278 (car 0.0549, bg 0.0263)  pstd 0.900  ctx 17.6  car hidden 0.23  527 Frames/s (data 12%)
+[  4000]  16.6 min  gstd 0.45/0.91  afstd 0.682  contrast 0.99  rank 8.8/8.3  ridge 4.65 m 165°
+  step 4500: loss 0.0277 (car 0.0557, bg 0.0262)  pstd 0.841  ctx 16.2  car hidden 0.23  542 Frames/s (data 12%)
+  step 5000: loss 0.0229 (car 0.0485, bg 0.0216)  pstd 0.798  ctx 17.8  car hidden 0.21  524 Frames/s (data 12%)
+[  5000]  20.6 min  gstd 0.36/0.85  afstd 0.431  contrast 0.99  rank 10.0/11.3  ridge 4.36 m 167°
+  step 5500: loss 0.0216 (car 0.0458, bg 0.0204)  pstd 0.778  ctx 16.9  car hidden 0.22  516 Frames/s (data 12%)
+  step 6000: loss 0.0197 (car 0.0426, bg 0.0187)  pstd 0.769  ctx 18.4  car hidden 0.22  502 Frames/s (data 12%)
+[  6000]  24.8 min  gstd 0.35/0.83  afstd 0.365  contrast 1.00  rank 10.2/12.4  ridge 4.41 m 168°
+{
+ "name": "base6k",
+ "encoder_params": 2712800,
+ "predictor_params": 453920,
+ "train_minutes": 24.77179868221283,
+ "frames_per_s": 516.7166165124265
+}

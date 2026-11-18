@@ -1,0 +1,2 @@
+device mps; encoder 2,712,800 params, predictor 453,920
+[     0]   0.0 min  gstd 0.10/0.16  afstd 0.093  contrast 2.33  rank 22.1/21.2  ridge 2.68 m 135°

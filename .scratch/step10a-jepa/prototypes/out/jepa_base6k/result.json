@@ -1,0 +1,31 @@
+{
+ "name": "base6k",
+ "args": {
+  "name": "base6k",
+  "steps": 6000,
+  "batch": 128,
+  "car": "partial",
+  "p_car": 0.5,
+  "width": 192,
+  "depth": 6,
+  "heads": 3,
+  "pred_width": 96,
+  "pred_depth": 4,
+  "out_dim": 32,
+  "lr": 0.0005,
+  "ema": [
+   0.996,
+   1.0
+  ],
+  "vicreg": 0.0,
+  "eval_every": 1000,
+  "n_diag": 2048,
+  "readout": false,
+  "seed": 0,
+  "device": null
+ },
+ "encoder_params": 2712800,
+ "predictor_params": 453920,
+ "train_minutes": 24.77179868221283,
+ "frames_per_s": 516.7166165124265
+}

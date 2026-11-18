@@ -1,0 +1,27 @@
+{
+ "name": "s8k_full",
+ "steps": 8000,
+ "batch": 128,
+ "car": "full",
+ "p_car": 0.5,
+ "width": 192,
+ "depth": 6,
+ "heads": 3,
+ "pred_width": 96,
+ "pred_depth": 4,
+ "out_dim": 32,
+ "lr": 0.0005,
+ "ema": [
+  0.996,
+  1.0
+ ],
+ "vicreg": 0.0,
+ "ema_fixed": null,
+ "fvar": 0.0,
+ "fvar_gamma": 0.5,
+ "eval_every": 2000,
+ "n_diag": 2048,
+ "readout": true,
+ "seed": 0,
+ "device": null
+}
